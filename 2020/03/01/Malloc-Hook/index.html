@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Malloc_Hook小记 | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        malloc_hook的介绍以及用堆进行malloc_hook攻击。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Malloc_Hook小记">
+<meta property="og:url" content="http://example.com/2020/03/01/Malloc-Hook/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        malloc_hook的介绍以及用堆进行malloc_hook攻击。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/3.png">
+<meta property="article:published_time" content="2020-03-01T07:09:47.000Z">
+<meta property="article:modified_time" content="2020-03-02T06:49:46.789Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-Malloc-Hook" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/01/Malloc-Hook/" class="article-date">
+  <time class="post-time" datetime="2020-03-01T07:09:47.000Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">01</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Malloc_Hook小记
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        malloc_hook的介绍以及用堆进行malloc_hook攻击。<span id="more"></span></p>
+<p>​        昨天的babyheap算是碰上的第一个malloc_hook利用，而且看这么简单的偏移都看不明白，还是记一下吧。</p>
+<h2 id="0x00-关于malloc-hook"><a href="#0x00-关于malloc-hook" class="headerlink" title="0x00 关于malloc_hook"></a>0x00 关于malloc_hook</h2><p>​        malloc_hook是一个位于main_arena附近的函数指针。</p>
+<p>​        当系统调用malloc，free函数时，会对此指针进行检查，如果指针非空则跳转到该地址并执行。所以，将shellcode或者system(“/bin/sh”)的地址写入到malloc_hook中再想办法调用是一个比较常见的getshell思路。</p>
+<h2 id="0x01-malloc-hook位置"><a href="#0x01-malloc-hook位置" class="headerlink" title="0x01 malloc_hook位置"></a>0x01 malloc_hook位置</h2><p>​        malloc_hook位于main_arena(如果不知道main_arena地址可以直接使用命令 x/20xg &amp;main_arena 查看内存和地址)往上，offset = 0x10:</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/1.png" style="zoom: 67%;" />
+
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/2.png" style="zoom: 67%;" />
+
+<p>​        一般来说malloc_hook为空，但是有一次偶然发现了malloc_hook未被攻击却有值，后来才发现是程序还没有初始化。</p>
+<h2 id="0x03-malloc-hook攻击"><a href="#0x03-malloc-hook攻击" class="headerlink" title="0x03 malloc_hook攻击"></a>0x03 malloc_hook攻击</h2><h3 id="A-如何写入"><a href="#A-如何写入" class="headerlink" title="A.如何写入"></a>A.如何写入</h3><p>​        如果程序中存在任意写的漏洞，则用户可以很容易的进行malloc_hook攻击。这里用堆做一个实例（实际上也通常用堆）。就fastbin attack来说，如果我们改写chunk的fd，使其指向malloc_hook上方一定偏移处，就可以填充并写入malloc_hook。所以问题的关键就是我们要在哪儿创建堆，创建多大的堆，如何填充数据。</p>
+<h3 id="B-用堆getshell"><a href="#B-用堆getshell" class="headerlink" title="B.用堆getshell"></a>B.用堆getshell</h3><p>​        1.首先我们需要知道，创建堆时填充数据的位置在chunk_ptr + 0x10（即free chunk的FD BK指针处）的位置，而前面0x10用来存放堆结构的部分信息，其中很重要的一个信息就是chunk_size。在创建堆时chunk_size是避免检查，决定填充偏移的关键。</p>
+<p>​        2.由此我们需要在malloc_hook附近找一个合适的“chunk_size”，也就是说，用该地址处的数据充当chunk_size，而且要让其满足fastchunk的大小。经过实验，可以找到main_ arena - 0x40 + 0xd 这个位置（不理解的话可以0x0 – 0x10 都试一下，找最合适的偏移）。<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/malloc/3.png" style="zoom:67%;" /></p>
+<p>​        在此偏移处的0x7f这个字节恰好满足需求，属于fastchunk。所以我们可以在这个地址malloc（0x60），系统就会给我们分配0x70的空间，也满足0x7f的chunksize。</p>
+<p>​        3.申请好chunk之后，我们还需要知道偏移量。假设我们已经leak出了libc_base，那么就可以根据main_arena在libc上的固定偏移并通过计算得知以下关系：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">main_arena == libc_base + <span class="number">0x3c4b20</span> </span><br><span class="line">chunk_addr == main_arena - <span class="number">0x40</span> + <span class="number">0xd</span></span><br><span class="line">chunk_addr == libc_base + <span class="number">0x3c4b20</span> - <span class="number">0x40</span> + <span class="number">0xd</span></span><br><span class="line">chunk_addr == libc_base + <span class="number">0x3c4aed</span></span><br><span class="line">malloc_hook== main_arena - <span class="number">0x10</span></span><br><span class="line">fill_size  == malloc_hook - chunk_addr</span><br><span class="line">fill_size  == <span class="number">0x23</span></span><br></pre></td></tr></table></figure>
+
+<p>​        所以说我们需要填充的大小就是0x23。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">&#x27;A&#x27;</span> * <span class="number">3</span></span><br><span class="line">payload +=p64(<span class="number">0</span>)</span><br><span class="line">payload +=p64(shellcode)</span><br></pre></td></tr></table></figure>
+
+<p>​            4.填充好之后，再进行一次malloc()就可以getshell了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/01/Malloc-Hook/" data-id="ckmlis0z20006s0ljckcodycx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/02/Unlink-stkof/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Unlink(stkof)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/29/Fastbin%20attack%20-%20Babyheap/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Fastbin attack (Babyheap)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

