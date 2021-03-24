@@ -316,15 +316,78 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div id='cover-backstretch'></div>
           
           <div class='cover-body'>
-  <div class='top'>
-    
-    
-      <p class="title">Bin Fantasy🤯</p>
-    
-    
-      <p class="subtitle">A ScriptKid doing Pwn and AndroidRe</p>
-    
-  </div>
+
+
+<!-- light:      '20EBC3','3AA8F2','6087AD','F7B25D','FC4848','36F085','F77444','BCD0D1','FF8850','73A0AB','BA90FF'                   -->
+<!-- colorful:      '1ABC9C','3498DB','34495E','E67E22','E74C3C','2ECC71','E74C3C','95A5A6','D35400'   -->
+
+<div class="box" style="display:none" >Bin Fantasy</div>
+<div class="box2" style="display:none" >Bin Fantasy</div>
+<div class="render" onclick="dyrandomlogofont()"></div>
+<script>
+var box = document.querySelector('.box').textContent,
+    rs = document.querySelector('.render'),
+    f= [
+      'Arial Rounded MT','Forte','Break','Bauhaus','Forte','Hobo Std','Lithos Pro','Kristen ITC'
+    ],
+    c = [
+'20EBC3','3AA8F2','6087AD','F7B25D','FC4848','36F085','F77444','BCD0D1','FF8850','73A0AB','BA90FF'
+    ]; 
+var out = '';
+for (var i = 0; i < box.length; i++) {
+  // Random array fonts
+  var r = f[Math.floor(Math.random() * f.length)],
+      // Random array colors
+      sh = c[Math.floor(Math.random() * c.length)],
+      st = 'font-size:80px;color:#'+sh+
+      ';font-family: '+r+
+      ';text-shadow:0px 1px 0px #'+sh+',0px 2px 0px #'+sh+',0px 3px 0px #'+sh+',0px 4px 0px #'+sh+', 0px 5px 0px  #'+sh+',0px 6px 0px #'+sh+', 0px 7px 0px #'+sh+',0px 8px 7px #'+sh;
+  out += '<span style="'+st+'">'+box[i]+'</span>';
+}  
+  emoj = [
+    '😀','🤣','😅','😊','🤩','😐','🙄','😥','😯','😪','😮','😏','😑','🤔','🙂','😋','😆','😃','😁','😂','😄','😉','😎','🤗','🤨','😶','😣','🤐','😫','🥱','😴','😌','😛','😜','😝','🤤','😒','😓','🙃','😕','😔','😲','😞','😤','😢','😭','😩','🤯','😬','😳','🥴','😵','🤪','🤒','🤧','🥺','🤥','🧐','🤫'
+  ]
+  tmp = emoj[Math.floor(Math.random() * emoj.length)],
+  out+= '<span style="font-size:60px">'+tmp+'</span>'
+rs.innerHTML = out; 
+
+function dyrandomlogofont(){
+var box = document.querySelector('.box2').textContent,
+    rs = document.querySelector('.render'),
+    f = [
+      'Arial Rounded MT','Forte','Break','Bauhaus','Forte','Hobo Std','Lithos Pro','Kristen ITC'
+    ],
+    c = [
+      '20EBC3','3AA8F2','6087AD','F7B25D',
+      'FC4848','36F085','F77444','BCD0D1','FF8850','73A0AB','BA90FF'
+    ];
+var out = '';
+for (var i = 0; i < box.length; i++) {
+  // Random array fonts
+  var r = f[Math.floor(Math.random() * f.length)],
+      // Random array colors
+      sh = c[Math.floor(Math.random() * c.length)],
+      st = 'font-size:80px;color:#'+sh+
+      ';font-family: '+r+
+      ';text-shadow:0px 1px 0px #'+sh+',0px 2px 0px #'+sh+',0px 3px 0px #'+sh+',0px 4px 0px #'+sh+', 0px 5px 0px  #'+sh+',0px 6px 0px #'+sh+', 0px 7px 0px #'+sh+',0px 8px 7px #'+sh;
+  out += '<span style="'+st+'">'+box[i]+'</span>';
+  }
+  emoj = [
+    '😀','🤣','😅','😊','🤩','😐','🙄','😥','😯','😪','😮','😏','😑','🤔','🙂','😋','😆','😃','😁','😂','😄','😉','😎','🤗','🤨','😶','😣','🤐','😫','🥱','😴','😌','😛','😜','😝','🤤','😒','😓','🙃','😕','😔','😲','😞','😤','😢','😭','😩','🤯','😬','😳','🥴','😵','🤪','🤒','🤧','🥺','🤥','🧐','🤫'
+  ]
+  tmp = emoj[Math.floor(Math.random() * emoj.length)],
+  out+= '<span style="font-size:60px">'+tmp+'</span>'
+  rs.innerHTML = out;
+}
+</script>
+
+
+
+
+
+
+
+
   <div class='bottom'>
     
       <div class="m_search">
@@ -340,6 +403,30 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" language="javascript">
+　　//Setting ico for cnblogs
+　　var linkObject = document.createElement('link');
+　　linkObject.rel = "shortcut icon";
+　　linkObject.href = "https://z3.ax1x.com/2021/03/23/67XzpF.png";
+　　document.getElementsByTagName("head")[0].appendChild(linkObject);
+</script>
+
+
+
+
+
 </div>
 
           <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
