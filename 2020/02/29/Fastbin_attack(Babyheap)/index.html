@@ -28,7 +28,7 @@
   
 
   
-    <meta name="description" content="​        新手肝babyheap要掉多少头发😑（malloc_hook的偏移我居然看了那么久。。）">
+    <meta name="description" content="​        利用malloc_hook解题。">
   
 
   <!-- feed -->
@@ -511,7 +511,7 @@ for (var i = 0; i < box.length; i++) {
 
   
   
-  <p>​        新手肝babyheap要掉多少头发😑（malloc_hook的偏移我居然看了那么久。。）<span id="more"></span></p>
+  <p>​        利用malloc_hook解题。<span id="more"></span></p>
 <h2 id="1-关于Fast-bin"><a href="#1-关于Fast-bin" class="headerlink" title="1.关于Fast_bin"></a>1.关于Fast_bin</h2><p>​        fast bin和其他的bin一样，都是一种用来记录free chunk的<strong>链表数据结构</strong>有单链表有双链表，因种类不同功能不同而采用不同的结构。fast bin专门使用于存放比较小的chunk，具体为16 bytes – 80 bytes（此处指malloc的实际大小）fast bin的设计初衷就是进行快速的<strong>小内存</strong>分配和释放，因此fast chunk之间是不进行合并的，即不存在unlink。因此其 next_chunk 的 prev_inuse 位也不会被清空。，也就催生了fast bin的漏洞。</p>
 <h2 id="2-babyheap复现"><a href="#2-babyheap复现" class="headerlink" title="2.babyheap复现"></a>2.babyheap复现</h2><h3 id="A-题目分析"><a href="#A-题目分析" class="headerlink" title="A.题目分析"></a>A.题目分析</h3><ul>
 <li><p>Link – <a target="_blank" rel="noopener" href="https://uaf.io/assets/0ctfbabyheap">https://uaf.io/assets/0ctfbabyheap</a></p>
@@ -605,7 +605,7 @@ for (var i = 0; i < box.length; i++) {
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-24T10:31:06+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-24T17:49:52+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>Update in:Mar 24, 2021</p>
