@@ -22,13 +22,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>Dalvik字节码 - Bin Fantasy🤯</title>
+  <title>App登录逻辑分析 - Bin Fantasy🤯</title>
   
-    <meta name="keywords" content="AndroidRe,Summary">
+    <meta name="keywords" content="AndroidRe">
   
 
   
-    <meta name="description" content="看懂Dalvik字节码，看懂Smali文件。">
+    <meta name="description" content="人人直播app的登录过程。">
   
 
   <!-- feed -->
@@ -410,7 +410,7 @@ for (var i = 0; i < box.length; i++) {
   
     <div class='headimg-div'>
       <a class='headimg-a'>
-        <img class='headimg' src='https://z3.ax1x.com/2021/03/23/6HQed1.gif'/>
+        <img class='headimg' src='https://z3.ax1x.com/2021/03/23/6HQKJK.gif'/>
       </a>
     </div>
   
@@ -419,7 +419,7 @@ for (var i = 0; i < box.length; i++) {
     
     
       <h1 class="title">
-        Dalvik字节码
+        App登录逻辑分析
       </h1>
       <div class='new-meta-box'>
         
@@ -443,7 +443,7 @@ for (var i = 0; i < box.length; i++) {
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Posted in:Feb 21, 2021</p>
+    <p>Posted in:Mar 28, 2021</p>
   </a>
 </div>
 
@@ -454,7 +454,7 @@ for (var i = 0; i < box.length; i++) {
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Dalvik字节码" data-path="/2021/02/21/Dalvik%E5%AD%97%E8%8A%82%E7%A0%81/">
+      <div id="lc-pv" data-title="App登录逻辑分析" data-path="/2021/03/28/App%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
          views
@@ -472,40 +472,91 @@ for (var i = 0; i < box.length; i++) {
 
   
   
-  <p>看懂Dalvik字节码，看懂Smali文件。<span id="more"></span></p>
-<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>存储变量≤32位，用1个寄存器</p>
-<p>存储变量64位，用2个相邻寄存器</p>
-<h2 id="寄存器命名法"><a href="#寄存器命名法" class="headerlink" title="寄存器命名法"></a>寄存器命名法</h2><h3 id="v命名法"><a href="#v命名法" class="headerlink" title="v命名法"></a>v命名法</h3><p>局部变量：M个  使用寄存器：v0~vM-1</p>
-<p>传入参数：N个  使用寄存器：vM~vM+N-1</p>
-<p><img src="https://img-blog.csdn.net/20160731141440713" class="lazyload" data-srcset="https://img-blog.csdn.net/20160731141440713" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h3 id="p命名法"><a href="#p命名法" class="headerlink" title="p命名法"></a>p命名法</h3><p>局部变量：M个  使用寄存器：v0~vM-1</p>
-<p>传入参数：N个  使用寄存器：p0~pN-1</p>
-<p><img src="https://img-blog.csdn.net/20160731142057192" class="lazyload" data-srcset="https://img-blog.csdn.net/20160731142057192" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<p><img src="https://z3.ax1x.com/2021/03/25/6LK2on.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/03/25/6LK2on.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="smali数据类型"><a href="#smali数据类型" class="headerlink" title="smali数据类型"></a>smali数据类型</h2><p><img src="https://z3.ax1x.com/2021/03/25/6LKgds.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/03/25/6LKgds.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="字段与函数分析"><a href="#字段与函数分析" class="headerlink" title="字段与函数分析"></a>字段与函数分析</h2><h3 id="字段格式"><a href="#字段格式" class="headerlink" title="字段格式"></a>字段格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lpackage/name/ObjectName;-&gt;FieldName:Ljava/lang/String;</span><br></pre></td></tr></table></figure>
+  <p>人人直播app的登录过程。<span id="more"></span></p>
+<p>之所以选择这app是因为没有加壳，而且混淆之后的代码还算比较好看，目前app现在还在运营中。人人直播的版本是v9.10.0，这也是博文撰写时该app的最新版本。</p>
+<h2 id="登录过程"><a href="#登录过程" class="headerlink" title="登录过程"></a>登录过程</h2><h3 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h3><p>设备安装好app之后打开登录界面，随意输入账号密码尝试登录。</p>
+<img src="https://z3.ax1x.com/2021/04/07/c3aNlQ.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3aNlQ.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="  />
 
-<p>分析为java：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lpackage.name</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ObjectName</span></span>&#123;</span><br><span class="line">	String FieldName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>获得提示”账号或密码输入有误，请重新输入”。这时候可以将apk丢到Android Killer分析，在strings.xml中搜索上述Toast文本。不过本文介绍抓包分析的方法：</p>
+<ol>
+<li><p>在PC端安装Fiddler，设置好端口号之后导出证书。</p>
+<p> <img src="D:\Download\img_tmp\39.png" class="lazyload" data-srcset="D:\Download\img_tmp\39.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+</li>
+<li><p>确保电脑和手机在同一个互联网下之后，在手机中进入设置，对wifi设置代理，主机号参见PC的ip地址。完成设置后安装上述证书。</p>
+<p> <img src="https://z3.ax1x.com/2021/04/07/c3aUyj.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3aUyj.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+</li>
+<li><p>打开Fiddler发现抓到了不少http/https的包</p>
+</li>
+<li><p>此时打开客户端，输入账号密码，点击登录，再查看Fiddler，发现有一个特殊的包</p>
+<p> <img src="https://z3.ax1x.com/2021/04/07/c3atSg.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3atSg.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+</li>
+<li><p>查看报文。</p>
+<p> <img src="https://z3.ax1x.com/2021/04/07/c3aaOs.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3aaOs.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+</li>
+<li><p>由此可以分析，app在手机端将账号密码加密后拼接成报文发送到服务器</p>
+</li>
+</ol>
+<h3 id="找到函数调用栈"><a href="#找到函数调用栈" class="headerlink" title="找到函数调用栈"></a>找到函数调用栈</h3><p>根据上面的报文，在Android Killer中搜索比较不常见的字段，这里选的是<kbd>tab_sequence</kbd>字段。</p>
+<p>发现整个工程中仅有com.renren.mobile.android.service.ServiceProvider.Ya()函数使用了该字段。为了方便找到程序登录过程中的函数调用栈，可以对此函数进行方法分析：</p>
+<ol>
+<li><p>打开DDMS，选中人人直播的进程，之后在手机上打开登录界面并提前输好账号密码。</p>
+</li>
+<li><p>点击方法分析，方法限制数为1000(默认)，点击ok。</p>
+</li>
+<li><p>迅速在app中点击登录，在马上回到DDMS中停止方法分析。</p>
+<p> <img src="https://z3.ax1x.com/2021/04/07/c3a0wq.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3a0wq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+</li>
+<li><p>弹出方法分析窗口。</p>
+</li>
+<li><p>在方法分析窗口中找到Ya()函数，双击后可在<strong>parents</strong>中找到上层调用函数。</p>
+<p> <img src="https://z3.ax1x.com/2021/04/07/c3aBT0.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3aBT0.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+</li>
+<li><p>以此类推，可以得到如下的函数调用栈。</p>
+</li>
+</ol>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">android.view.view.performClick()</span><br><span class="line">👇调用</span><br><span class="line">com.renren.mobile.android.loginB.register.ui.LoginFromQuickRegisterFragment.onClick()</span><br><span class="line">👇调用</span><br><span class="line">com.renren.mobile.android.loginB.register.ui.LoginFromQuickRegisterFragment.j1()</span><br><span class="line">👇调用</span><br><span class="line">com.renren.mobile.android.service.ServiceProvider.Ya()</span><br></pre></td></tr></table></figure>
 
-<h3 id="函数格式"><a href="#函数格式" class="headerlink" title="函数格式"></a>函数格式</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Lpackage/name/ObjectName;-&gt;MethodName(III)Z</span><br></pre></td></tr></table></figure>
+<p>由于performClick再往上是系统级的进程，于是不再向上追溯。</p>
+<h3 id="方法分析"><a href="#方法分析" class="headerlink" title="方法分析"></a>方法分析</h3><p>使用Jadx-gui根据函数调用栈逐个分析方法。</p>
+<h4 id="ServiceProvider-Ya"><a href="#ServiceProvider-Ya" class="headerlink" title="ServiceProvider.Ya()"></a>ServiceProvider.Ya()</h4><p>此函数用于拼接各个字段并发往服务端。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">m8161Ya</span><span class="params">(String str, String str2, <span class="keyword">int</span> i, String str3, String str4, Context context, LoginStatusListener loginStatusListener)</span> </span>&#123;</span><br><span class="line">        JsonObject mb = m7924mb(<span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">if</span> (str4 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            mb.put(<span class="string">&quot;rkey&quot;</span>, str4);</span><br><span class="line">        &#125;</span><br><span class="line">        mb.put(<span class="string">&quot;v&quot;</span>, <span class="string">&quot;1.0&quot;</span>);</span><br><span class="line">        mb.put(<span class="string">&quot;format&quot;</span>, <span class="string">&quot;JSON&quot;</span>);</span><br><span class="line">        mb.put(<span class="string">&quot;user&quot;</span>, str);</span><br><span class="line">        mb.put(<span class="string">&quot;password&quot;</span>, str2);</span><br><span class="line">        mb.put(<span class="string">&quot;uniq_id&quot;</span>, Variables.f12082X);</span><br><span class="line">        mb.m6432f(<span class="string">&quot;session_key&quot;</span>);</span><br><span class="line">        mb.put(INetRequest.f12253n, INetRequest.f12254o);</span><br><span class="line">        mb.put(<span class="string">&quot;tab_sequence&quot;</span>, <span class="number">1L</span>);</span><br><span class="line">        JsonObject jsonObject = <span class="keyword">new</span> JsonObject();</span><br><span class="line">        jsonObject.put(<span class="string">&quot;station_id&quot;</span>, Variables.f12072S);</span><br><span class="line">        mb.put(<span class="string">&quot;ext_info&quot;</span>, jsonObject);</span><br><span class="line">        mb.put(<span class="string">&quot;sig&quot;</span>, m8499D8(mb));</span><br><span class="line">        INetResponse r4 = <span class="keyword">new</span> <span class="number">2</span>(loginStatusListener, str, str2, context);</span><br><span class="line">        HttpRequestWrapper httpRequestWrapper = <span class="keyword">new</span> HttpRequestWrapper();</span><br><span class="line">        httpRequestWrapper.setUrl(ConstantUrls.k + <span class="string">&quot;/client/login&quot;</span>);</span><br><span class="line">        httpRequestWrapper.setData(mb);</span><br><span class="line">        httpRequestWrapper.setResponse(r4);</span><br><span class="line">        httpRequestWrapper.setSecretKey(f11721O);</span><br><span class="line">        HttpProviderWrapper.getInstance().addRequest(httpRequestWrapper);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>分析为java：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> Lpackage.name</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ObjectName</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Boolean <span class="title">MethodName</span><span class="params">(<span class="keyword">int</span> ,<span class="keyword">int</span> ,<span class="keyword">int</span> )</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中的user和password字段的值由调用函数传入。</p>
+<h4 id="LoginFromQuickRegisterFragment-j1"><a href="#LoginFromQuickRegisterFragment-j1" class="headerlink" title="LoginFromQuickRegisterFragment.j1()"></a>LoginFromQuickRegisterFragment.j1()</h4><p>发现密码通过RSA类的函数加密。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* j1重命名为new_ser */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">new_ser</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    String str;</span><br><span class="line">    SettingManager.g0().ra(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    SettingManager.g0().sa(-<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//在RSA中启动新线程，该线程初始化各个属性，详见RSA.java</span></span><br><span class="line">    RSA.g();</span><br><span class="line">    m6206f1();</span><br><span class="line">    <span class="comment">//获取账号输入框的字符串</span></span><br><span class="line">    Variables.v = <span class="keyword">this</span>.f18480x.getText().toString().trim();</span><br><span class="line">    <span class="comment">//获取密码输入框的字符串</span></span><br><span class="line">    Variables.w = <span class="keyword">this</span>.f18479w.getText().toString().trim();</span><br><span class="line">    String account = Variables.v;</span><br><span class="line">    <span class="keyword">if</span> (account == <span class="keyword">null</span> || account.length() == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//提示：账号不能为空</span></span><br><span class="line">        Toast.makeText((Context) getActivity(), (CharSequence) RenrenApplication.getContext().getResources().getString(C0667R.string.v5_0_1_guide_register_account_no_null), <span class="number">1</span>).show();</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    String pwd = Variables.w;</span><br><span class="line">    <span class="keyword">if</span> (pwd == <span class="keyword">null</span> || pwd.length() == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//提示：密码不能为空</span></span><br><span class="line">        Toast.makeText((Context) getActivity(), (CharSequence) RenrenApplication.getContext().getResources().getString(C0667R.string.v5_0_1_guide_register_password_no_null), <span class="number">1</span>).show();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (Methods.U0(Variables.v)) &#123;</span><br><span class="line">        <span class="comment">//提示：账号不能有中文字符</span></span><br><span class="line">        Methods.showToast(getResources().getString(C0667R.string.v5_0_1_guide_register_not_have_china), <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (Methods.U0(Variables.w)) &#123;</span><br><span class="line">        <span class="comment">//提示：密码不能有中文字符</span></span><br><span class="line">        Methods.showToast(getResources().getString(C0667R.string.v5_0_1_guide_register_pwd_have_china), <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//如果上述检查无异常，就用RSA类的方法初始化变量。</span></span><br><span class="line">        rkey = RSA.get_rkey();</span><br><span class="line">        <span class="keyword">this</span>.n = RSA.get_n();</span><br><span class="line">        String tmp_e = RSA.get_e();</span><br><span class="line">        <span class="keyword">this</span>.e = tmp_e;</span><br><span class="line">        <span class="keyword">if</span> (rkey != <span class="keyword">null</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//密码用RSA.b()函数处理过</span></span><br><span class="line">                Variables.w = RSA.b(Variables.w, <span class="keyword">this</span>.n, tmp_e);</span><br><span class="line">                RSA.isDone = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e2) &#123;</span><br><span class="line">                e2.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        &#123;</span><br><span class="line">            Variables.w = Md5.toMD5(Variables.w);</span><br><span class="line">            RSA.isDone = <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        String str2 = Variables.v;</span><br><span class="line">        <span class="comment">//如果账号密码长度正确</span></span><br><span class="line">        <span class="keyword">if</span> (str2 != <span class="keyword">null</span> &amp;&amp; str2.length() &gt; <span class="number">0</span> &amp;&amp; (str = Variables.w) != <span class="keyword">null</span> &amp;&amp; str.length() &gt; <span class="number">0</span>) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.f18462G == <span class="keyword">null</span>) &#123;</span><br><span class="line">                Dialog dialog = <span class="keyword">new</span> Dialog(getActivity());</span><br><span class="line">                <span class="keyword">this</span>.f18462G = dialog;</span><br><span class="line">                dialog.setContentView(C0667R.layout.login_dialog);</span><br><span class="line">                ((ImageView) <span class="keyword">this</span>.f18462G.findViewById(<span class="number">2131299173</span>)).startAnimation(AnimationUtils.loadAnimation(getActivity(), C0667R.anim.login_dialog_scale));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">this</span>.f18462G.show();</span><br><span class="line">            <span class="keyword">if</span> (RSA.isDone != <span class="number">1</span>) &#123;</span><br><span class="line">                rkey = <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//调用Ya()，发现第一第二个函数分别为账号密码</span></span><br><span class="line">            ServiceProvider.Ya(Variables.v, Variables.w, <span class="number">1</span>, <span class="string">&quot;&quot;</span>, rkey, getActivity(), <span class="keyword">this</span>.f18471P);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="Dalvik指令格式"><a href="#Dalvik指令格式" class="headerlink" title="Dalvik指令格式"></a>Dalvik指令格式</h2><blockquote>
-<p>格式：基础字节码-名称后缀/字节码后缀  目的寄存器  源寄存器</p>
-</blockquote>
-<blockquote>
-<p>exp：       move    - wide     /     from16           vAA     ,  vBBBB</p>
-</blockquote>
-<ul>
-<li>其中move为基础字节码，opcode</li>
-<li>wide为名称后缀,标识指令操作的数据宽度为64位。</li>
-<li>from16为字节码后缀,标识源为一个16位的寄存器引用变量</li>
-<li>vAA为目的寄存器,它始终在源的前面，取值范围为v0~v255</li>
-<li>vBBBB为源寄存器，取值范围为v0~v65535</li>
-</ul>
+
+
+<h4 id="LoginFromQuickRegisterFragment-onClick"><a href="#LoginFromQuickRegisterFragment-onClick" class="headerlink" title="LoginFromQuickRegisterFragment.onClick()"></a>LoginFromQuickRegisterFragment.onClick()</h4><p>仅调用，无重要逻辑。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//switch判断被点击的Button</span></span><br><span class="line">       <span class="keyword">switch</span> (view.getId()) &#123;</span><br><span class="line">           ...</span><br><span class="line">           <span class="keyword">case</span> <span class="number">2131301366</span>:</span><br><span class="line">               <span class="comment">//如果用户点击登录，则调用new_ser</span></span><br><span class="line">               new_ser();</span><br><span class="line">               <span class="keyword">return</span>;</span><br><span class="line">          	...</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="RSA-java"><a href="#RSA-java" class="headerlink" title="RSA.java"></a>RSA.java</h4><p>RSA的加密工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.renren.mobile.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.xiaomi.mipush.sdk.Constants;</span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.math.BigInteger;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.security.KeyFactory;</span><br><span class="line"><span class="keyword">import</span> java.security.interfaces.RSAPublicKey;</span><br><span class="line"><span class="keyword">import</span> java.security.spec.InvalidKeySpecException;</span><br><span class="line"><span class="keyword">import</span> java.security.spec.RSAPublicKeySpec;</span><br><span class="line"><span class="keyword">import</span> javax.crypto.Cipher;</span><br><span class="line"><span class="keyword">import</span> kotlin.UByte;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">RSA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String rkey;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String e;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String n;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String info_from_url;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> done;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">a</span><span class="params">(<span class="keyword">byte</span>[] bArr)</span> </span>&#123;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">byte</span> b : bArr) &#123;</span><br><span class="line">            sb.append(Integer.toString((b &amp; UByte.f22619c) + <span class="number">256</span>, <span class="number">16</span>).substring(<span class="number">1</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//用户输入密码由此函数加密，后两个参数本质上是服务器端传回的n和e的值</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">b</span><span class="params">(String pwd, String ee, String dd)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Cipher instance = Cipher.getInstance(<span class="string">&quot;RSA&quot;</span>);</span><br><span class="line">        instance.init(<span class="number">1</span>, c(ee, dd));</span><br><span class="line">        <span class="keyword">return</span> a(instance.doFinal(pwd.getBytes()));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> RSAPublicKey <span class="title">c</span><span class="params">(String str, String str2)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (RSAPublicKey) KeyFactory.getInstance(<span class="string">&quot;RSA&quot;</span>).generatePublic(<span class="keyword">new</span> RSAPublicKeySpec(<span class="keyword">new</span> BigInteger(str, <span class="number">16</span>), <span class="keyword">new</span> BigInteger(str2, <span class="number">16</span>)));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InvalidKeySpecException e2) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> Exception(e2.getMessage());</span><br><span class="line">       	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">d</span><span class="params">()</span> </span>&#123;	<span class="keyword">return</span> e;	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">e</span><span class="params">()</span> </span>&#123;	<span class="keyword">return</span> n;	&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">f</span><span class="params">()</span> </span>&#123;	<span class="keyword">return</span> rkey; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//启动新线程，其任务是调用init_from_url()，故在new_ser中RSA.g()直接实现了类属性的初始化</span></span><br><span class="line">        <span class="keyword">new</span> Thread(RunnableC0828a.f7137a).start();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init_from_url</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//返回url的内容</span></span><br><span class="line">            String i = i();</span><br><span class="line">            info_from_url = i;</span><br><span class="line">            <span class="keyword">if</span> (i != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="comment">//根据info_from_url字符串初始化e、n、rkey</span></span><br><span class="line">                e = i.split(Constants.COLON_SEPARATOR)[<span class="number">2</span>].split(Constants.ACCEPT_TIME_SEPARATOR_SP)[<span class="number">0</span>].trim();</span><br><span class="line">                n = info_from_url.split(Constants.COLON_SEPARATOR)[<span class="number">3</span>].split(Constants.ACCEPT_TIME_SEPARATOR_SP)[<span class="number">0</span>].trim();</span><br><span class="line">                rkey = info_from_url.split(Constants.COLON_SEPARATOR)[<span class="number">5</span>].split(<span class="string">&quot;\\&#125;&quot;</span>)[<span class="number">0</span>].trim();</span><br><span class="line">                <span class="comment">//去掉双引号</span></span><br><span class="line">                e = e.substring(<span class="number">1</span>, e.length() - <span class="number">1</span>);</span><br><span class="line">                n = n.substring(<span class="number">1</span>, n.length() - <span class="number">1</span>);</span><br><span class="line">                rkey = rkey.substring(<span class="number">1</span>, rkey.length() - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e2) &#123;</span><br><span class="line">            e2.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> String <span class="title">i</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="comment">//访问如下url，服务器会返回一串拼接了e、n、rkey的字符串，即服务器为客户端分配公钥</span></span><br><span class="line">        BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(<span class="keyword">new</span> URL(<span class="string">&quot; http://login.renren.com/ajax/getEncryptKey&quot;</span>).openStream(), <span class="string">&quot;GB2312&quot;</span>));</span><br><span class="line">        String readLine = bufferedReader.readLine();</span><br><span class="line">        bufferedReader.close();</span><br><span class="line">        <span class="keyword">return</span> readLine;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><p>用户数据发往服务器之后，服务器会发会一个响应报文。</p>
+<p>登录失败：<img src="https://z3.ax1x.com/2021/04/07/c3arkV.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3arkV.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p>登录成功：<img src="https://z3.ax1x.com/2021/04/07/c3asYT.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3asYT.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p>由于响应到客户端判断输出的过程设计太多网络编程🤣，没有太多涉猎，所以就不深究了，仅分析客户端输入到上传数据的过程。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>用户输入账户密码后，数据传入<kbd>new_ser</kbd>函数。</li>
+<li>在判断输入格式无误后，新建<kbd>RSA</kbd>类并初始化。</li>
+<li><kbd>RSA</kbd>类新建线程，访问url，获取服务器分配的密钥。</li>
+<li><kbd>RSA</kbd>用分配的密钥以及其他字段信息初始化自身各个属性。</li>
+<li><kbd>new_ser</kbd>类传入用户输入的密码以及url中的n和e给<kbd>RSA</kbd>类中的b()函数作为参数。</li>
+<li>密码加密完成</li>
+<li><kbd>new_ser</kbd>将账号密码以及rkey传入<kbd>Ya</kbd>函数。</li>
+<li><kbd>Ya</kbd>函数进行拼接发送。</li>
+<li>服务器判断账号密码是否正确，根据结果返回不同响应。</li>
+</ol>
+<h2 id="抓包补充"><a href="#抓包补充" class="headerlink" title="抓包补充"></a>抓包补充</h2><p>对于某些APP(特别是大厂)按照老方法抓包，发现登录的报文没办法抓到。</p>
+<p>原因是为了保护数据安全，大部分app在传输敏感用户信息的数据包时并不会按照系统代理设置传输，也就是说这些流量包根本没有走代理通道。原理参见<a target="_blank" rel="noopener" href="https://juejin.cn/post/6860818685763223565">链接</a>。</p>
+<p>上述链接的最后提到了该问题的解决方法，即使用<a target="_blank" rel="noopener" href="https://blog.csdn.net/lckj686/article/details/100697545">drony</a> app对特定的应用进行指定代理。</p>
+<p>再次测试，发现抓到了登录请求：</p>
+<p><img src="https://z3.ax1x.com/2021/04/07/c3ayfU.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/07/c3ayfU.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
 
   
   
@@ -523,7 +574,7 @@ for (var i = 0; i < box.length; i++) {
               
             
               
-                <p> <a href=http://example.com/2021/02/21/Dalvik%E5%AD%97%E8%8A%82%E7%A0%81/>http://example.com/2021/02/21/Dalvik%E5%AD%97%E8%8A%82%E7%A0%81/</a></p>
+                <p> <a href=http://example.com/2021/03/28/App%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91/>http://example.com/2021/03/28/App%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91/</a></p>
               
             
           </blockquote>
@@ -540,10 +591,10 @@ for (var i = 0; i < box.length; i++) {
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-25T10:49:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-07T09:13:47+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Update in:Mar 25, 2021</p>
+    <p>Update in:Apr 7, 2021</p>
   </a>
 </div>
 
@@ -552,7 +603,7 @@ for (var i = 0; i < box.length; i++) {
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/AndroidRe/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>AndroidRe</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Summary/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Summary</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/AndroidRe/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>AndroidRe</p></a></div>
 
 
         
@@ -569,30 +620,11 @@ for (var i = 0; i < box.length; i++) {
   
     <div class="prev-next">
       
-        <a class='prev' href='/2021/02/27/NDK%E5%BC%80%E5%8F%91/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>NDK开发</p>
-          <p class='content'>用C/C++开发Android
-Android工程一般由java语言编写，但是可以通过NDK调用native方法来执行C/C++的代码，后者代码中的标识符需要在工程中进行注册，以便在java被一...</p>
-        </a>
       
-      
-        <a class='next' href='/2021/02/12/Android%E5%9F%BA%E7%A1%80/'>
-          <p class='title'>Android基础<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>补充一些关于Android的系统知识。
-APK包结构
-
-
-Filename
-Property
-
-
-
-assets
-静态资源（图片，配置文件，html5离线资源）任意深度子目录
-
-
-res
-程序资...</p>
+        <a class='next' href='/2021/03/15/Hook%E6%A1%86%E6%9E%B6/'>
+          <p class='title'>Hook Framework<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>截获消息，获得控制权。
+HOOK框架是一种Android逆向技术。在系统没有调用该函数之前，Hook就先捕获该消息，Hook函数先得到控制权，这时Hook函数既可以修改程序执行逻辑，改变参数返回...</p>
         </a>
       
     </div>
@@ -635,7 +667,7 @@ res
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-text">寄存器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E5%91%BD%E5%90%8D%E6%B3%95"><span class="toc-text">寄存器命名法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#v%E5%91%BD%E5%90%8D%E6%B3%95"><span class="toc-text">v命名法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p%E5%91%BD%E5%90%8D%E6%B3%95"><span class="toc-text">p命名法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#smali%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">smali数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E4%B8%8E%E5%87%BD%E6%95%B0%E5%88%86%E6%9E%90"><span class="toc-text">字段与函数分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E6%A0%BC%E5%BC%8F"><span class="toc-text">字段格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A0%BC%E5%BC%8F"><span class="toc-text">函数格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dalvik%E6%8C%87%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="toc-text">Dalvik指令格式</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E8%BF%87%E7%A8%8B"><span class="toc-text">登录过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%93%E5%8C%85"><span class="toc-text">抓包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%BE%E5%88%B0%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88"><span class="toc-text">找到函数调用栈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%88%86%E6%9E%90"><span class="toc-text">方法分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ServiceProvider-Ya"><span class="toc-text">ServiceProvider.Ya()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LoginFromQuickRegisterFragment-j1"><span class="toc-text">LoginFromQuickRegisterFragment.j1()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LoginFromQuickRegisterFragment-onClick"><span class="toc-text">LoginFromQuickRegisterFragment.onClick()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RSA-java"><span class="toc-text">RSA.java</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-text">响应报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%93%E5%8C%85%E8%A1%A5%E5%85%85"><span class="toc-text">抓包补充</span></a></li></ol>
     </div>
   </section>
 
@@ -654,7 +686,7 @@ res
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="Dalvik字节码";
+  pdata.postTitle="App登录逻辑分析";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
