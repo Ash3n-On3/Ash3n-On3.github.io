@@ -28,6 +28,8 @@
   
 
   
+    <meta name="description" content="​        Apk加固基础知识&amp;原理。">
+  
 
   <!-- feed -->
   
@@ -470,7 +472,8 @@ for (var i = 0; i < box.length; i++) {
 
   
   
-  <h2 id="加固原理"><a href="#加固原理" class="headerlink" title="加固原理"></a>加固原理</h2><p>​        APK保护措施指的是使逆向工作者获取源代码后不便分析或是获取apk后不便调试，而APK的加固则是避免对方直接获取到程序的可执行文件。</p>
+  <p>​        Apk加固基础知识&amp;原理。<span id="more"></span></p>
+<h2 id="加固原理"><a href="#加固原理" class="headerlink" title="加固原理"></a>加固原理</h2><p>​        APK保护措施指的是使逆向工作者获取源代码后不便分析或是获取apk后不便调试，而APK的加固则是避免对方直接获取到程序的可执行文件。</p>
 <p>​        其原理是在Android项目将要打包发布时，再将加解密程序(壳程序)封装入dex文件中，在程序运行之前原dex文件由解密程序解出后再正常执行。而Cracker拿到apk后如果不做脱壳处理，则无法直接获得dex或者so原文件，也就不能直接分析源码。</p>
 <p><img src="https://z3.ax1x.com/2021/04/10/cdp2XF.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdp2XF.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
 <h2 id="加固后的Dex文件加载方式"><a href="#加固后的Dex文件加载方式" class="headerlink" title="加固后的Dex文件加载方式"></a>加固后的Dex文件加载方式</h2><h3 id="落地式加载"><a href="#落地式加载" class="headerlink" title="落地式加载"></a>落地式加载</h3><p>​        设备启动APP前先执行解壳程序，将加密后的dex文件加载到内存中进行解密，解密之后的完整Dex文件会临时保存在系统某一个目录下，再通过DexClassLoad去加载解密后的dex文件，运行程序。</p>
@@ -478,7 +481,7 @@ for (var i = 0; i < box.length; i++) {
 <h3 id="不落地式加载（动态加载）"><a href="#不落地式加载（动态加载）" class="headerlink" title="不落地式加载（动态加载）"></a>不落地式加载（动态加载）</h3><p>​        设备启动APP前先执行解壳程序，负责加载加密后的dex文件到内存中进行解密，解密之后的dex文件存放在内存中，通过自定义ClassLoad加载内存中的dex文件数据。</p>
 <p>​        对于这种加载方式，可以在程序运行时在内存中找到dex文件头后，dump出dex文件。某些时候dex文件在内存中可能并非连续存放，因此可能需要根据偏移拼接各个片段形成完整dex。</p>
 <h2 id="加壳技术历史"><a href="#加壳技术历史" class="headerlink" title="加壳技术历史"></a>加壳技术历史</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdpDkn.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpDkn.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="常用脱壳机"><a href="#常用脱壳机" class="headerlink" title="常用脱壳机"></a>常用脱壳机</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdpdmQ.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpdmQ.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<h2 id="常用脱壳机"><a href="#常用脱壳机" class="headerlink" title="常用脱壳机"></a>常用脱壳机</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdClGt.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdClGt.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
 <h2 id="Dex其他保护"><a href="#Dex其他保护" class="headerlink" title="Dex其他保护"></a>Dex其他保护</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdpGfP.jpg" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpGfP.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
 <h3 id="字段隐藏"><a href="#字段隐藏" class="headerlink" title="字段隐藏"></a>字段隐藏</h3><p>​        使用010Editor工具打开一个dex文件，再打开<a target="_blank" rel="noopener" href="https://www.sweetscape.com/010editor/repository/templates/">dex.bt</a>(自动分析脚本)按下F5执行，选择需要分析的dex文件后，发现dex文件窗口下多出了分析窗口。</p>
 <p><img src="https://z3.ax1x.com/2021/04/10/cdp0Ts.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdp0Ts.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
@@ -544,7 +547,7 @@ for (var i = 0; i < box.length; i++) {
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-10T17:13:04+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-10T17:21:18+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>Update in:Apr 10, 2021</p>
