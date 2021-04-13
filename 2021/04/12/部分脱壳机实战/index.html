@@ -22,13 +22,13 @@
 
   <!-- 页面元数据 -->
   
-  <title>Apk加固 - Bin Fantasy🤯</title>
+  <title>部分脱壳机实战 - Bin Fantasy🤯</title>
   
-    <meta name="keywords" content="AndroidRe,Summary">
+    <meta name="keywords" content="AndroidRe">
   
 
   
-    <meta name="description" content="​        Apk加固基础知识&amp;原理。">
+    <meta name="description" content="​        来试试常用的脱壳机。">
   
 
   <!-- feed -->
@@ -410,7 +410,7 @@ for (var i = 0; i < box.length; i++) {
   
     <div class='headimg-div'>
       <a class='headimg-a'>
-        <img class='headimg' src='https://z3.ax1x.com/2021/03/23/6HMzaq.gif'/>
+        <img class='headimg' src='https://z3.ax1x.com/2021/03/23/6HQaJf.gif'/>
       </a>
     </div>
   
@@ -419,7 +419,7 @@ for (var i = 0; i < box.length; i++) {
     
     
       <h1 class="title">
-        Apk加固
+        部分脱壳机实战
       </h1>
       <div class='new-meta-box'>
         
@@ -443,7 +443,7 @@ for (var i = 0; i < box.length; i++) {
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>Posted in:Apr 9, 2021</p>
+    <p>Posted in:Apr 12, 2021</p>
   </a>
 </div>
 
@@ -454,7 +454,7 @@ for (var i = 0; i < box.length; i++) {
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="Apk加固" data-path="/2021/04/09/APP%E5%8A%A0%E5%9B%BA%E4%B8%8E%E5%8A%A0%E5%A3%B3/">
+      <div id="lc-pv" data-title="部分脱壳机实战" data-path="/2021/04/12/%E9%83%A8%E5%88%86%E8%84%B1%E5%A3%B3%E6%9C%BA%E5%AE%9E%E6%88%98/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
          views
@@ -472,47 +472,116 @@ for (var i = 0; i < box.length; i++) {
 
   
   
-  <p>​        Apk加固基础知识&amp;原理。<span id="more"></span></p>
-<h2 id="加固原理"><a href="#加固原理" class="headerlink" title="加固原理"></a>加固原理</h2><p>​        APK保护措施指的是使逆向工作者获取源代码后不便分析或是获取apk后不便调试，而APK的加固则是避免对方直接获取到程序的可执行文件。</p>
-<p>​        其原理是在Android项目将要打包发布时，再将加解密程序(壳程序)封装入dex文件中，在程序运行之前原dex文件由解密程序解出后再正常执行。而Cracker拿到apk后如果不做脱壳处理，则无法直接获得dex或者so原文件，也就不能直接分析源码。</p>
-<p><img src="https://z3.ax1x.com/2021/04/10/cdp2XF.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdp2XF.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="加固后的Dex文件加载方式"><a href="#加固后的Dex文件加载方式" class="headerlink" title="加固后的Dex文件加载方式"></a>加固后的Dex文件加载方式</h2><h3 id="落地式加载"><a href="#落地式加载" class="headerlink" title="落地式加载"></a>落地式加载</h3><p>​        设备启动APP前先执行解壳程序，将加密后的dex文件加载到内存中进行解密，解密之后的完整Dex文件会临时保存在系统某一个目录下，再通过DexClassLoad去加载解密后的dex文件，运行程序。</p>
-<p>​        对于这种加载方式，可以在程序运行时找到完整dex并复制出来进行分析。</p>
-<h3 id="不落地式加载（动态加载）"><a href="#不落地式加载（动态加载）" class="headerlink" title="不落地式加载（动态加载）"></a>不落地式加载（动态加载）</h3><p>​        设备启动APP前先执行解壳程序，负责加载加密后的dex文件到内存中进行解密，解密之后的dex文件存放在内存中，通过自定义ClassLoad加载内存中的dex文件数据。</p>
-<p>​        对于这种加载方式，可以在程序运行时在内存中找到dex文件头后，dump出dex文件。某些时候dex文件在内存中可能并非连续存放，因此可能需要根据偏移拼接各个片段形成完整dex。</p>
-<h2 id="加壳技术历史"><a href="#加壳技术历史" class="headerlink" title="加壳技术历史"></a>加壳技术历史</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdpDkn.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpDkn.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="常用脱壳机"><a href="#常用脱壳机" class="headerlink" title="常用脱壳机"></a>常用脱壳机</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdClGt.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdClGt.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="Dex其他保护"><a href="#Dex其他保护" class="headerlink" title="Dex其他保护"></a>Dex其他保护</h2><p><img src="https://z3.ax1x.com/2021/04/10/cdpGfP.jpg" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpGfP.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h3 id="字段隐藏"><a href="#字段隐藏" class="headerlink" title="字段隐藏"></a>字段隐藏</h3><p>​        使用010Editor工具打开一个dex文件，再打开<a target="_blank" rel="noopener" href="https://www.sweetscape.com/010editor/repository/templates/">dex.bt</a>(自动分析脚本)按下F5执行，选择需要分析的dex文件后，发现dex文件窗口下多出了分析窗口。</p>
-<p><img src="https://z3.ax1x.com/2021/04/10/cdp0Ts.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdp0Ts.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<p>​        其中struct string_id_list_dex_type_ids存放一个结构体数组，每个结构体记录dex中各个类的信息。</p>
-<img src="https://z3.ax1x.com/2021/04/10/cdpN6S.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpN6S.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="  />
+  <p>​        来试试常用的脱壳机。<span id="more"></span></p>
+<h1 id="DexHunter"><a href="#DexHunter" class="headerlink" title="DexHunter"></a><a target="_blank" rel="noopener" href="https://github.com/zyq8709/DexHunter/">DexHunter</a></h1><p>​        2015年发布的比较旧的脱壳工具，目前已经被大部分加壳厂商反制。不过这个工具适合用来入门学习脱壳知识。作者自己也写了<a target="_blank" rel="noopener" href="http://www.liuhaihua.cn/archives/153836.html">详细介绍</a>，这也是本文的重要参考。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​        对于不落地式加载的加壳Dex，我们知道如下情况中内存里储存的一定是解密后的正确代码。</p>
+<blockquote>
+<ol>
+<li>打开或提取dex文件时</li>
+<li>加载Class</li>
+<li>Class的初始化</li>
+<li>方法被调用</li>
+</ol>
+</blockquote>
+<p>​        因此很自然而然的可以想到的办法是，在程序一开始就把所有的类都初始化一遍，这样一来即可将全部函数都解密到内存中，再写入新的Dex文件中或其他方式即可完成脱壳。</p>
+<p>​        对于类的加载或初始化，又基于虚拟机种类分为如下两种：</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGZ1H.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGZ1H.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="ART的类加载" style="zoom:90%;" />
 
-<p>​        其中uint class_data_off记录的是该类在dex文件中的偏移量。</p>
-<p><img src="https://z3.ax1x.com/2021/04/10/cdptl8.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdptl8.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<p>​        将其值改为0，可以隐藏类的方法，反编译是看到的此类就是空的类。</p>
-<h3 id="指令集隐藏"><a href="#指令集隐藏" class="headerlink" title="指令集隐藏"></a>指令集隐藏</h3><p>​        用上述方式找到结构体数组<strong>class def item class_ def</strong>，找到Mainactivity的结构体，按照如下路径找到onCreat方法的指令集。</p>
-<p><img src="https://z3.ax1x.com/2021/04/10/cdpUOg.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpUOg.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<p>再将insns指令集数组置空。</p>
-<p><img src="https://z3.ax1x.com/2021/04/10/cdpwwj.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdpwwj.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<p>用jadx打开则无法看到onCreat函数的函数体。</p>
-<p><img src="https://z3.ax1x.com/2021/04/10/cdprYq.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/10/cdprYq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
-<h2 id="So层加固"><a href="#So层加固" class="headerlink" title="So层加固"></a>So层加固</h2><p>​        由于so文件的安全性比dex高，因此开发者更倾向于将比较重要的算法和协议写入so层，即可增加apk逆向难度。</p>
-<h3 id="加壳自解"><a href="#加壳自解" class="headerlink" title="加壳自解"></a>加壳自解</h3><p>​        早期的爱加密对so层的加固就是将原有的so层通过类UPX的方式加壳之后再写入自己的libexec.so中。在需要调用app原有的so时候先进行解密，再使用libexec.so中自定义的linker加载到内存中。因此静态分析时只能看到被加密过的so。</p>
-<p>​        这种保护一般只需要在运行时dum出内存中的so文件即可，但是so文件可能并不连续，需要修改elf文件的一些偏移。</p>
-<h3 id="字符串混淆"><a href="#字符串混淆" class="headerlink" title="字符串混淆"></a>字符串混淆</h3><p>​        早期爱加密也用过类似ollvm的混淆技术。将部分字符串加密后储存在so层，运行时进行解密。</p>
-<p>​        该混淆技术的<a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-266583.htm">解法</a>：</p>
-<p>​        1.找到被加密的so文件，丢进010 Editor中找到被加密的字符串部分。</p>
-<p>​        2.用IDA动态调试，在JNI_onload<code>、</code>init<code>、</code>init_array函数下断，搜索此时有无引进上述so模块。</p>
-<p>​        3.找到so模块后再根据偏移找到被加密的字符串部分，用脚本dump出。</p>
-<p>​        4.将dump出的文件覆写到so文件被加密的部分。</p>
-<p>​        贴一个dump脚本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">static main(void)</span><br><span class="line">&#123;</span><br><span class="line">	auto fp,dexAdderss,end,size;</span><br><span class="line">	start &#x3D; 0x0417D000;</span><br><span class="line">	end &#x3D; 0x0417F000;</span><br><span class="line">	fp &#x3D; fopen(&quot;D:\\libnet_ cry.so&quot;,&quot;wb&quot;);</span><br><span class="line">	for( ; start &lt; end ; start++)</span><br><span class="line">		fputc (Byte(start),fp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://z3.ax1x.com/2021/04/13/cyGV9e.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGV9e.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="DVM的类加载" style="zoom:90%;" />
 
+<p>​        了解了上述加载过程，那么可以劫持上述类加载函数，遍历加载全部类即可获取到全部代码。而劫持的过程，则需要通过刷机，修改保存上述函数的系统源码文件即可劫持进程，而这些源码文件同样的基于虚拟机种类分为如下两种。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DVM：&#x2F;dalvik&#x2F;vm&#x2F;native&#x2F;dalvik_system_DexFile.cpp</span><br><span class="line">ART：&#x2F;art&#x2F;runtime&#x2F;class_linker.cc</span><br></pre></td></tr></table></figure>
 
+<p>​        修改系统源码后，接下来再找到DexFile的location(字符串)成员，该成员保存当前dex文件的路径名，由此可以找到需要脱壳的dex文件，然后再通过类加载函数遍历加载。</p>
+<p>​        假设执行程序到此时我们已经完成所有类的加载，然后就是dump出dex的过程了。对于class_defs段之前和之后的内容加载后在内存中不变，我们可以直接dump出来分别写入到dex1和dex3文件中。</p>
+<p>​        而对于class_defs段，加载到内存中后可能会有些许改动，因此我们需要进行修复，过程如下：</p>
+<ol>
+<li><p>遍历判断各个class_defs_item中的class_datas_off这个偏移是否在dex占用的内存范围内，如果越界则将这个类的class_data_item给放到dex末尾，修改class_def_item并保存。</p>
+</li>
+<li><p>比较class_data_item的accessflag、codeoff是否与未运行时的dex一致，不一致则按运行时为准。</p>
+</li>
+<li><p>判断code_item_off是否越界，如果是则同1写到末尾再修改class_def_item</p>
+<p> 被修改过的class_defs段，保存在classdef文件中，上述的写到末尾的文件则另外再写入到extra文件。</p>
+<p> 四个文件结合为脱壳后的dex。</p>
+</li>
+</ol>
+<h2 id="脱壳过程"><a href="#脱壳过程" class="headerlink" title="脱壳过程"></a>脱壳过程</h2><p>​        由于手边没有适合刷Android4.4.4的设备……而且如果使用模拟器装脱壳机自带的arm架构镜像，模拟器启动会非常慢(x86跑arm系统太不友好)，因此该脱壳机的实践暂且搁置了。</p>
+<p>​        而且在搜资料的过程中发现还有大佬实现了<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangmiaoping23/article/details/80303445">Xpose版的DexHunter</a>，有机会再学习一波。</p>
+<h1 id="Youpk"><a href="#Youpk" class="headerlink" title="Youpk"></a><a target="_blank" rel="noopener" href="https://github.com/Youlor/Youpk">Youpk</a></h1><p>​        基于ART的主动调用的脱壳机。</p>
+<h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>​        脱壳方式与DexHunter脱壳机大同小异：</p>
+<blockquote>
+<ol>
+<li>程序加载后直接在内存中dump出dex</li>
+<li>先构造一条完整的函数调用链，主动调用所有的方法</li>
+<li>dump出CodeItem结构体</li>
+<li>将CodeItem结构体合并到dex中</li>
+</ol>
+</blockquote>
+<h2 id="脱壳过程-1"><a href="#脱壳过程-1" class="headerlink" title="脱壳过程"></a>脱壳过程</h2><p>​        为了调用所有函数，我们需要先hook一些特定的对象或方法，比如DexFile和ClassLinker，所以该脱壳机还是需要刷机修改系统实现。完整步骤如下：</p>
+<h3 id="刷机"><a href="#刷机" class="headerlink" title="刷机"></a>刷机</h3><p>​        此处使用设备为Google Pixle 1。先<strong>备份手机数据</strong>，将压缩包下下来之后解压，将手机重启到fastboot后连接上PC，运行flash-all.bat。刷机结束后得到如下的崭新系统，系统是Android7.1.2，应该是Pixel1支持的最古早的系统了。而且刷完用adb调试发现直接可以使用root权限。</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGecd.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGecd.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:67%;" />
 
-<h3 id="代码混淆"><a href="#代码混淆" class="headerlink" title="代码混淆"></a>代码混淆</h3><p>​        利用宏定义，修改程序中的各个标识符名称，降低分析时的可读性。</p>
-<h3 id="修改文件结构"><a href="#修改文件结构" class="headerlink" title="修改文件结构"></a>修改文件结构</h3><p>​        通过修改一些header，比如将某个函数的的地址偏移量置为0，此后若通过IDA等分析软件打开则无法正常反编译。不过只要重新计算出偏移值即可破解。</p>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>​        使用如下命令将需要脱壳的apk的完整包名写入配置文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Ash3n_On3 &gt;&gt; adb shell</span><br><span class="line">sailfish:&#x2F; # echo &quot;com.example.test_shell&quot; &gt; &#x2F;data&#x2F;local&#x2F;tmp&#x2F;unpacker.config</span><br></pre></td></tr></table></figure>
+
+<p>​        脱壳机会根据上述包名找到需要脱壳的apk文件。</p>
+<h3 id="安装apk"><a href="#安装apk" class="headerlink" title="安装apk"></a>安装apk</h3><p>​        实战用到的是一个之前写的计算器apk，分别到<a target="_blank" rel="noopener" href="https://www.ijiami.cn/apply/encryptLogs">爱加密</a>和<a target="_blank" rel="noopener" href="https://dev.bangcle.com/Apps/index">梆梆安全</a>官网进行加固，作为样本。</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGktO.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGktO.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:80%;" />
+
+<p>​        看看加固后的分析出来是怎么样的。<img src="https://z3.ax1x.com/2021/04/13/cyGAhD.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGAhD.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:80%;" /></p>
+<p>​        爱加密的是经典抽函数。已经看不到函数体了。</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGunI.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGunI.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="63" style="zoom:80%;" />
+
+<p>​        梆梆的壳呢只能看到壳程序了。</p>
+<p>​        先后安装两个apk文件，运行一会儿即可完成脱壳。顺带一提该脱壳机每隔10秒将自动重新脱壳。一般来说脱壳都不太久，如果不确定是否脱壳完成可以查看日志是否有打印<em>unpack end</em>。</p>
+<h3 id="导出dex"><a href="#导出dex" class="headerlink" title="导出dex"></a>导出dex</h3><p>​        脱壳完成后，app的文件夹下会多出unpack目录，其中的dex目录存放着脱壳后的两个dex文件，分别是壳程序dex和源程序dex。使用如下命令导出dex：</p>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb pull /data/data/包名/unpacker/dex ~/Desktop/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://z3.ax1x.com/2021/04/13/cyGmjA.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGmjA.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII="></p>
+<p>​        一般来说，比较小的是壳程序，于是打开比较大的dex瞅瞅。</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGKBt.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGKBt.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:80%;" />
+
+<p>​        虽然格式有点不好看，但是确实是完整的dex，所有函数都dump出来了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>​        刷机过程不太麻烦(不过不知道其他设备的情况)，脱壳过程也比较简单，而且该脱壳机自动构建函数调用链再逐个dump出，能有效攻击指令抽取的加固方法。算是比较好用的脱壳机了。</p>
+<h1 id="Frida-DexDump"><a href="#Frida-DexDump" class="headerlink" title="Frida-DexDump"></a><a target="_blank" rel="noopener" href="https://github.com/hluwa/FRIDA-DEXDump">Frida-DexDump</a></h1><p>​        除了刷机改系统之外，也有利用Frida实现的脱壳机。</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGlAf.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGlAf.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="突然帅起来了" style="zoom:80%;" />
+
+<h2 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h2><p>​        因为该脱壳机本质上是一个Frida脚本，所以源码肯定是要分析一波的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">scandex: <span class="function"><span class="keyword">function</span> <span class="title">scandex</span>(<span class="params"></span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="comment">//每一个只读进程</span></span><br><span class="line">    Process.enumerateRanges(<span class="string">&#x27;r--&#x27;</span>).forEach</span><br><span class="line">    (</span><br><span class="line">		<span class="function"><span class="keyword">function</span> (<span class="params">range</span>) </span></span><br><span class="line"><span class="function">		</span>&#123;</span><br><span class="line">		    <span class="keyword">try</span> &#123;</span><br><span class="line">		        Memory.scanSync(range.base, range.size, <span class="string">&quot;64 65 78 0a 30 ?? ?? 00&quot;</span>).forEach</span><br><span class="line">		        (</span><br><span class="line">		        	<span class="comment">//进程中每一处匹配的dex文件头</span></span><br><span class="line">		        	<span class="function"><span class="keyword">function</span> (<span class="params">match</span>) </span></span><br><span class="line"><span class="function">			        </span>&#123;</span><br><span class="line">			        	<span class="comment">//判断路径是否合法、是否处于系统分区</span></span><br><span class="line">			            <span class="keyword">if</span>(range.file &amp;&amp; range.file.path &amp;&amp; (<span class="comment">// 					      								range.file.path.startsWith(&quot;/data/app/&quot;) ||</span></span><br><span class="line">			             range.file.path.startsWith(<span class="string">&quot;/data/dalvik-cache/&quot;</span>) ||</span><br><span class="line">			                    range.file.path.startsWith(<span class="string">&quot;/system/&quot;</span>))) &#123;</span><br><span class="line">			                <span class="keyword">return</span>;</span><br><span class="line">			            &#125;</span><br><span class="line"></span><br><span class="line">			            <span class="keyword">if</span>(verify(match.address, range, <span class="literal">false</span>)) </span><br><span class="line">			            &#123;</span><br><span class="line">			                <span class="keyword">var</span> dex_size = get_dex_real_size(match.address, range.base, 									range.base.add(range.size));</span><br><span class="line">			                result.push(&#123;<span class="string">&quot;addr&quot;</span>: match.address,<span class="string">&quot;size&quot;</span>: dex_size&#125;);</span><br><span class="line">			                <span class="keyword">var</span> max_size = range.size - match.address.sub(range.base);</span><br><span class="line">			                <span class="keyword">if</span>(enable_deep_search &amp;&amp; max_size != dex_size) </span><br><span class="line">			                &#123;</span><br><span class="line">			                    result.push(&#123;<span class="string">&quot;addr&quot;</span>: match.address,<span class="string">&quot;size&quot;</span>: max_size&#125;);</span><br><span class="line">			                &#125;</span><br><span class="line">			            &#125;</span><br><span class="line">			        &#125;</span><br><span class="line">		        );</span><br><span class="line"></span><br><span class="line">		        <span class="keyword">if</span>(enable_deep_search) </span><br><span class="line">		        &#123;</span><br><span class="line">		        	<span class="comment">//String_ids_off字段偏移为0x3C，内容为&quot;70 00 00 00&quot;</span></span><br><span class="line">		            Memory.scanSync(range.base, range.size, <span class="string">&quot;70 00 00 00&quot;</span>).forEach</span><br><span class="line">		            (</span><br><span class="line">		            	<span class="function"><span class="keyword">function</span> (<span class="params">match</span>) </span></span><br><span class="line"><span class="function">			            </span>&#123;</span><br><span class="line">			            	<span class="comment">//计算得到的dex文件基址</span></span><br><span class="line">			                <span class="keyword">var</span> dex_base = match.address.sub(<span class="number">0x3C</span>);</span><br><span class="line">			                <span class="comment">//如果计算得出的和匹配文件头得到的基址不匹配</span></span><br><span class="line">			                <span class="keyword">if</span>(dex_base &lt; range.base) </span><br><span class="line">			                &#123;</span><br><span class="line">			                    <span class="keyword">return</span></span><br><span class="line">			                &#125;</span><br><span class="line">			                </span><br><span class="line">			                <span class="keyword">if</span>(dex_base.readCString(<span class="number">4</span>) != <span class="string">&quot;dex\n&quot;</span> &amp;&amp; verify(dex_base, range, <span class="literal">true</span>)) </span><br><span class="line">			                &#123;</span><br><span class="line">			                    <span class="keyword">var</span> real_dex_size = get_dex_real_size(dex_base, range.base, 									range.base.add(range.size));</span><br><span class="line">			                    result.push(&#123;<span class="string">&quot;addr&quot;</span>: dex_base,<span class="string">&quot;size&quot;</span>: real_dex_size&#125;);</span><br><span class="line">			                    <span class="keyword">var</span> max_size = range.size - dex_base.sub(range.base);</span><br><span class="line">			                    <span class="keyword">if</span>(max_size != real_dex_size) </span><br><span class="line">			                    &#123;</span><br><span class="line">			                        result.push(&#123;<span class="string">&quot;addr&quot;</span>: match.address,<span class="string">&quot;size&quot;</span>: max_size&#125;);</span><br><span class="line">			                    &#125;</span><br><span class="line">			                &#125;</span><br><span class="line">			            &#125;</span><br><span class="line">		            )</span><br><span class="line">		        &#125;</span><br><span class="line">		        <span class="keyword">else</span> </span><br><span class="line">		        &#123;</span><br><span class="line">		            <span class="keyword">if</span>(range.base.readCString(<span class="number">4</span>) != <span class="string">&quot;dex\n&quot;</span> &amp;&amp; verify(range.base, range, <span class="literal">true</span>)) </span><br><span class="line">		            &#123;</span><br><span class="line">		                <span class="keyword">var</span> real_dex_size = get_dex_real_size(range.base, range.base, 									range.base.add(range.size));</span><br><span class="line">		                result.push(&#123;<span class="string">&quot;addr&quot;</span>: range.base,<span class="string">&quot;size&quot;</span>: real_dex_size&#125;);</span><br><span class="line">		            &#125;</span><br><span class="line">		        &#125;</span><br><span class="line">		    &#125; <span class="keyword">catch</span> (e) &#123;&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>先遍历每一个和包名匹配的进程</li>
+<li>遍历进程占用的内存范围</li>
+<li>查找dex文件头，再判断是否符合dex文件的一些特征(verify函数)</li>
+<li>如果符合则写入哈希表等后续dump</li>
+<li>如果用于运行深度搜索模式，则再次判断进程占用的内存范围内有无string_ids_off正常值匹配的地址</li>
+<li>如果找到匹配，则将string_ids_off-0x3c作为dex文件头，如果该文件头也符合dex特征，则写入哈希表</li>
+</ul>
+</blockquote>
+<p>​        此处的深搜模式主要用于防止dex载入内存后去除文件头的防dump措施，实现了作者readme中说的<em>fuzzy search</em>。</p>
+<p>​        除此之外还需要分析一下verify函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">verify</span>(<span class="params">dexptr, range, enable_verify_maps</span>) </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(range != <span class="literal">null</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> range_end = range.base.add(range.size);</span><br><span class="line">        <span class="comment">// verify header_size</span></span><br><span class="line">        <span class="comment">//基址+0x70为dex文件的正文起始地址，若越界则说明这片内存可能只是一个dex文件头</span></span><br><span class="line">        <span class="keyword">if</span>(dexptr.add(<span class="number">0x70</span>) &gt; range_end) </span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果开了深搜模式</span></span><br><span class="line">        <span class="keyword">if</span>(enable_verify_maps) </span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="comment">//在已有的哈希表中判断一遍</span></span><br><span class="line">            <span class="keyword">var</span> maps_address = get_maps_address(dexptr, range.base, range_end);</span><br><span class="line">            <span class="keyword">if</span>(!maps_address) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">var</span> maps_end = get_maps_end(maps_address, range.base, range_end);</span><br><span class="line">            <span class="keyword">if</span>(!maps_end) </span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> verify_by_maps(dexptr, maps_address)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        &#123;</span><br><span class="line">        	<span class="comment">//判断string_ids_off的值是否与正常值(0x70)相等</span></span><br><span class="line">            <span class="keyword">return</span> dexptr.add(<span class="number">0x3C</span>).readUInt() === <span class="number">0x70</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// In runtime, the fileSize is can to be clean, so it&#x27;s not trust.</span></span><br><span class="line">        <span class="comment">// verify file_size</span></span><br><span class="line">        <span class="comment">// var dex_size = dexptr.add(0x20).readUInt();</span></span><br><span class="line">        <span class="comment">// if(dexptr.add(dex_size) &gt; range_end) &#123;</span></span><br><span class="line">        <span class="comment">//     return false;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>判断文件头+0x70是否直接越界，如果是则说明这片内存并非完整的dex文件</li>
+<li>深搜模式时再匹配一遍哈希表中已有的dex基址</li>
+<li>非深搜则判断此文件头+0x3c是否匹配string_ids_off字段的正常值</li>
+</ul>
+</blockquote>
+<h2 id="脱壳过程-2"><a href="#脱壳过程-2" class="headerlink" title="脱壳过程"></a>脱壳过程</h2><p>​        1.运行frida-server或者frida-server-x64，进行端口转发</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyG34S.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyG34S.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:67%;" />
+
+<p>​        2.安装并且打开加固的APP</p>
+<p>​        3.运行脱壳机文件夹中的main.py脚本</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyGMHP.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyGMHP.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom: 67%;" />
+
+<p>​        4.发现main.py所在路径多出一个以目标APP包名命名的文件夹</p>
+<p>​        5.得到壳dex和源程序dex</p>
+<img src="https://z3.ax1x.com/2021/04/13/cyG1N8.png" class="lazyload" data-srcset="https://z3.ax1x.com/2021/04/13/cyG1N8.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:67%;" />
+
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>​        Frida-dexdump本质上是自动化找到并判断内存中的dex文件，并且dump出。仅做了对于完整dex的相关判断，如果dex不连续，或者遇到指令抽取的情况则无法脱壳，因此仅适用于简单加固的情况。</p>
 
   
   
@@ -530,7 +599,7 @@ for (var i = 0; i < box.length; i++) {
               
             
               
-                <p> <a href=http://example.com/2021/04/09/APP%E5%8A%A0%E5%9B%BA%E4%B8%8E%E5%8A%A0%E5%A3%B3/>http://example.com/2021/04/09/APP%E5%8A%A0%E5%9B%BA%E4%B8%8E%E5%8A%A0%E5%A3%B3/</a></p>
+                <p> <a href=http://example.com/2021/04/12/%E9%83%A8%E5%88%86%E8%84%B1%E5%A3%B3%E6%9C%BA%E5%AE%9E%E6%88%98/>http://example.com/2021/04/12/%E9%83%A8%E5%88%86%E8%84%B1%E5%A3%B3%E6%9C%BA%E5%AE%9E%E6%88%98/</a></p>
               
             
           </blockquote>
@@ -547,10 +616,10 @@ for (var i = 0; i < box.length; i++) {
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-10T17:21:18+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-13T21:40:30+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>Update in:Apr 10, 2021</p>
+    <p>Update in:Apr 13, 2021</p>
   </a>
 </div>
 
@@ -559,7 +628,7 @@ for (var i = 0; i < box.length; i++) {
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/AndroidRe/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>AndroidRe</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Summary/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Summary</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/AndroidRe/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>AndroidRe</p></a></div>
 
 
         
@@ -576,18 +645,11 @@ for (var i = 0; i < box.length; i++) {
   
     <div class="prev-next">
       
-        <a class='prev' href='/2021/04/12/%E9%83%A8%E5%88%86%E8%84%B1%E5%A3%B3%E6%9C%BA%E5%AE%9E%E6%88%98/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>部分脱壳机实战</p>
-          <p class='content'>​        来试试常用的脱壳机。
-DexHunter​        2015年发布的比较旧的脱壳工具，目前已经被大部分加壳厂商反制。不过这个工具适合用来入门学习脱壳知识。作者自己也写了详...</p>
-        </a>
       
-      
-        <a class='next' href='/2021/03/28/App%E7%99%BB%E5%BD%95%E9%80%BB%E8%BE%91/'>
-          <p class='title'>App登录逻辑分析<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>人人直播app的登录过程。
-之所以选择这app是因为没有加壳，而且混淆之后的代码还算比较好看，目前app现在还在运营中。人人直播的版本是v9.10.0，这也是博文撰写时该app的最新版本。
-登录...</p>
+        <a class='next' href='/2021/04/09/APP%E5%8A%A0%E5%9B%BA%E4%B8%8E%E5%8A%A0%E5%A3%B3/'>
+          <p class='title'>Apk加固<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>​        Apk加固基础知识&amp;原理。
+加固原理​        APK保护措施指的是使逆向工作者获取源代码后不便分析或是获取apk后不便调试，而APK的加固则是避免对方直接获取到...</p>
         </a>
       
     </div>
@@ -630,7 +692,7 @@ DexHunter​        2015年发布的比较旧的脱壳工具，目前已经被�
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%9B%BA%E5%8E%9F%E7%90%86"><span class="toc-text">加固原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%9B%BA%E5%90%8E%E7%9A%84Dex%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F"><span class="toc-text">加固后的Dex文件加载方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%90%BD%E5%9C%B0%E5%BC%8F%E5%8A%A0%E8%BD%BD"><span class="toc-text">落地式加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%90%BD%E5%9C%B0%E5%BC%8F%E5%8A%A0%E8%BD%BD%EF%BC%88%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD%EF%BC%89"><span class="toc-text">不落地式加载（动态加载）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E5%A3%B3%E6%8A%80%E6%9C%AF%E5%8E%86%E5%8F%B2"><span class="toc-text">加壳技术历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%84%B1%E5%A3%B3%E6%9C%BA"><span class="toc-text">常用脱壳机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dex%E5%85%B6%E4%BB%96%E4%BF%9D%E6%8A%A4"><span class="toc-text">Dex其他保护</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E6%AE%B5%E9%9A%90%E8%97%8F"><span class="toc-text">字段隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E9%9B%86%E9%9A%90%E8%97%8F"><span class="toc-text">指令集隐藏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#So%E5%B1%82%E5%8A%A0%E5%9B%BA"><span class="toc-text">So层加固</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E5%A3%B3%E8%87%AA%E8%A7%A3"><span class="toc-text">加壳自解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%B7%B7%E6%B7%86"><span class="toc-text">字符串混淆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86"><span class="toc-text">代码混淆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-text">修改文件结构</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%B1%E5%A3%B3%E8%BF%87%E7%A8%8B"><span class="toc-text">脱壳过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-1"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%B1%E5%A3%B3%E8%BF%87%E7%A8%8B-1"><span class="toc-text">脱壳过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E6%9C%BA"><span class="toc-text">刷机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85apk"><span class="toc-text">安装apk</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BAdex"><span class="toc-text">导出dex</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86-2"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%B1%E5%A3%B3%E8%BF%87%E7%A8%8B-2"><span class="toc-text">脱壳过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93-1"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
@@ -649,7 +711,7 @@ DexHunter​        2015年发布的比较旧的脱壳工具，目前已经被�
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="Apk加固";
+  pdata.postTitle="部分脱壳机实战";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
